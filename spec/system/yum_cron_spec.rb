@@ -14,4 +14,18 @@ class { 'yum_cron': }
        its(:exit_code) { should be_zero }
     end
   end
+
+  describe package('yum-cron') do
+    it { should be_installed }
+  end
+
+  describe service('yum-cron') do
+    it { should be_enabled }
+    it { should be_running }
+  end
+  
+  describe file('/etc/sysconfig/yum-cron') do
+    it { should be_file }
+    it { should contain 'CHECK_ONLY=yes' }
+  end
 end

@@ -1,48 +1,47 @@
 # == Class: yum_cron
 #
-# Full description of class yum_cron here.
+# Manage yum-cron.
 #
 # === Parameters
 #
-# Document parameters here.
-#
-# [*sample_parameter*]
-#   Explanation of what this parameter affects and what it defaults to.
-#   e.g. "Specify one or more upstream ntp servers as an array."
-#
-# === Variables
-#
-# Here you should define a list of variables that this module would require.
-#
-# [*sample_variable*]
-#   Explanation of how this variable affects the funtion of this class and if it
-#   has a default. e.g. "The parameter enc_ntp_servers must be set by the
-#   External Node Classifier as a comma separated list of hostnames." (Note,
-#   global variables should not be used in preference to class parameters  as of
-#   Puppet 2.6.)
-#
 # === Examples
 #
-#  class { yum_cron: }
+#  class { 'yum_cron': }
 #
 # === Authors
 #
-# Author Name <author@domain.com>
+# Trey Dockendorf <treydock@gmail.com>
 #
 # === Copyright
 #
-# Copyright 2013 Your name here, unless otherwise noted.
+# Copyright 2013 Trey Dockendorf
 #
 class yum_cron (
-$package_name         = $yum_cron::params::package_name,
-$service_name         = $yum_cron::params::service_name,
-$service_ensure       = $yum_cron::params::service_ensure,
-$service_enable       = $yum_cron::params::service_enable,
-$service_hasstatus    = $yum_cron::params::service_hasstatus,
-$service_hasrestart   = $yum_cron::params::service_hasrestart,
-$service_autorestart  = $yum_cron::params::service_autorestart,
-$config_path          = $yum_cron::params::config_path
+  $yum_parameter        = '',
+  $check_only           = 'yes',
+  $check_first          = 'no',
+  $download_only        = 'no',
+  $error_level          = 0,
+  $debug_level          = 1,
+  $randomwait           = '60',
+  $mailto               = '',
+  $systemname           = '',
+  $days_of_week         = '0123456',
+  $cleanday             = '0',
+  $service_waits        = 'yes',
+  $service_wait_time    = '300',
+  $package_name         = $yum_cron::params::package_name,
+  $service_name         = $yum_cron::params::service_name,
+  $service_ensure       = $yum_cron::params::service_ensure,
+  $service_enable       = $yum_cron::params::service_enable,
+  $service_hasstatus    = $yum_cron::params::service_hasstatus,
+  $service_hasrestart   = $yum_cron::params::service_hasrestart,
+  $config_path          = $yum_cron::params::config_path
 ) inherits yum_cron::params {
+
+  validate_re($check_only, '^yes|no$')
+  validate_re($check_first, '^yes|no$')
+  validate_re($download_only, '^yes|no$')
 
   # This gives the option to not manage the service 'ensure' state.
   $service_ensure_real  = $service_ensure ? {
@@ -56,32 +55,27 @@ $config_path          = $yum_cron::params::config_path
     default   => $service_enable,
   }
 
-  $service_subscribe = $service_autorestart ? {
-    true  => File['/etc/yum_cron'],
-    false => undef,
-  }
-
-  package { 'yum_cron':
+  package { 'yum-cron':
     ensure  => present,
     name    => $package_name,
-    before  => File['/etc/yum_cron'],
+    before  => File['/etc/sysconfig/yum-cron'],
   }
 
-  service { 'yum_cron':
+  service { 'yum-cron':
     ensure      => $service_ensure_real,
     enable      => $service_enable_real,
     name        => $service_name,
     hasstatus   => $service_hasstatus,
     hasrestart  => $service_hasrestart,
-    subscribe   => $service_subscribe,
+    subscribe   => File['/etc/sysconfig/yum-cron'],
   }
 
-  file { '/etc/yum_cron':
+  file { '/etc/sysconfig/yum-cron':
     ensure  => present,
     path    => $config_path,
+    content => template('yum_cron/yum-cron.erb'),
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
   }
-
 }
