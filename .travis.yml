@@ -1,4 +1,8 @@
 language: ruby
+before_install:
+  - sudo add-apt-repository -y ppa:raphink/augeas
+  - sudo apt-get update
+  - sudo apt-get install augeas-tools libaugeas-dev libxml2-dev
 bundler_args: --without development
 script: "bundle exec rake ci"
 rvm:
