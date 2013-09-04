@@ -1,11 +1,9 @@
 name    'treydock-yum_cron'
 version '0.0.1'
-source 'UNKNOWN'
+source 'git://github.com/treydock/puppet-yum_cron.git'
 author 'treydock'
 license 'Apache License, Version 2.0'
-summary 'UNKNOWN'
-description 'UNKNOWN'
-project_page 'UNKNOWN'
-
-## Add dependencies, if any:
-dependency 'puppetlabs/stdlib', '>=3.2.0 <5.0.0'
+summary 'yum-cron module'
+description 'yum-cron module'
+project_page 'http://github.com/treydock/puppet-yum_cron'
+dependency 'puppetlabs/stdlib'
