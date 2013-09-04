@@ -2,11 +2,20 @@
 
 [![Build Status](https://travis-ci.org/treydock/puppet-yum_cron.png)](https://travis-ci.org/treydock/puppet-yum_cron)
 
+####Table of Contents
+
+1. [Overview - What is the yum_cron module?](#overview)
+2. [Usage - Configuration and customization options](#usage)
+    * [Class: yum_cron](#class-yum_cron)
+3. [Compatibility - Operating system and Puppet compatibility](#compatibility)
+4. [Development - Guide for contributing to the module](#development)
+    * [Testing - Testing your configuration](#testing)
+
 ## Overview
 
 The yum_cron module manages the *yum-cron* package to allow for automatic updates and available updates notifications.
 
-## Reference
+## Usage
 
 ### Class: yum_cron
 
@@ -19,10 +28,10 @@ The default parameters will install and enable yum-cron to only check for update
 These are the actions take by the module with default parameter values:
 
 * Install yum-cron
-* Enable the yum-cron service
 * Set configuration values in /etc/sysconfig/yum-cron
   * CHECK_ONLY=yes
   * MAILTO=root
+* Start and enable the yum-cron service
 * Disable yum-autoupdate **(Scientific Linux only)**
   * Sets ENABLED=false in /etc/sysconfig/yum-autoupdate
 
