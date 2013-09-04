@@ -5,6 +5,8 @@ group :development, :test do
   gem 'puppetlabs_spec_helper', :require => false
   gem 'puppet-lint', '~> 0.3.2'
   gem 'travis-lint'
+  gem 'ruby-augeas'
+  gem 'rspec-puppet-augeas'
   gem 'rspec-system-puppet', '~> 2.0'
   #gem 'rspec-system-serverspec', '~> 1.0'
   # Needed to use latest serverspec gem

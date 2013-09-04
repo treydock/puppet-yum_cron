@@ -27,5 +27,14 @@ class { 'yum_cron': }
   describe file('/etc/sysconfig/yum-cron') do
     it { should be_file }
     it { should contain 'CHECK_ONLY=yes' }
+    it { should contain 'MAILTO=root' }
+  end
+
+  if node.facts['operatingsystem'] =~ /Scientific/
+    context 'should disable yum-autoupdate' do
+      describe file('/etc/sysconfig/yum-autoupdate') do
+        it { should contain 'ENABLED=false' }
+      end
+    end
   end
 end

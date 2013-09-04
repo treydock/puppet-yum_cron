@@ -48,7 +48,7 @@ describe 'yum_cron' do
       'ERROR_LEVEL=0',
       'DEBUG_LEVEL=1',
       'RANDOMWAIT=60',
-      'MAILTO=',
+      'MAILTO=root',
       'SYSTEMNAME=',
       'DAYS_OF_WEEK=0123456',
       'CLEANDAY=0',
@@ -56,6 +56,8 @@ describe 'yum_cron' do
       'SERVICE_WAIT_TIME=300',
     ])
   end
+
+  it { should_not contain_augeas('disable yum-autoupdate') }
 
   context 'with service_ensure => "undef"' do
     let(:params) {{ :service_ensure => "undef" }}
@@ -65,6 +67,28 @@ describe 'yum_cron' do
   context 'with service_enable => "undef"' do
     let(:params) {{ :service_enable => "undef" }}
     it { should contain_service('yum-cron').with_enable(nil) }
+  end
+
+  # Test boolean validation
+  [
+    'disable_yum_autoupdate',
+  ].each do |param|
+    context "with #{param} => 'foo'" do
+      let(:params) {{ param => 'foo' }}
+      it { expect { should create_class('yum_cron') }.to raise_error(Puppet::Error, /is not a boolean/) }
+    end
+  end
+
+  # Test yes/no parameter validation
+  [
+    'check_only',
+    'check_first',
+    'download_only',
+  ].each do |param|
+    context "with #{param} => 'foo'" do
+      let(:params) {{ param => 'foo' }}
+      it { expect { should create_class('yum_cron') }.to raise_error(Puppet::Error, /does not match "\^yes\|no\$"/) }
+    end
   end
 
   [
@@ -93,6 +117,25 @@ describe 'yum_cron' do
           verify_contents(subject, '/etc/sysconfig/yum-cron', ["#{key.upcase}=#{value}"])
         end
       end
+    end
+  end
+
+  describe 'operatingsystem => Scientific' do
+    let(:facts) { default_facts.merge({ :operatingsystem => "Scientific" })}
+
+    it { should contain_augeas('disable yum-autoupdate') }
+
+    describe_augeas 'disable yum-autoupdate', :lens => 'Shellvars', :target => 'etc/sysconfig/yum-autoupdate' do
+      it 'should change ENABLED to false' do
+        should execute.with_change
+        aug_get("ENABLED").should == "false"
+        should execute.idempotently
+      end
+    end
+    
+    context 'disable_yum_autoupdate => false' do
+      let(:params) {{ :disable_yum_autoupdate => false }}
+      it { should_not contain_augeas('disable yum-autoupdate') }
     end
   end
 end

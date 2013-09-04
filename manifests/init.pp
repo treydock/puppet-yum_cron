@@ -17,31 +17,33 @@
 # Copyright 2013 Trey Dockendorf
 #
 class yum_cron (
-  $yum_parameter        = '',
-  $check_only           = 'yes',
-  $check_first          = 'no',
-  $download_only        = 'no',
-  $error_level          = 0,
-  $debug_level          = 1,
-  $randomwait           = '60',
-  $mailto               = '',
-  $systemname           = '',
-  $days_of_week         = '0123456',
-  $cleanday             = '0',
-  $service_waits        = 'yes',
-  $service_wait_time    = '300',
-  $package_name         = $yum_cron::params::package_name,
-  $service_name         = $yum_cron::params::service_name,
-  $service_ensure       = $yum_cron::params::service_ensure,
-  $service_enable       = $yum_cron::params::service_enable,
-  $service_hasstatus    = $yum_cron::params::service_hasstatus,
-  $service_hasrestart   = $yum_cron::params::service_hasrestart,
-  $config_path          = $yum_cron::params::config_path
+  $yum_parameter          = '',
+  $check_only             = 'yes',
+  $check_first            = 'no',
+  $download_only          = 'no',
+  $error_level            = 0,
+  $debug_level            = 1,
+  $randomwait             = '60',
+  $mailto                 = 'root',
+  $systemname             = '',
+  $days_of_week           = '0123456',
+  $cleanday               = '0',
+  $service_waits          = 'yes',
+  $service_wait_time      = '300',
+  $package_name           = $yum_cron::params::package_name,
+  $service_name           = $yum_cron::params::service_name,
+  $service_ensure         = $yum_cron::params::service_ensure,
+  $service_enable         = $yum_cron::params::service_enable,
+  $service_hasstatus      = $yum_cron::params::service_hasstatus,
+  $service_hasrestart     = $yum_cron::params::service_hasrestart,
+  $config_path            = $yum_cron::params::config_path,
+  $disable_yum_autoupdate = true
 ) inherits yum_cron::params {
 
   validate_re($check_only, '^yes|no$')
   validate_re($check_first, '^yes|no$')
   validate_re($download_only, '^yes|no$')
+  validate_bool($disable_yum_autoupdate)
 
   # This gives the option to not manage the service 'ensure' state.
   $service_ensure_real  = $service_ensure ? {
@@ -77,5 +79,12 @@ class yum_cron (
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
+  }
+
+  if $::operatingsystem =~ /Scientific/ and $disable_yum_autoupdate {
+    augeas { 'disable yum-autoupdate':
+      context => '/files/etc/sysconfig/yum-autoupdate',
+      changes => 'set ENABLED "false"',
+    }
   }
 }
