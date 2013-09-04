@@ -1,11 +1,12 @@
 # puppet-yum_cron
 
-UNKNOWN
+[![Build Status](https://travis-ci.org/treydock/puppet-yum_cron.png)](https://travis-ci.org/treydock/puppet-yum_cron)
+
+## Overview
 
 ## Support
 
 Tested using
-* CentOS 5.9
 * CentOS 6.4
 
 ## Reference
@@ -33,6 +34,6 @@ If you have Vagrant >= 1.2.0 installed you can run system tests
 
     bundle exec rake spec:system
 
-## Further Information
+## TODO
 
-*
+* Remove or disable yum-autoupdate installed by default in SL 6
