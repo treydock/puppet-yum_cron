@@ -4,6 +4,94 @@
 #
 # === Parameters
 #
+# [*yum_parameter*]
+#   String. Additional yum arguments.
+#   Default: ''
+#
+# [*check_only*]
+#   String. Sets yum-cron to only check for updates.
+#   Valid values are 'yes' and 'no'.
+#   Default: 'yes'
+#
+# [*check_first*]
+#   String.  Valid values are 'yes' and 'no'.
+#   Default: 'no'
+#
+# [*download_only*]
+#   String.  Valid values are 'yes' and 'no'.
+#   Default: 'no'
+#
+# [*error_level*]
+#   String or Integer.
+#   Default: 0
+#
+# [*debug_level*]
+#   String or Integer.
+#   Default: 1
+#
+# [*randomwait*]
+#   String or Integer.
+#   Default: '60'
+#
+# [*mailto*]
+#   String. Address to send yum-cron update notifications.
+#   Default: 'root'
+#
+# [*systemname*]
+#   String.
+#   Default: ''
+#
+# [*days_of_week*]
+#   String.  Days of the week to perform yum update checks.
+#   Default: '0123456'
+#
+# [*cleanday*]
+#   String.
+#   Default: '0'
+#
+# [*service_waits*]
+#   String.
+#   Default: 'yes'
+#
+# [*service_wait_time*]
+#   String or Integer.
+#   Default: '300'
+#
+# [*package_name*]
+#   String. Name of the yum-cron package.
+#   Default: 'yum-cron'
+#
+# [*service_name*]
+#   String. Name of the yum-cron service.
+#   Default: 'yum-cron'
+#
+# [*service_ensure*]
+#   Service ensure parameter.
+#   Default: 'running'
+#
+# [*service_enable*]
+#   Service enable parameter.
+#   Default: true
+#
+# [*service_hasstatus*]
+#   Service hasstatus parameter.
+#
+# [*service_hasrestart*]
+#   Service hasrestart parameter.
+#
+# [*config_path*]
+#   Path to the yum-cron configuration file.
+#
+# [*disable_yum_autoupdate*]
+#   Boolean.  Disables the yum-autoupdate service
+#   that is specific to Scientific Linux.
+#   Default: true
+#
+# [*remove_yum_autoupdate*]
+#   Boolean.  Uninstalls the yum-autoupdate package
+#   that is specific to Scientific Linux.
+#   Default: false
+#
 # === Examples
 #
 #  class { 'yum_cron': }

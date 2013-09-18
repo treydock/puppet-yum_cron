@@ -21,7 +21,7 @@ The yum_cron module manages the *yum-cron* package to allow for automatic update
 
 The default parameters will install and enable yum-cron to only check for updates and notify root if any are available.
 
-**On Scientific Linux the default behavior is to also disable *yum-autoupdate*.**  This can be changed with the *disable_yum_autoupdate* parameter.
+**On Scientific Linux the default behavior is to also disable *yum-autoupdate*.**  This can be changed with the *disable_yum_autoupdate* parameter.  The yum-autoupdate package can be removed by setting the *remove_yum_autoupdate* parameter to true.
 
     class { 'yum_cron': }
 
