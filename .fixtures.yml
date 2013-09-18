@@ -1,5 +1,6 @@
 fixtures:
   repositories:
     stdlib: git://github.com/puppetlabs/puppetlabs-stdlib.git
+    augeasproviders: git://github.com/hercules-team/augeasproviders.git
   symlinks:
     yum_cron: "#{source_dir}"

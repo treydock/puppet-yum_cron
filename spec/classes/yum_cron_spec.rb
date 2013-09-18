@@ -123,19 +123,29 @@ describe 'yum_cron' do
   describe 'operatingsystem => Scientific' do
     let(:facts) { default_facts.merge({ :operatingsystem => "Scientific" })}
 
-    it { should contain_augeas('disable yum-autoupdate') }
-
-    describe_augeas 'disable yum-autoupdate', :lens => 'Shellvars', :target => 'etc/sysconfig/yum-autoupdate' do
-      it 'should change ENABLED to false' do
-        should execute.with_change
-        aug_get("ENABLED").should == "false"
-        should execute.idempotently
-      end
+    it do
+      should contain_shellvar('disable yum-autoupdate').with({
+        'variable'  => 'ENABLED',
+        'value'     => 'false',
+        'target'    => '/etc/sysconfig/yum-autoupdate',
+      })
     end
     
     context 'disable_yum_autoupdate => false' do
       let(:params) {{ :disable_yum_autoupdate => false }}
-      it { should_not contain_augeas('disable yum-autoupdate') }
+      it { should_not contain_shellvar('disable yum-autoupdate') }
+    end
+
+    context 'remove_yum_autoupdate => true' do
+      let(:params) {{ :remove_yum_autoupdate => true }}
+      it { should_not contain_shellvar('disable yum-autoupdate') }
+      it { should contain_package('yum-autoupdate').with_ensure('absent') }
+    end
+
+    context 'disable_yum_autoupdate => true and remove_yum_autoupdate => true' do
+      let(:params) {{ :disable_yum_autoupdate => true, :remove_yum_autoupdate => true }}
+      it { should_not contain_shellvar('disable yum-autoupdate') }
+      it { should contain_package('yum-autoupdate').with_ensure('absent') }
     end
   end
 end

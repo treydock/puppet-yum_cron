@@ -22,6 +22,7 @@ RSpec.configure do |c|
     puppet_master_install
 
     shell('puppet module install puppetlabs-stdlib --modulepath /etc/puppet/modules --force')
+    shell('puppet module install domcleal/augeasproviders --modulepath /etc/puppet/modules --force')
     
     # Install yum_cron module
     puppet_module_install(:source => proj_root, :module_name => 'yum_cron')

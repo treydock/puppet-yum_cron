@@ -37,13 +37,15 @@ class yum_cron (
   $service_hasstatus      = $yum_cron::params::service_hasstatus,
   $service_hasrestart     = $yum_cron::params::service_hasrestart,
   $config_path            = $yum_cron::params::config_path,
-  $disable_yum_autoupdate = true
+  $disable_yum_autoupdate = true,
+  $remove_yum_autoupdate  = false
 ) inherits yum_cron::params {
 
   validate_re($check_only, '^yes|no$')
   validate_re($check_first, '^yes|no$')
   validate_re($download_only, '^yes|no$')
   validate_bool($disable_yum_autoupdate)
+  validate_bool($remove_yum_autoupdate)
 
   # This gives the option to not manage the service 'ensure' state.
   $service_ensure_real  = $service_ensure ? {
@@ -81,10 +83,19 @@ class yum_cron (
     mode    => '0644',
   }
 
-  if $::operatingsystem =~ /Scientific/ and $disable_yum_autoupdate {
-    augeas { 'disable yum-autoupdate':
-      context => '/files/etc/sysconfig/yum-autoupdate',
-      changes => 'set ENABLED "false"',
+  if $::operatingsystem =~ /Scientific/ {
+    if $disable_yum_autoupdate and ! $remove_yum_autoupdate {
+      shellvar { 'disable yum-autoupdate':
+        variable  => 'ENABLED',
+        value     => 'false',
+        target    => '/etc/sysconfig/yum-autoupdate',
+      }
+    }
+
+    if $remove_yum_autoupdate {
+      package { 'yum-autoupdate':
+        ensure  => absent,
+      }
     }
   }
 }
