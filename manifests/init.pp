@@ -27,7 +27,7 @@
 #
 # [*debug_level*]
 #   String or Integer.
-#   Default: 1
+#   Default: 0
 #
 # [*randomwait*]
 #   String or Integer.
@@ -110,7 +110,7 @@ class yum_cron (
   $check_first            = 'no',
   $download_only          = 'no',
   $error_level            = 0,
-  $debug_level            = 1,
+  $debug_level            = 0,
   $randomwait             = '60',
   $mailto                 = 'root',
   $systemname             = '',
