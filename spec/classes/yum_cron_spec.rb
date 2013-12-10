@@ -3,9 +3,8 @@ require 'spec_helper'
 describe 'yum_cron' do
   include_context :default_facts
 
-  let :facts do
-    default_facts
-  end
+  let(:facts) { default_facts }
+  let(:params) {{}}
 
   it { should create_class('yum_cron') }
   it { should contain_class('yum_cron::params') }
@@ -36,6 +35,7 @@ describe 'yum_cron' do
       'owner'   => 'root',
       'group'   => 'root',
       'mode'    => '0644',
+      'before'  => 'Service[yum-cron]',
     })
   end
 
@@ -49,7 +49,7 @@ describe 'yum_cron' do
       'DEBUG_LEVEL=0',
       'RANDOMWAIT=60',
       'MAILTO=root',
-      'SYSTEMNAME=',
+      "SYSTEMNAME=#{node}",
       'DAYS_OF_WEEK=0123456',
       'CLEANDAY=0',
       'SERVICE_WAITS=yes',
@@ -57,24 +57,36 @@ describe 'yum_cron' do
     ])
   end
 
-  it { should_not contain_augeas('disable yum-autoupdate') }
+  it { should_not contain_package('yum-autoupdate') }
+  it { should_not contain_shellvar('disable yum-autoupdate') }
 
-  context 'with service_ensure => "undef"' do
-    let(:params) {{ :service_ensure => "undef" }}
-    it { should contain_service('yum-cron').with_ensure(nil) }
+  context 'with service_autorestart => false' do
+    let(:params) {{ :service_autorestart => false }}
+    it { should contain_service('yum-cron').with_subscribe(nil) }
   end
 
-  context 'with service_enable => "undef"' do
-    let(:params) {{ :service_enable => "undef" }}
-    it { should contain_service('yum-cron').with_enable(nil) }
+  # Test service ensure and enable 'magic' values
+  [
+    'undef',
+    'UNSET',
+  ].each do |v|
+    context "with service_ensure => '#{v}'" do
+      let(:params) {{ :service_ensure => v }}
+      it { should contain_service('yum-cron').with_ensure(nil) }
+    end
+
+    context "with service_enable => '#{v}'" do
+      let(:params) {{ :service_enable => v }}
+      it { should contain_service('yum-cron').with_enable(nil) }
+    end
   end
 
   # Test boolean validation
   [
-    'disable_yum_autoupdate',
+    'service_autorestart',
   ].each do |param|
     context "with #{param} => 'foo'" do
-      let(:params) {{ param => 'foo' }}
+      let(:params) {{ param.to_sym => 'foo' }}
       it { expect { should create_class('yum_cron') }.to raise_error(Puppet::Error, /is not a boolean/) }
     end
   end
@@ -86,32 +98,30 @@ describe 'yum_cron' do
     'download_only',
   ].each do |param|
     context "with #{param} => 'foo'" do
-      let(:params) {{ param => 'foo' }}
-      it { expect { should create_class('yum_cron') }.to raise_error(Puppet::Error, /does not match "\^yes\|no\$"/) }
+      let(:params) {{ param.to_sym => 'foo' }}
+      it { expect { should create_class('yum_cron') }.to raise_error(Puppet::Error, /does not match \["\^yes", "\^no"\]/) }
     end
   end
 
-  [
-    {
-      'check_only' => 'no',
-      'check_first' => 'yes',
-      'download_only' => 'yes',
-      'error_level' => 2,
-      'debug_level' => 1,
-      'randomwait' => 30,
-      'mailto' => 'foo@bar',
-      'systemname' => 'foo.bar',
-      'days_of_week' => '06',
-      'cleanday' => 6,
-      'service_waits' => 'no',
-      'service_wait_time' => 200,
-    }
-  ].each do |passed_params|
-    context "with non-default configuration values" do
-      let :params do
-        passed_params
-      end
-      
+  context "with non-default configuration values" do
+    [
+      {
+        'check_only' => 'no',
+        'check_first' => 'yes',
+        'download_only' => 'yes',
+        'error_level' => 1,
+        'debug_level' => 1,
+        'randomwait' => 30,
+        'mailto' => 'foo@bar',
+        'systemname' => 'foo.bar',
+        'days_of_week' => '06',
+        'cleanday' => 6,
+        'service_waits' => 'no',
+        'service_wait_time' => 200,
+      }
+    ].each do |passed_params|
+      let(:params) { passed_params }
+    
       passed_params.each_pair do |key,value|
         it "should set #{key.upcase}=#{value}" do
           verify_contents(subject, '/etc/sysconfig/yum-cron', ["#{key.upcase}=#{value}"])
@@ -123,6 +133,8 @@ describe 'yum_cron' do
   describe 'operatingsystem => Scientific' do
     let(:facts) { default_facts.merge({ :operatingsystem => "Scientific" })}
 
+    it { should_not contain_package('yum-autoupdate') }
+
     it do
       should contain_shellvar('disable yum-autoupdate').with({
         'variable'  => 'ENABLED',
@@ -130,22 +142,28 @@ describe 'yum_cron' do
         'target'    => '/etc/sysconfig/yum-autoupdate',
       })
     end
-    
-    context 'disable_yum_autoupdate => false' do
-      let(:params) {{ :disable_yum_autoupdate => false }}
+
+    context "yum_autoupdate_ensure => 'absent'" do
+      let(:params) {{ :yum_autoupdate_ensure => 'absent' }}
+      it { should contain_package('yum-autoupdate').with_ensure('absent') }
       it { should_not contain_shellvar('disable yum-autoupdate') }
     end
 
-    context 'remove_yum_autoupdate => true' do
-      let(:params) {{ :remove_yum_autoupdate => true }}
+    context "yum_autoupdate_ensure => 'undef'" do
+      let(:params) {{ :yum_autoupdate_ensure => 'undef' }}
+      it { should_not contain_package('yum-autoupdate') }
       it { should_not contain_shellvar('disable yum-autoupdate') }
-      it { should contain_package('yum-autoupdate').with_ensure('absent') }
     end
 
-    context 'disable_yum_autoupdate => true and remove_yum_autoupdate => true' do
-      let(:params) {{ :disable_yum_autoupdate => true, :remove_yum_autoupdate => true }}
+    context "yum_autoupdate_ensure => 'UNSET'" do
+      let(:params) {{ :yum_autoupdate_ensure => 'UNSET' }}
+      it { should_not contain_package('yum-autoupdate') }
       it { should_not contain_shellvar('disable yum-autoupdate') }
-      it { should contain_package('yum-autoupdate').with_ensure('absent') }
+    end
+
+    context "yum_autoupdate_ensure => 'foo'" do
+      let(:params) {{ :yum_autoupdate_ensure => 'foo' }}
+      it { expect { should create_class('yum_cron') }.to raise_error(Puppet::Error, /does not match \["\^undef", "\^UNSET", "\^absent", "\^disabled"\]/) }
     end
   end
 end

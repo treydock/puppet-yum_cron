@@ -1,6 +1,8 @@
 require 'puppetlabs_spec_helper/module_spec_helper'
 
 shared_context :default_facts do
+  let(:node) { 'foo.example.com' }
+
   let :default_facts do
     {
       :kernel                 => 'Linux',

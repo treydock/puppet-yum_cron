@@ -5,6 +5,7 @@
 ####Table of Contents
 
 1. [Overview - What is the yum_cron module?](#overview)
+2. [Backwards Compatibility - Key changes between versions](#backwards-compatibility)
 2. [Usage - Configuration and customization options](#usage)
     * [Class: yum_cron](#class-yum_cron)
 3. [Compatibility - Operating system and Puppet compatibility](#compatibility)
@@ -15,13 +16,17 @@
 
 The yum_cron module manages the *yum-cron* package to allow for automatic updates and available updates notifications.
 
+## Backwards Compatibility
+
+Version 2.x of this module replaced the **disable_yum_autoupdate** and **remove_yum_autoupdate** parameters with **yum_autoupdate_ensure**.  The default behavior is still to disable yum-autoupdate.
+
 ## Usage
 
 ### Class: yum_cron
 
 The default parameters will install and enable yum-cron to only check for updates and notify root if any are available.
 
-**On Scientific Linux the default behavior is to also disable *yum-autoupdate*.**  This can be changed with the *disable_yum_autoupdate* parameter.  The yum-autoupdate package can be removed by setting the *remove_yum_autoupdate* parameter to true.
+**On Scientific Linux the default behavior is to disable *yum-autoupdate*.**
 
     class { 'yum_cron': }
 
@@ -32,8 +37,7 @@ These are the actions take by the module with default parameter values:
   * CHECK_ONLY=yes
   * MAILTO=root
 * Start and enable the yum-cron service
-* Disable yum-autoupdate **(Scientific Linux only)**
-  * Sets ENABLED=false in /etc/sysconfig/yum-autoupdate
+* Disable yum-autoupdate by setting ENABLED="false" in /etc/sysconfig/yum-autoupdate **(Scientific Linux only)**
 
 This is an example of enabling automatic updates
 
@@ -43,9 +47,20 @@ This is an example of enabling automatic updates
 
 Refer to the yum-cron manpage for all available configuration options.
 
+The following are valid values for **yum_autoupdate_ensure**:
+
+* disabled (default) - Sets ENABLED='false' in /etc/sysconfig/yum-autoupdate.
+* absent - Uninstall the yum-autoupdate package.
+* undef or UNSET - Leave yum-autoupdate unmanaged.
+
 ## Compatibility
 
-This module should be compatible with all RedHat based operating systems and Puppet 2.6.x and later.
+This module should be compatible with all RedHat based operating systems and Puppet 2.7.x and later.
+
+It has only been tested on:
+
+* CentOS 6
+* Scientific Linux 6
 
 ## Development
 

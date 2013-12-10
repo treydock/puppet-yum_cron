@@ -2,8 +2,6 @@
 #
 # The yum_cron configuration settings.
 #
-# === Variables
-#
 # === Authors
 #
 # Trey Dockendorf <treydock@gmail.com>
@@ -13,9 +11,6 @@
 # Copyright 2013 Trey Dockendorf
 #
 class yum_cron::params {
-
-  $service_ensure       = 'running'
-  $service_enable       = true
 
   case $::osfamily {
     'RedHat': {
