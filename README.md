@@ -18,7 +18,7 @@ The yum_cron module manages the *yum-cron* package to allow for automatic update
 
 ## Backwards Compatibility
 
-Version 2.x of this module replaced the **disable_yum_autoupdate** and **remove_yum_autoupdate** parameters with **yum_autoupdate_ensure**.  The default behavior is still to disable yum-autoupdate.
+Version 1.x of this module replaced the **disable_yum_autoupdate** and **remove_yum_autoupdate** parameters with **yum_autoupdate_ensure**.  The default behavior is still to disable yum-autoupdate.
 
 ## Usage
 
