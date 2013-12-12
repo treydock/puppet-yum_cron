@@ -40,7 +40,8 @@ describe 'yum_cron' do
   end
 
   it 'should have valid config' do
-    verify_contents(subject, '/etc/sysconfig/yum-cron', [
+    content = subject.resource('file', '/etc/sysconfig/yum-cron').send(:parameters)[:content]
+    content.split("\n").reject { |c| c =~ /(^#|^$)/ }.should == [
       'YUM_PARAMETER=',
       'CHECK_ONLY=yes',
       'CHECK_FIRST=no',
@@ -54,7 +55,7 @@ describe 'yum_cron' do
       'CLEANDAY=0',
       'SERVICE_WAITS=yes',
       'SERVICE_WAIT_TIME=300',
-    ])
+    ]
   end
 
   it { should_not contain_package('yum-autoupdate') }
