@@ -11,36 +11,36 @@ describe 'yum_cron' do
 
   it do
     should contain_package('yum-cron').with({
-      'ensure'    => 'present',
-      'name'      => 'yum-cron',
-      'before'    => 'File[/etc/sysconfig/yum-cron]',
+      :ensure     => 'present',
+      :name       => 'yum-cron',
+      :before     => 'File[/etc/sysconfig/yum-cron]',
     })
   end
 
   it do
     should contain_service('yum-cron').with({
-      'ensure'      => 'running',
-      'enable'      => 'true',
-      'name'        => 'yum-cron',
-      'hasstatus'   => 'true',
-      'hasrestart'  => 'true',
-      'subscribe'   => 'File[/etc/sysconfig/yum-cron]',
+      :ensure       => 'running',
+      :enable       => 'true',
+      :name         => 'yum-cron',
+      :hasstatus    => 'true',
+      :hasrestart   => 'true',
+      :subscribe    => 'File[/etc/sysconfig/yum-cron]',
     })
   end
 
   it do
     should contain_file('/etc/sysconfig/yum-cron').with({
-      'ensure'  => 'present',
-      'path'    => '/etc/sysconfig/yum-cron',
-      'owner'   => 'root',
-      'group'   => 'root',
-      'mode'    => '0644',
-      'before'  => 'Service[yum-cron]',
+      :ensure   => 'present',
+      :path     => '/etc/sysconfig/yum-cron',
+      :owner    => 'root',
+      :group    => 'root',
+      :mode     => '0644',
+      :before   => 'Service[yum-cron]',
     })
   end
 
   it 'should have valid config' do
-    content = subject.resource('file', '/etc/sysconfig/yum-cron').send(:parameters)[:content]
+    content = catalogue.resource('file', '/etc/sysconfig/yum-cron').send(:parameters)[:content]
     content.split("\n").reject { |c| c =~ /(^#|^$)/ }.should == [
       'YUM_PARAMETER=',
       'CHECK_ONLY=yes',
@@ -59,7 +59,7 @@ describe 'yum_cron' do
   end
 
   it { should_not contain_package('yum-autoupdate') }
-  it { should_not contain_shellvar('disable yum-autoupdate') }
+  it { should_not contain_file_line('disable yum-autoupdate') }
 
   context 'with service_autorestart => false' do
     let(:params) {{ :service_autorestart => false }}
@@ -125,7 +125,7 @@ describe 'yum_cron' do
     
       passed_params.each_pair do |key,value|
         it "should set #{key.upcase}=#{value}" do
-          verify_contents(subject, '/etc/sysconfig/yum-cron', ["#{key.upcase}=#{value}"])
+          verify_contents(catalogue, '/etc/sysconfig/yum-cron', ["#{key.upcase}=#{value}"])
         end
       end
     end
@@ -137,34 +137,51 @@ describe 'yum_cron' do
     it { should_not contain_package('yum-autoupdate') }
 
     it do
-      should contain_shellvar('disable yum-autoupdate').with({
-        'variable'  => 'ENABLED',
-        'value'     => 'false',
-        'target'    => '/etc/sysconfig/yum-autoupdate',
+      should contain_file_line('disable yum-autoupdate').with({
+        :path  => '/etc/sysconfig/yum-autoupdate',
+        :line  => 'ENABLED=false',
+        :match => '^ENABLED=.*',
       })
     end
 
     context "yum_autoupdate_ensure => 'absent'" do
       let(:params) {{ :yum_autoupdate_ensure => 'absent' }}
       it { should contain_package('yum-autoupdate').with_ensure('absent') }
-      it { should_not contain_shellvar('disable yum-autoupdate') }
+      it { should_not contain_file_line('disable yum-autoupdate') }
     end
 
     context "yum_autoupdate_ensure => 'undef'" do
       let(:params) {{ :yum_autoupdate_ensure => 'undef' }}
       it { should_not contain_package('yum-autoupdate') }
-      it { should_not contain_shellvar('disable yum-autoupdate') }
+      it { should_not contain_file_line('disable yum-autoupdate') }
     end
 
     context "yum_autoupdate_ensure => 'UNSET'" do
       let(:params) {{ :yum_autoupdate_ensure => 'UNSET' }}
       it { should_not contain_package('yum-autoupdate') }
-      it { should_not contain_shellvar('disable yum-autoupdate') }
+      it { should_not contain_file_line('disable yum-autoupdate') }
     end
 
     context "yum_autoupdate_ensure => 'foo'" do
       let(:params) {{ :yum_autoupdate_ensure => 'foo' }}
       it { expect { should create_class('yum_cron') }.to raise_error(Puppet::Error, /does not match \["\^undef", "\^UNSET", "\^absent", "\^disabled"\]/) }
+    end
+  end
+
+  describe 'operatingsystemrelease => "5.10"' do
+    let(:facts) { default_facts.merge({ :operatingsystemrelease => "5.10" })}
+
+    it 'should only set CHECK_ONLY and DOWNLOAD_ONLY' do
+      content = catalogue.resource('file', '/etc/sysconfig/yum-cron').send(:parameters)[:content]
+      content.split("\n").reject { |c| c =~ /(^#|^$)/ }.should == [
+        'CHECK_ONLY=yes',
+        'DOWNLOAD_ONLY=no',
+      ]
+    end
+
+    context "with check_first => 'foo'" do
+      let(:params) {{ :check_first => 'foo' }}
+      it { expect { should create_class('yum_cron') }.not_to raise_error }
     end
   end
 end

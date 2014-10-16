@@ -16,3 +16,5 @@ shared_context :default_facts do
     }
   end
 end
+
+at_exit { RSpec::Puppet::Coverage.report! }

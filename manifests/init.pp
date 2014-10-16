@@ -131,8 +131,16 @@ class yum_cron (
   $yum_autoupdate_ensure  = 'disabled'
 ) inherits yum_cron::params {
 
+  if versioncmp($::operatingsystemrelease, '6.0') >= 0 {
+    # Only validate parameter for EL6 as this value does not exist for EL5
+    validate_re($check_first, ['^yes', '^no'])
+
+    $config_content = template('yum_cron/yum-cron.erb')
+  } else {
+    $config_content = template('yum_cron/yum-cron-el5.erb')
+  }
+
   validate_re($check_only, ['^yes', '^no'])
-  validate_re($check_first, ['^yes', '^no'])
   validate_re($download_only, ['^yes', '^no'])
   validate_bool($service_autorestart)
   validate_re($yum_autoupdate_ensure, ['^undef', '^UNSET', '^absent', '^disabled'])
@@ -155,24 +163,24 @@ class yum_cron (
   }
 
   package { 'yum-cron':
-    ensure  => present,
-    name    => $package_name,
-    before  => File['/etc/sysconfig/yum-cron'],
+    ensure => present,
+    name   => $package_name,
+    before => File['/etc/sysconfig/yum-cron'],
   }
 
   service { 'yum-cron':
-    ensure      => $service_ensure_real,
-    enable      => $service_enable_real,
-    name        => $service_name,
-    hasstatus   => $service_hasstatus,
-    hasrestart  => $service_hasrestart,
-    subscribe   => $service_subscribe,
+    ensure     => $service_ensure_real,
+    enable     => $service_enable_real,
+    name       => $service_name,
+    hasstatus  => $service_hasstatus,
+    hasrestart => $service_hasrestart,
+    subscribe  => $service_subscribe,
   }
 
   file { '/etc/sysconfig/yum-cron':
     ensure  => present,
     path    => $config_path,
-    content => template('yum_cron/yum-cron.erb'),
+    content => $config_content,
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
@@ -187,10 +195,10 @@ class yum_cron (
     }
 
     if $yum_autoupdate_ensure == 'disabled' {
-      shellvar { 'disable yum-autoupdate':
-        variable  => 'ENABLED',
-        value     => 'false',
-        target    => '/etc/sysconfig/yum-autoupdate',
+      file_line { 'disable yum-autoupdate':
+        path  => '/etc/sysconfig/yum-autoupdate',
+        line  => 'ENABLED=false',
+        match => '^ENABLED=.*',
       }
     }
   }

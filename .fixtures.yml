@@ -2,9 +2,6 @@ fixtures:
   repositories:
     stdlib:
       repo: git://github.com/puppetlabs/puppetlabs-stdlib.git
-      ref: 3.2.0
-    augeasproviders:
-      repo: git://github.com/hercules-team/augeasproviders.git
-      ref: v1.0.2
+      ref: 4.3.1
   symlinks:
     yum_cron: "#{source_dir}"

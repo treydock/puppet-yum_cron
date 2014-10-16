@@ -35,7 +35,7 @@ These are the actions take by the module with default parameter values:
 * Install yum-cron
 * Set configuration values in /etc/sysconfig/yum-cron
   * CHECK_ONLY=yes
-  * MAILTO=root
+  * MAILTO=root **(EL6 only)**
 * Start and enable the yum-cron service
 * Disable yum-autoupdate by setting ENABLED="false" in /etc/sysconfig/yum-autoupdate **(Scientific Linux only)**
 
@@ -60,6 +60,7 @@ This module should be compatible with all RedHat based operating systems and Pup
 It has only been tested on:
 
 * CentOS 6
+* CentOS 5
 * Scientific Linux 6
 
 ## Development
@@ -77,8 +78,8 @@ Install gem dependencies
 
 Run unit tests
 
-    bundle exec rake ci
+    bundle exec rake test
 
 If you have Vagrant >= 1.2.0 installed you can run system tests
 
-    bundle exec rake spec:system
+    bundle exec rake beaker
