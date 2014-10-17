@@ -46,7 +46,7 @@ describe 'yum_cron class:' do
       end
 
       describe file('/etc/sysconfig/yum-autoupdate') do
-        its(:content) { should match /^ENABLED="false"$/ }
+        its(:content) { should match /^ENABLED=false$/ }
       end
     end
   end
