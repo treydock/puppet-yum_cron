@@ -1,0 +1,29 @@
+{
+  "name": "treydock-yum_cron",
+  "version": "1.1.0",
+  "author": "treydock",
+  "summary": "yum-cron module",
+  "license": "Apache License, Version 2.0",
+  "source": "git://github.com/treydock/puppet-yum_cron.git",
+  "description": "yum-cron module",
+  "issues_url": "https://github.com/treydock/puppet-yum_cron/issues",
+  "project_page": "http://github.com/treydock/puppet-yum_cron",
+  "tags": [ "yum", "yum-cron", "centos", "redhat" ],
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "RedHat",
+      "operatingsystemrelease": [ "5.0", "6.0", "7.0" ]
+    },
+    {
+      "operatingsystem": "CentOS",
+      "operatingsystemrelease": [ "5.0", "6.0", "7.0" ]
+    },
+    {
+      "operatingsystem": "Scientific",
+      "operatingsystemrelease": [ "5.0", "6.0", "7.0" ]
+    }
+  ],
+  "dependencies": [
+    { "version_requirement": ">= 2.2.1", "name": "puppetlabs/stdlib" }
+  ]
+}
