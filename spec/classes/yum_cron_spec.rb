@@ -1,7 +1,16 @@
 require 'spec_helper'
 
 describe 'yum_cron' do
-  include_context :default_facts
+  let :default_facts do
+    {
+      :kernel                 => 'Linux',
+      :osfamily               => 'RedHat',
+      :operatingsystem        => 'CentOS',
+      :operatingsystemrelease => '6.4',
+      :architecture           => 'x86_64',
+      :fqdn                   => 'foo.example.com',
+    }
+  end
 
   let(:facts) { default_facts }
   let(:params) {{}}
@@ -50,7 +59,7 @@ describe 'yum_cron' do
       'DEBUG_LEVEL=0',
       'RANDOMWAIT=60',
       'MAILTO=root',
-      "SYSTEMNAME=#{node}",
+      "SYSTEMNAME=#{facts[:fqdn]}",
       'DAYS_OF_WEEK=0123456',
       'CLEANDAY=0',
       'SERVICE_WAITS=yes',

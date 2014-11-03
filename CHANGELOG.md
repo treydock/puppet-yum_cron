@@ -1,0 +1,40 @@
+## treydock-xdmod changelog
+
+Release notes for the treydock-xdmod module.
+
+------------------------------------------
+
+#### 1.1.0 - 2014-11-03
+
+Features:
+
+* Remove dependency on augeasproviders and use file_line to disable yum-autoupdates
+* Add support for EL5
+* Replace rspec-system tests with beaker acceptance tests
+* Update unit testing dependencies
+
+------------------------------------------
+
+#### 1.0.0 - 2013-12-12
+
+Backwards incompatible changes:
+
+* Replace disable\_yum\_autoupdate and remove\_yum\_autoupdate parameters with yum\_autoupdate\_ensure
+
+Minor changes:
+
+* Bring regression testing up-to-date
+* Remove Puppet-2.6 from travis-ci tests
+
+------------------------------------------
+
+#### 0.1.0 - 2013-09-18
+
+* Replace augeas with shellvar provider for disabling yum-autoupdate 
+* Add remove\_yum\_autoupdate parameter to uninstall yum-autoupdate
+
+------------------------------------------
+
+#### 0.0.1 - 2013-09-04
+
+* Initial release

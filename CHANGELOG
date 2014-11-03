@@ -1,6 +1,0 @@
-2013-09-18 - Trey Dockendorf <treydock@gmail.com> - 0.1.0
- * Replace augeas with shellvar provider for disabling yum-autoupdate 
- * Add remove_yum_autoupdate parameter to uninstall yum-autoupdate
-
-2013-09-04 - Trey Dockendorf <treydock@gmail.com> - 0.0.1
- * Initial release
