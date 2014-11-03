@@ -9,7 +9,7 @@ group :development, :test do
   gem 'puppet-syntax',            :require => false
   gem 'beaker',                   :require => false
   gem 'beaker-rspec',             :require => false
-  gem 'pry',                      :require => false
+  gem 'pry',                      :require => false unless RUBY_VERSION =~ /^1.8/
   gem 'simplecov',                :require => false
   gem 'coveralls',                :require => false
   gem 'rest-client', '~> 1.6.0',  :require => false if RUBY_VERSION =~ /^1.8/
@@ -26,3 +26,5 @@ if puppetversion = ENV['PUPPET_GEM_VERSION']
 else
   gem 'puppet', :require => false
 end
+
+# vim:ft=ruby

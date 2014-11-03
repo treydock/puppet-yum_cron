@@ -10,7 +10,7 @@ desc "Run syntax, lint and spec tasks."
 task :test => [:syntax, :lint, :spec]
 
 desc "Run syntax, lint and spec_standalone tasks."
-task :test_standalone => [:syntax, :lint, :spec_standalone]
+task :test_standalone => [:spec_prep, :syntax, :lint, :spec_standalone]
 
 exclude_paths = [
   "pkg/**/*",
@@ -23,7 +23,7 @@ PuppetLint::RakeTask.new :lint do |config|
   config.ignore_paths = exclude_paths
   config.fail_on_warnings = true
   config.log_format = "%{path}:%{linenumber}:%{check}:%{KIND}:%{message}"
-  config.disable_checks = ["80chars", "quoted_booleans", "class_inherits_from_params_class"]
+  config.disable_checks = ["80chars", "class_inherits_from_params_class"]
   #config.relative = true
 end
 PuppetLint.configuration.relative = true
