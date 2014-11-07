@@ -1,6 +1,14 @@
-## treydock-xdmod changelog
+## treydock-yum_cron changelog
 
-Release notes for the treydock-xdmod module.
+Release notes for the treydock-yum_cron module.
+
+------------------------------------------
+
+#### 1.1.1 - 2014-11-07
+
+Changes:
+
+* Update beaker tests to not depend on augeasproviders
 
 ------------------------------------------
 
