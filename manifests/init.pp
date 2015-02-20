@@ -84,7 +84,11 @@
 #
 # [*config_path*]
 #   Path to the yum-cron configuration file.
-#   Default: '/etc/sysconfig/yum-cron'
+#   Default: OS version dependent
+#
+# [*config_template*]
+#   Template used to configure yum-cron.
+#   Default: OS version dependent
 #
 # [*yum_autoupdate_ensure*]
 #   String.  Valid values are 'undef', 'UNSET', 'absent', 'disabled'.
@@ -128,20 +132,20 @@ class yum_cron (
   $service_hasrestart     = $yum_cron::params::service_hasrestart,
   $service_autorestart    = true,
   $config_path            = $yum_cron::params::config_path,
+  $config_template        = $yum_cron::params::config_template,
   $yum_autoupdate_ensure  = 'disabled'
 ) inherits yum_cron::params {
 
-  if versioncmp($::operatingsystemrelease, '6.0') >= 0 {
+  if $::operatingsystemmajrelease == '6' {
     # Only validate parameter for EL6 as this value does not exist for EL5
     validate_re($check_first, ['^yes', '^no'])
+  }
 
-    $config_content = template('yum_cron/yum-cron.erb')
-  } else {
-    $config_content = template('yum_cron/yum-cron-el5.erb')
+  if $::operatingsystemmajrelease < '7' {
+    validate_re($download_only, ['^yes', '^no'])
   }
 
   validate_re($check_only, ['^yes', '^no'])
-  validate_re($download_only, ['^yes', '^no'])
   validate_bool($service_autorestart)
   validate_re($yum_autoupdate_ensure, ['^undef', '^UNSET', '^absent', '^disabled'])
 
@@ -158,14 +162,14 @@ class yum_cron (
   }
 
   $service_subscribe = $service_autorestart ? {
-    true  => File['/etc/sysconfig/yum-cron'],
+    true  => File['yum-cron-config'],
     false => undef,
   }
 
   package { 'yum-cron':
     ensure => present,
     name   => $package_name,
-    before => File['/etc/sysconfig/yum-cron'],
+    before => File['yum-cron-config'],
   }
 
   service { 'yum-cron':
@@ -177,10 +181,10 @@ class yum_cron (
     subscribe  => $service_subscribe,
   }
 
-  file { '/etc/sysconfig/yum-cron':
+  file { 'yum-cron-config':
     ensure  => present,
     path    => $config_path,
-    content => $config_content,
+    content => template($config_template),
     owner   => 'root',
     group   => 'root',
     mode    => '0644',

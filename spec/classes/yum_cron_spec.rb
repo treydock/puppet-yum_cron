@@ -3,12 +3,12 @@ require 'spec_helper'
 describe 'yum_cron' do
   let :default_facts do
     {
-      :kernel                 => 'Linux',
-      :osfamily               => 'RedHat',
-      :operatingsystem        => 'CentOS',
-      :operatingsystemrelease => '6.4',
-      :architecture           => 'x86_64',
-      :fqdn                   => 'foo.example.com',
+      :kernel                     => 'Linux',
+      :osfamily                   => 'RedHat',
+      :operatingsystem            => 'CentOS',
+      :operatingsystemmajrelease  => '6',
+      :architecture               => 'x86_64',
+      :fqdn                       => 'foo.example.com',
     }
   end
 
@@ -22,7 +22,7 @@ describe 'yum_cron' do
     should contain_package('yum-cron').with({
       :ensure     => 'present',
       :name       => 'yum-cron',
-      :before     => 'File[/etc/sysconfig/yum-cron]',
+      :before     => 'File[yum-cron-config]',
     })
   end
 
@@ -33,12 +33,12 @@ describe 'yum_cron' do
       :name         => 'yum-cron',
       :hasstatus    => 'true',
       :hasrestart   => 'true',
-      :subscribe    => 'File[/etc/sysconfig/yum-cron]',
+      :subscribe    => 'File[yum-cron-config]',
     })
   end
 
   it do
-    should contain_file('/etc/sysconfig/yum-cron').with({
+    should contain_file('yum-cron-config').with({
       :ensure   => 'present',
       :path     => '/etc/sysconfig/yum-cron',
       :owner    => 'root',
@@ -49,7 +49,7 @@ describe 'yum_cron' do
   end
 
   it 'should have valid config' do
-    content = catalogue.resource('file', '/etc/sysconfig/yum-cron').send(:parameters)[:content]
+    content = catalogue.resource('file', 'yum-cron-config').send(:parameters)[:content]
     content.split("\n").reject { |c| c =~ /(^#|^$)/ }.should == [
       'YUM_PARAMETER=',
       'CHECK_ONLY=yes',
@@ -134,7 +134,7 @@ describe 'yum_cron' do
     
       passed_params.each_pair do |key,value|
         it "should set #{key.upcase}=#{value}" do
-          verify_contents(catalogue, '/etc/sysconfig/yum-cron', ["#{key.upcase}=#{value}"])
+          verify_contents(catalogue, 'yum-cron-config', ["#{key.upcase}=#{value}"])
         end
       end
     end
@@ -177,15 +177,50 @@ describe 'yum_cron' do
     end
   end
 
-  describe 'operatingsystemrelease => "5.10"' do
-    let(:facts) { default_facts.merge({ :operatingsystemrelease => "5.10" })}
+  describe 'operatingsystemmajrelease => "5"' do
+    let(:facts) { default_facts.merge({ :operatingsystemmajrelease => "5" })}
 
     it 'should only set CHECK_ONLY and DOWNLOAD_ONLY' do
-      content = catalogue.resource('file', '/etc/sysconfig/yum-cron').send(:parameters)[:content]
+      content = catalogue.resource('file', 'yum-cron-config').send(:parameters)[:content]
       content.split("\n").reject { |c| c =~ /(^#|^$)/ }.should == [
         'CHECK_ONLY=yes',
         'DOWNLOAD_ONLY=no',
       ]
+    end
+
+    context "with check_first => 'foo'" do
+      let(:params) {{ :check_first => 'foo' }}
+      it { expect { should create_class('yum_cron') }.not_to raise_error }
+    end
+  end
+
+  describe 'operatingsystemmajrelease => "7"' do
+    let(:facts) { default_facts.merge({ :operatingsystemmajrelease => "7" })}
+
+    it do
+      should contain_file('yum-cron-config').with_path('/etc/yum/yum-cron.conf')
+    end
+
+    it 'should only set apply_updates, system_name and email_to' do
+      verify_contents(catalogue, 'yum-cron-config', [
+        'apply_updates = no',
+        'system_name = foo.example.com',
+        'email_to = root',
+      ])
+    end
+
+    context "when check_only => 'no'" do
+      let(:params) {{ :check_only => 'no' }}
+      it 'should set apply_updates = yes' do
+        verify_contents(catalogue, 'yum-cron-config', [
+          'apply_updates = yes',
+        ])
+      end
+    end
+
+    context "with download_only => 'foo'" do
+      let(:params) {{ :download_only => 'foo' }}
+      it { expect { should create_class('yum_cron') }.not_to raise_error }
     end
 
     context "with check_first => 'foo'" do

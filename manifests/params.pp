@@ -18,7 +18,24 @@ class yum_cron::params {
       $service_name       = 'yum-cron'
       $service_hasstatus  = true
       $service_hasrestart = true
-      $config_path        = '/etc/sysconfig/yum-cron'
+
+      case $::operatingsystemmajrelease {
+        '7': {
+          $config_template  = 'yum_cron/yum-cron.conf.erb'
+          $config_path      = '/etc/yum/yum-cron.conf'
+        }
+        '6': {
+          $config_template  = 'yum_cron/yum-cron.erb'
+          $config_path      = '/etc/sysconfig/yum-cron'
+        }
+        '5': {
+          $config_template  = 'yum_cron/yum-cron-el5.erb'
+          $config_path      = '/etc/sysconfig/yum-cron'
+        }
+        default: {
+          fail("Unsupported operatingsystemmajrelease: ${::operatingsystemmajrelease}, module ${module_name} only support 5, 6, and 7")
+        }
+      }
     }
 
     default: {

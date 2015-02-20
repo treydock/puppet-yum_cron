@@ -83,3 +83,7 @@ Run unit tests
 If you have Vagrant >= 1.2.0 installed you can run system tests
 
     bundle exec rake beaker
+
+## TODO
+
+* The options for EL7 are drastically different than previous versions of yum-cron.  This module's parameters will need to be reworked so the parameters make sense when used on EL6 and EL7 systems.
