@@ -10,6 +10,7 @@ Changes:
 
 * Add parameter `config_template` that defines which template to use for configuring yum-cron
 * Add basic EL7 support
+* Move system test gem dependencies to a separate group excluded during travis-ci tests
 
 ------------------------------------------
 
