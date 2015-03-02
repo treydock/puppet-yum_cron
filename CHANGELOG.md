@@ -4,6 +4,15 @@ Release notes for the treydock-yum_cron module.
 
 ------------------------------------------
 
+#### 1.2.0 - 2015-03-02
+
+Changes:
+
+* Add parameter `config_template` that defines which template to use for configuring yum-cron
+* Add basic EL7 support
+
+------------------------------------------
+
 #### 1.1.1 - 2014-11-07
 
 Changes:
