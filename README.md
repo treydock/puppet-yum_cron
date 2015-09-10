@@ -59,6 +59,7 @@ This module should be compatible with all RedHat based operating systems and Pup
 
 It has only been tested on:
 
+* CentOS 7
 * CentOS 6
 * CentOS 5
 * Scientific Linux 6
@@ -86,4 +87,4 @@ If you have Vagrant >= 1.2.0 installed you can run system tests
 
 ## TODO
 
-* The options for EL7 are drastically different than previous versions of yum-cron.  This module's parameters will need to be reworked so the parameters make sense when used on EL6 and EL7 systems.
+*
