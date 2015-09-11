@@ -133,7 +133,8 @@ class yum_cron (
   $service_autorestart    = true,
   $config_path            = $yum_cron::params::config_path,
   $config_template        = $yum_cron::params::config_template,
-  $yum_autoupdate_ensure  = 'disabled'
+  $yum_autoupdate_ensure  = 'disabled',
+  $email_host             = 'localhost'
 ) inherits yum_cron::params {
 
   if $::operatingsystemmajrelease == '6' {
