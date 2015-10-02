@@ -23,14 +23,20 @@ class yum_cron::params {
         '7': {
           $config_template  = 'yum_cron/yum-cron.conf.erb'
           $config_path      = '/etc/yum/yum-cron.conf'
+          $debug_level      = '-2'
+          $randomwait       = '360'
         }
         '6': {
           $config_template  = 'yum_cron/yum-cron.erb'
           $config_path      = '/etc/sysconfig/yum-cron'
+          $debug_level      = '0'
+          $randomwait       = '60'
         }
         '5': {
           $config_template  = 'yum_cron/yum-cron-el5.erb'
           $config_path      = '/etc/sysconfig/yum-cron'
+          $debug_level      = undef
+          $randomwait       = undef
         }
         default: {
           fail("Unsupported operatingsystemmajrelease: ${::operatingsystemmajrelease}, module ${module_name} only support 5, 6, and 7")

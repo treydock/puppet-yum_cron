@@ -114,10 +114,6 @@
 # Whether updates should be downloaded when they are available. 'yes' or 'no'.
 # Default: 'yes'
 #
-# [*apply_updates*]
-# Whether updates should be applied when they are available.  Note
-# that download_updates must also be yes for the update to be applied. 'yes' or 'no'
-# Default: 'yes'
 # [*email_host*]
 # Name of the host to connect to to send email messages.
 # === Examples
@@ -138,8 +134,8 @@ class yum_cron (
   $check_first            = 'no',
   $download_only          = 'no',
   $error_level            = 0,
-  $debug_level            = 0,
-  $randomwait             = '60',
+  $debug_level            = $yum_cron::params::debug_level,
+  $randomwait             = $yum_cron::params::randomwait,
   $mailto                 = 'root',
   $systemname             = $::fqdn,
   $days_of_week           = '0123456',
@@ -159,8 +155,7 @@ class yum_cron (
   #CentOS 7 params
   $update_cmd             = 'default',
   $update_messages        = 'yes',
-  $download_updates       = 'no',
-  $apply_updates          = 'no',
+  $download_updates       = 'yes',
   $email_host             = 'localhost',
 ) inherits yum_cron::params {
 
