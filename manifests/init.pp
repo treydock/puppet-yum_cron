@@ -3,6 +3,7 @@
 # Manage yum-cron.
 #
 # === Parameters
+# 
 #
 # [*yum_parameter*]
 #   String. Additional yum arguments.
@@ -98,6 +99,27 @@
 #   This is specific to Scientific Linux.
 #   Default: 'disabled'
 #
+# === Parameters for CentOS 7
+# [*update_cmd*]
+#  What kind of update to use:
+# default                            = yum upgrade
+# security                           = yum --security upgrade
+# security-severity:Critical         = yum --sec-severity=Critical upgrade
+# minimal                            = yum --bugfix upgrade-minimal
+# minimal-security                   = yum --security upgrade-minimal
+# minimal-security-severity:Critical =  --sec-severity=Critical upgrade-minimal
+# Default: 'default'
+#
+# [*download_updates*]
+# Whether updates should be downloaded when they are available. 'yes' or 'no'.
+# Default: 'yes'
+#
+# [*apply_updates*]
+# Whether updates should be applied when they are available.  Note
+# that download_updates must also be yes for the update to be applied. 'yes' or 'no'
+# Default: 'yes'
+# [*email_host*]
+# Name of the host to connect to to send email messages.
 # === Examples
 #
 #  class { 'yum_cron': }
@@ -134,7 +156,12 @@ class yum_cron (
   $config_path            = $yum_cron::params::config_path,
   $config_template        = $yum_cron::params::config_template,
   $yum_autoupdate_ensure  = 'disabled',
-  $email_host             = 'localhost'
+  #CentOS 7 params
+  $update_cmd             = 'default',
+  $update_messages        = 'yes',
+  $download_updates       = 'no',
+  $apply_updates          = 'no',
+  $email_host             = 'localhost',
 ) inherits yum_cron::params {
 
   if $::operatingsystemmajrelease == '6' {

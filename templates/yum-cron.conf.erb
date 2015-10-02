@@ -6,14 +6,14 @@
 # minimal                            = yum --bugfix upgrade-minimal
 # minimal-security                   = yum --security upgrade-minimal
 # minimal-security-severity:Critical =  --sec-severity=Critical upgrade-minimal
-update_cmd = default
+update_cmd = <%= @update_cmd %>
 
 # Whether a message should be emitted when updates are available,
 # were downloaded, or applied.
-update_messages = yes
+update_messages = <%= @update_messages %>
 
 # Whether updates should be downloaded when they are available.
-download_updates = yes
+download_updates = <%= @download_updates %>
 
 # Whether updates should be applied when they are available.  Note
 # that download_updates must also be yes for the update to be applied.
@@ -25,7 +25,7 @@ apply_updates = <%= @check_only == 'yes' ? 'no' : 'yes' %>
 # times that multiple systems will access update servers.  If
 # random_sleep is 0 or negative, the program will run immediately.
 # 6*60 = 360
-random_sleep = 360
+random_sleep = <%= @randomwait %>
 
 
 [emitters]
@@ -71,7 +71,7 @@ group_package_types = mandatory, default
 # -4: critical
 # -3: critical+errors
 # -2: critical+errors+warnings (default)
-debuglevel = -2
+debuglevel = <%= @debug_level %>
 
 # skip_broken = True
 mdpolicy = group:main
