@@ -203,9 +203,15 @@ describe 'yum_cron' do
 
     it 'should only set apply_updates, system_name and email_to' do
       verify_contents(catalogue, 'yum-cron-config', [
+        'update_cmd = default',
+        'update_messages = yes',
+        'download_updates = yes',
         'apply_updates = no',
+        'random_sleep = 360',
         'system_name = foo.example.com',
         'email_to = root',
+        'email_host = localhost',
+        'debuglevel = -2',
       ])
     end
 
