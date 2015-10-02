@@ -1,0 +1,17 @@
+HOSTS:
+  scientific-6-x64-docker:
+    roles:
+      - master
+    platform: el-6-x86_64
+    hypervisor: docker
+    image: ringo/scientific:6.6
+    docker_preserve_image: true
+    docker_cmd:
+      - '/sbin/init'
+    docker_image_commands:
+# Install yum-autoupdate because docker image does not have it - but minimal
+# install will contain this package
+      - 'yum install -y tar wget yum-autoupdate'
+CONFIG:
+  log_level: debug
+  type: foss

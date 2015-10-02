@@ -12,7 +12,7 @@ group :development, :test do
 end
 
 group :system_tests do
-  gem 'beaker', '~>2.2.0',        :require => false
+  gem 'beaker',                   :require => false
   gem 'beaker-rspec',             :require => false
   gem 'serverspec',               :require => false
   gem 'pry',                      :require => false unless RUBY_VERSION =~ /^1.8/

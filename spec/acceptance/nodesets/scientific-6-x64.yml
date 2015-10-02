@@ -1,5 +1,5 @@
 HOSTS:
-  scientific-64-x64:
+  scientific-6-x64:
     roles:
       - master
     platform: el-6-x86_64
