@@ -1,6 +1,7 @@
 # puppet-yum_cron
 
-[![Build Status](https://travis-ci.org/treydock/puppet-yum_cron.png)](https://travis-ci.org/treydock/puppet-yum_cron)
+[![Puppet Forge](http://img.shields.io/puppetforge/v/treydock/yum_cron.svg)](https://forge.puppetlabs.com/treydock/yum_cron)
+[![Build Status](https://travis-ci.org/treydock/puppet-yum_cron.svg?branch=master)](https://travis-ci.org/treydock/puppet-yum_cron)
 
 ####Table of Contents
 

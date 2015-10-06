@@ -4,6 +4,26 @@ Release notes for the treydock-yum_cron module.
 
 ------------------------------------------
 
+#### 1.3.0 - 2015-10-02
+
+This release adds new features to this module focused on better support for EL7.
+
+Changes:
+
+* Added parameters that only apply to EL7
+    * update_cmd
+    * update_messages
+    * download_updates
+    * email_host
+* The following parameters now effect EL7 configurations
+    * debug_level
+    * randomwait
+* Updates to unit testing dependencies and Travis-CI test matrixes
+* Update acceptance tests to validate EL7
+* Update nodesets used for acceptance tests including docker nodesets
+
+------------------------------------------
+
 #### 1.2.0 - 2015-03-02
 
 Changes:
