@@ -28,14 +28,14 @@ describe 'yum_cron class:' do
         it { should be_grouped_into 'root' }
         it { should be_mode 644 }
         its(:content) { should match /^CHECK_ONLY=yes$/ }
-        its(:content) { should match /^DOWNLOAD_ONLY=no$/ }
+        its(:content) { should match /^DOWNLOAD_ONLY=yes$/ }
         if fact('operatingsystemmajrelease') >= '6'
           its(:content) { should match /^DEBUG_LEVEL=0$/ }
-          its(:content) { should match /^RANDOMWAIT=60$/ }
-          its(:content) { should match /^MAILTO=root$/ }
+          its(:content) { should match /^RANDOMWAIT="60"$/ }
+          its(:content) { should match /^MAILTO=root(?:\s+)?$/ } # For some reason a trailing space exists
           its(:content) { should match /^SYSTEMNAME=#{fact('fqdn')}$/ }
           its(:content) { should match /^DAYS_OF_WEEK=0123456$/ }
-          its(:content) { should match /^CLEANDAY=0$/ }
+          its(:content) { should match /^CLEANDAY="0"$/ }
         end
       end
     else
@@ -66,21 +66,6 @@ describe 'yum_cron class:' do
 
       describe file('/etc/sysconfig/yum-autoupdate') do
         its(:content) { should match /^ENABLED=false$/ }
-      end
-    end
-  end
-
-  if fact('operatingsystem') =~ /Scientific/
-    context "with yum_autoupdate_ensure => 'absent'" do
-      it 'should remove yum-autoupdate' do
-        pp = "class { 'yum_cron': yum_autoupdate_ensure => 'absent' }"
-
-        apply_manifest(pp, :catch_failures => true)
-        apply_manifest(pp, :catch_changes => true)
-      end
-        
-      describe package('yum-autoupdate') do
-        it { should_not be_installed }
       end
     end
   end
@@ -118,6 +103,21 @@ describe 'yum_cron class:' do
     describe service('yum-cron') do
       it { should_not be_enabled }
       it { should_not be_running }
+    end
+  end
+
+  if fact('operatingsystem') =~ /Scientific/
+    context "with yum_autoupdate_ensure => 'absent'" do
+      it 'should remove yum-autoupdate' do
+        pp = "class { 'yum_cron': yum_autoupdate_ensure => 'absent' }"
+
+        apply_manifest(pp, :catch_failures => true)
+        apply_manifest(pp, :catch_changes => true)
+      end
+
+      describe package('yum-autoupdate') do
+        it { should_not be_installed }
+      end
     end
   end
 end
