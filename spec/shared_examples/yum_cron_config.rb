@@ -1,5 +1,5 @@
 shared_examples 'yum_cron::config' do |facts|
-  EL7_CONFIGS ||= [
+  EL7_CONFIGS = [
     {:name => 'commands/update_cmd', :value => 'default'},
     {:name => 'commands/update_messages', :value => 'yes'},
     {:name => 'commands/download_updates', :value => 'yes'},
@@ -9,9 +9,9 @@ shared_examples 'yum_cron::config' do |facts|
     {:name => 'email/email_to', :value => 'root'},
     {:name => 'email/email_host', :value => 'localhost'},
     {:name => 'base/debuglevel', :value => '-2'},
-  ]
+  ] unless defined?(EL7_CONFIGS)
 
-  EL6_CONFIGS ||= [
+  EL6_CONFIGS = [
     {:name => 'CHECK_ONLY', :value => 'yes'},
     {:name => 'DOWNLOAD_ONLY', :value => 'yes'},
     {:name => 'DEBUG_LEVEL', :value => '0'},
@@ -20,12 +20,12 @@ shared_examples 'yum_cron::config' do |facts|
     {:name => 'SYSTEMNAME', :value => facts[:fqdn]},
     {:name => 'DAYS_OF_WEEK', :value => '0123456'},
     {:name => 'CLEANDAY', :value => '0'},
-  ]
+  ] unless defined?(EL6_CONFIGS)
 
-  EL5_CONFIGS ||= [
+  EL5_CONFIGS = [
     {:name => 'CHECK_ONLY', :value => 'yes'},
     {:name => 'DOWNLOAD_ONLY', :value => 'yes'},
-  ]
+  ] unless defined?(EL5_CONFIGS)
 
   case facts[:operatingsystemmajrelease]
   when '7'
