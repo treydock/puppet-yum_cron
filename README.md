@@ -35,7 +35,7 @@ The default parameters will install and enable yum-cron to only check for update
 
     class { 'yum_cron': }
 
-These are the actions take by the module with default parameter values:
+These are the actions taken by the module with default parameter values:
 
 * Install yum-cron
 * Set configuration values to enable checking for updates and notify root
