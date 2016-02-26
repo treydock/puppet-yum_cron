@@ -79,19 +79,21 @@ class yum_cron (
   $service_enable_real = pick($service_enable, $service_enable_default)
 
   if $apply_updates {
-    $apply_updates_str  = 'yes'
-    $check_only         = 'no'
+    $apply_updates_str    = 'yes'
+    $download_updates_str = 'yes'
+    $check_only           = 'no'
+    $download_only        = 'no'
   } else {
     $apply_updates_str  = 'no'
     $check_only         = 'yes'
-  }
 
-  if $download_updates {
-    $download_updates_str = 'yes'
-    $download_only        = 'yes'
-  } else {
-    $download_updates_str = 'no'
-    $download_only        = 'no'
+    if $download_updates {
+      $download_updates_str = 'yes'
+      $download_only        = 'yes'
+    } else {
+      $download_updates_str = 'no'
+      $download_only        = 'no'
+    }
   }
 
   include yum_cron::install

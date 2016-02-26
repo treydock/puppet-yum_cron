@@ -70,6 +70,27 @@ describe 'yum_cron class:' do
     end
   end
 
+  context 'with automatic updates enabled' do
+    it 'should run successfully' do
+      pp = "class { 'yum_cron': apply_updates => true }"
+
+      apply_manifest(pp, :catch_failures => true)
+      apply_manifest(pp, :catch_changes => true)
+    end
+
+    if fact('operatingsystemmajrelease') <= '6'
+      describe file('/etc/sysconfig/yum-cron') do
+        its(:content) { should match /^CHECK_ONLY=no$/ }
+        its(:content) { should match /^DOWNLOAD_ONLY=no$/ }
+      end
+    else
+      describe file('/etc/yum/yum-cron.conf') do
+        its(:content) { should match /^download_updates = yes$/ }
+        its(:content) { should match /^apply_updates = yes$/ }
+      end
+    end
+  end
+
   context 'when enable => false' do
     it 'should run successfully' do
       pp = "class { 'yum_cron': enable => false }"

@@ -20,6 +20,9 @@ The yum_cron module manages the *yum-cron* package to allow for automatic update
 
 ## Backwards Compatibility
 
+Version 3.x of this module modified the way `apply_updates` and `download_updates` parameters are handled.  `apply_updates` now takes precedence over `download_updates`.  If `apply_updates` is `true` then `download_updates` has no effect.
+
+
 Version 2.x of this module added and removed many parameters.  See [CHANGELOG](CHANGELOG.md) for detailed list of all the changes.
 
 
@@ -134,7 +137,7 @@ Boolean that determines if updates should be automatically downloaded.  Default 
 
 #####`apply_updates`
 
-Boolean that determines if updates should be automatically installed.  Default is `false`
+Boolean that determines if updates should be automatically installed.  Default is `false`.  If set to `true` then `download_updates` ignored.
 
 #####`debug_level`
 
