@@ -4,7 +4,7 @@ Release notes for the treydock-yum_cron module.
 
 ------------------------------------------
 
-#### 3.0.0 - 2015-02-26
+#### 3.0.0 - 2018-02-10
 
 This releases addresses a bug that prevented automatic updates from working the same between EL6 and EL7 systems.  Because the module's handling of parameters is changed, this is being released as a non-backwards compatible release.
 

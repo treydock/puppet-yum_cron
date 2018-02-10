@@ -3,7 +3,7 @@
 [![Puppet Forge](http://img.shields.io/puppetforge/v/treydock/yum_cron.svg)](https://forge.puppetlabs.com/treydock/yum_cron)
 [![Build Status](https://travis-ci.org/treydock/puppet-yum_cron.svg?branch=master)](https://travis-ci.org/treydock/puppet-yum_cron)
 
-####Table of Contents
+#### Table of Contents
 
 1. [Overview - What is the yum_cron module?](#overview)
 2. [Backwards Compatibility - Key changes between versions](#backwards-compatibility)
@@ -123,53 +123,53 @@ $::operatingsystemmajrelease == '5'
     yum_cron::randomwait: undef
     yum_cron::config_path: '/etc/sysconfig/yum-cron'
 
-#####`ensure`
+##### `ensure`
 
 Defines the presence of `yum-cron`.  Valid values are 'present' and 'absent'.  Default is `'present'`.
 
-#####`enable`
+##### `enable`
 
 Boolean that defines the state of `yum-cron`.  Default is `true`
 
-#####`download_updates`
+##### `download_updates`
 
 Boolean that determines if updates should be automatically downloaded.  Default is `true`
 
-#####`apply_updates`
+##### `apply_updates`
 
 Boolean that determines if updates should be automatically installed.  Default is `false`.  If set to `true` then `download_updates` ignored.
 
-#####`debug_level`
+##### `debug_level`
 
 Sets debug level.  Default varies based on OS version
 Applies only to EL7 and EL6.
 
-#####`randomwait`
+##### `randomwait`
 
 Sets random wait time.  Default varies based on OS version
 Applies only to EL7 and EL6.
 
-#####`mailto`
+##### `mailto`
 
 Address notified about updates.  Default is 'root'
 Applies only to EL7 and EL6.
 
-#####`systemname`
+##### `systemname`
 
 Name of system used in notifications.  Default is `$::fqdn`
 Applies only to EL7 and EL6.
 
-#####`days_of_week`
+##### `days_of_week`
 
 Days of the week that yum-cron will run.  Default is `'0123456'`
 Applies only to EL6.
 
-#####`cleanday`
+##### `cleanday`
 
 Day of the week yum-cron will cleanup.  Default is '0'
 Applies only to EL6.
 
-#####`update_cmd`
+##### `update_cmd`
 
 The kind of updates to use.  Default is 'default'
 Applies only to EL7.
@@ -183,17 +183,17 @@ Valid values:
     # minimal-security                   = yum --security upgrade-minimal
     # minimal-security-severity:Critical =  --sec-severity=Critical upgrade-minimal
 
-#####`update_messages`
+##### `update_messages`
 
 Determines whether a message should be emitted when updates are available, downloaded, and applied.  Default is 'yes'
 Applies only to EL7.
 
-#####`email_host`
+##### `email_host`
 
 Host used to send email messages.  Default is 'localhost'
 Applies only to EL7.
 
-#####`extra_configs`
+##### `extra_configs`
 
 Hash that can be used to define additional configurations.  Default is {}
 Applies only to EL7 and EL6.
@@ -202,7 +202,7 @@ The Hash is passed to `create_resources`.
 For EL7 the hash defines additional `yum_cron_config` resources.
 For EL6 the hash defines additional `shellvar` resources.
 
-#####`yum_autoupdate_ensure`
+##### `yum_autoupdate_ensure`
 
 Defines how to handle yum-autoupdate on Scientific Linux systems.  Default is 'disabled'
 Applies only to Scientific Linux.
@@ -213,38 +213,38 @@ Valid values:
 * 'absent' - Uninstall the yum-autoupdate package.
 * 'undef' or 'UNSET' - Leave yum-autoupdate unmanaged.
 
-#####`package_ensure`
+##### `package_ensure`
 
 The ensure value passed to yum-cron package resource.  Default is `undef`
 When `undef`, the value passed to the package resources is based on this class' `ensure` parameter value.
 
-#####`package_name`
+##### `package_name`
 
 yum-cron package name.  Default is `'yum-cron'`
 
-#####`service_name`
+##### `service_name`
 
 yum-cron service name.  Default is `'yum-cron'`
 
-#####`service_ensure`
+##### `service_ensure`
 
 The ensure value passed to yum-cron service resource.  Default is `undef`
 When `undef`, the value passed to the service resources is based on this class' `ensure` and `enable` parameter values.
 
-#####`service_enable`
+##### `service_enable`
 
 The ensure value passed to yum-cron package resource.  Default is `undef`
 When `undef`, the value passed to the service resources is based on this class' `ensure` and `enable` parameter values.
 
-#####`service_hasstatus`
+##### `service_hasstatus`
 
 Service hasstatus property.  Default is `true`
 
-#####`service_hasrestart`
+##### `service_hasrestart`
 
 Service hasrestart property.  Default is `true`
 
-#####`config_path`
+##### `config_path`
 
 Path to yum-cron configuration.  Default is based on OS version.
 
