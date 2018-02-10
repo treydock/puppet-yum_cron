@@ -117,12 +117,6 @@ $::operatingsystemmajrelease == '6'
     yum_cron::randomwait: '60'
     yum_cron::config_path: '/etc/sysconfig/yum-cron'
 
-$::operatingsystemmajrelease == '5'
-
-    yum_cron::debug_level: undef
-    yum_cron::randomwait: undef
-    yum_cron::config_path: '/etc/sysconfig/yum-cron'
-
 ##### `ensure`
 
 Defines the presence of `yum-cron`.  Valid values are 'present' and 'absent'.  Default is `'present'`.
@@ -256,7 +250,6 @@ It has only been tested on:
 
 * CentOS 7
 * CentOS 6
-* CentOS 5
 * Scientific Linux 6
 
 ## Development

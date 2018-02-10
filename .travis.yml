@@ -22,12 +22,6 @@ matrix:
     - rvm: 2.4.0
       sudo: required
       services: docker
-      env: BEAKER_set="centos-5-x64-docker"
-      bundler_args:
-      script: sudo service docker restart ; sleep 10 ; bundle exec rake beaker
-    - rvm: 2.4.0
-      sudo: required
-      services: docker
       env: BEAKER_set="centos-6-x64-docker"
       bundler_args:
       script: sudo service docker restart ; sleep 10 ; bundle exec rake beaker
