@@ -100,9 +100,9 @@ class yum_cron (
   include yum_cron::config
   include yum_cron::service
 
-  anchor { 'yum_cron::start': }->
-  Class['yum_cron::install']->
-  Class['yum_cron::config']->
-  Class['yum_cron::service']->
-  anchor { 'yum_cron::end': }
+  anchor { 'yum_cron::start': }
+  -> Class['yum_cron::install']
+  -> Class['yum_cron::config']
+  -> Class['yum_cron::service']
+  -> anchor { 'yum_cron::end': }
 }
