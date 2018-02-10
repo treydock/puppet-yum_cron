@@ -3,7 +3,7 @@ language: ruby
 sudo: false
 cache: bundler
 bundler_args: --without system_tests
-script: bundle exec rake test
+script: bundle exec rake release_checks
 matrix:
   fast_finish: true
   include:
