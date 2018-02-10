@@ -4,11 +4,12 @@ HOSTS:
       - master
     platform: el-6-x86_64
     hypervisor: docker
-    image: ringo/scientific:6.6
+    image: ringo/scientific:6.8
     docker_preserve_image: true
     docker_cmd:
       - '/sbin/init'
     docker_image_commands:
+      - 'yum clean all'
 # Install yum-autoupdate because docker image does not have it - but minimal
 # install will contain this package
       - 'yum install -y tar wget yum-autoupdate'
