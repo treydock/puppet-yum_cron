@@ -31,24 +31,20 @@ class yum_cron (
   $config_path            = $yum_cron::params::config_path,
 ) inherits yum_cron::params {
 
-  validate_bool(
-    $enable,
-    $download_updates,
-    $apply_updates
-  )
-  validate_string(
-    $mailto,
-    $systemname,
-    $days_of_week,
-    $cleanday,
-    $update_cmd,
-    $update_messages,
-    $email_host
-  )
-  validate_hash(
-    $extra_configs
-  )
-  validate_re($yum_autoupdate_ensure, ['^undef', '^UNSET', '^absent', '^disabled'])
+  validate_legacy('Bool', 'validate_bool', $enable)
+  validate_legacy('Bool', 'validate_bool', $download_updates)
+  validate_legacy('Bool', 'validate_bool', $apply_updates)
+  validate_legacy('String', 'validate_string', $mailto)
+  validate_legacy('String', 'validate_string', $systemname)
+  validate_legacy('String', 'validate_string', $days_of_week)
+  validate_legacy('String', 'validate_string', $cleanday)
+  validate_legacy('String', 'validate_string', $update_cmd)
+  validate_legacy('String', 'validate_string', $update_messages)
+  validate_legacy('String', 'validate_string', $email_host)
+  validate_legacy('Hash', 'validate_hash', $extra_configs)
+  validate_legacy('Enum["undef", "UNSET", "absent", "disabled"]',
+                  'validate_re', $yum_autoupdate_ensure,
+                  ['^undef', '^UNSET', '^absent', '^disabled'])
 
   case $ensure {
     'present': {
