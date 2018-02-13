@@ -4,7 +4,7 @@ Release notes for the treydock-yum_cron module.
 
 ------------------------------------------
 
-#### 4.0.0 - 2018-02-11
+#### 4.0.0 - 2018-02-12
 
 This release modernizes this module.
 
