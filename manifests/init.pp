@@ -11,7 +11,7 @@ class yum_cron (
   String $systemname = $::fqdn,
   # EL6 only options
   Pattern[/^[0-6]+$/] $days_of_week = '0123456',
-  Pattern[/^[0-9]$/] $cleanday = '0',
+  Pattern[/^[0-6]$/] $cleanday = '0',
   # EL7 only options
   Yum_cron::Update_cmd $update_cmd = 'default',
   Enum['yes','no'] $update_messages = 'yes',
