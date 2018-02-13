@@ -244,7 +244,7 @@ Path to yum-cron configuration.  Default is based on OS version.
 
 ## Compatibility
 
-This module should be compatible with all RedHat based operating systems and Puppet 2.7.x and later.
+This module should be compatible with all RedHat based operating systems and Puppet 4.7.x and later.
 
 It has only been tested on:
 

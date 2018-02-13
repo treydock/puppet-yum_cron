@@ -11,6 +11,7 @@ This release modernizes this module.
 ##### Backwards incompatible changes
 
 * Remove support for EL5
+* Drop support for Puppet 3.x.  Require Puppet >= 4.7.0
 
 ------------------------------------------
 
