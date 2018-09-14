@@ -93,7 +93,7 @@ $::osfamily == 'RedHat'
     yum_cron::days_of_week: '0123456'
     yum_cron::cleanday: '0'
     yum_cron::update_cmd: 'default'
-    yum_cron::update_message: 'yes'
+    yum_cron::update_messages: 'yes'
     yum_cron::email_host: 'localhost'
     yum_cron::extra_configs: {}
     yum_cron::yum_autoupdate_ensure: 'disabled'
