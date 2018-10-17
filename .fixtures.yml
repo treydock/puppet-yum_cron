@@ -1,13 +1,12 @@
 fixtures:
   repositories:
     stdlib:
-      repo: git://github.com/puppetlabs/puppetlabs-stdlib.git
-      ref: 4.13.1
+      repo: https://github.com/puppetlabs/puppetlabs-stdlib.git
     inifile:
-      repo: git://github.com/puppetlabs/puppetlabs-inifile.git
+      repo: https://github.com/puppetlabs/puppetlabs-inifile.git
     augeasproviders_core:
-      repo: git://github.com/hercules-team/augeasproviders_core.git
+      repo: https://github.com/hercules-team/augeasproviders_core.git
     augeasproviders_shellvar:
-      repo: git://github.com/hercules-team/augeasproviders_shellvar.git
+      repo: https://github.com/hercules-team/augeasproviders_shellvar.git
   symlinks:
     yum_cron: "#{source_dir}"
