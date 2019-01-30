@@ -2,6 +2,22 @@
 
 Release notes for the treydock-yum_cron module.
 
+#### [4.1.0](https://github.com/treydock/puppet-yum_cron/tree/4.1.0) (2018-10-17)
+[Full Changelog](https://github.com/treydock/puppet-yum_cron/compare/4.0.0...4.1.0)
+
+**Closed issues:**
+
+- undefined method `provider' for nil:NilClass  [\#14](https://github.com/treydock/puppet-yum_cron/issues/14)
+- emit\_via variable on CentOS7 [\#8](https://github.com/treydock/puppet-yum_cron/issues/8)
+- download\_updates logic is different between EL6 and EL7 [\#7](https://github.com/treydock/puppet-yum_cron/issues/7)
+
+**Merged pull requests:**
+
+- raise upper version bounds for recent dependencies [\#17](https://github.com/treydock/puppet-yum_cron/pull/17) ([mmoll](https://github.com/mmoll))
+- update beaker to 4.x [\#16](https://github.com/treydock/puppet-yum_cron/pull/16) ([mmoll](https://github.com/mmoll))
+- Fix hiera example of update\_messages [\#15](https://github.com/treydock/puppet-yum_cron/pull/15) ([yorickps](https://github.com/yorickps))
+- Fix typo in changelog [\#13](https://github.com/treydock/puppet-yum_cron/pull/13) ([siebrand](https://github.com/siebrand))
+
 ------------------------------------------
 
 #### 4.0.0 - 2018-02-12

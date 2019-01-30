@@ -1,8 +1,26 @@
-pkg/
-Gemfile.lock
-vendor/
-spec/fixtures/manifests/
-spec/fixtures/modules/
+# IDE related
+.idea/
+.project/
+
+# Testing and development
 .vagrant/
+spec/fixtures/modules/
+spec/fixtures/manifests/
+.rspec_system/
+.vagrant/
+/log
+
+# Ruby and RVM
+.ruby-version
+.rvmrc
+
+# Bundler
+Gemfile.lock
 .bundle/
-coverage/
+
+# Puppet module generated
+pkg/
+
+# Docs
+doc/
+.yardoc/
