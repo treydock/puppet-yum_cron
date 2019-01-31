@@ -6,8 +6,7 @@
 .vagrant/
 spec/fixtures/modules/
 spec/fixtures/manifests/
-.rspec_system/
-.vagrant/
+.rspec_system
 /log
 
 # Ruby and RVM
