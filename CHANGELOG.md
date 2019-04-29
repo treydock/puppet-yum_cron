@@ -2,6 +2,18 @@
 
 Release notes for the treydock-yum_cron module.
 
+#### [4.1.1](https://github.com/treydock/puppet-yum_cron/tree/4.1.1) (2019-04-29)
+[Full Changelog](https://github.com/treydock/puppet-yum_cron/compare/4.1.0...4.1.1)
+
+**Closed issues:**
+
+- Can't install from puppet-forge : dependency problem  [\#18](https://github.com/treydock/puppet-yum_cron/issues/18)
+
+**Merged pull requests:**
+
+- Update inifile compatibility [\#20](https://github.com/treydock/puppet-yum_cron/pull/20) ([siebrand](https://github.com/siebrand))
+- Remove duplicate entry .vagrant/ [\#19](https://github.com/treydock/puppet-yum_cron/pull/19) ([siebrand](https://github.com/siebrand))
+
 #### [4.1.0](https://github.com/treydock/puppet-yum_cron/tree/4.1.0) (2018-10-17)
 [Full Changelog](https://github.com/treydock/puppet-yum_cron/compare/4.0.0...4.1.0)
 
