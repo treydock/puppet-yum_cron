@@ -5,21 +5,31 @@
 
 **Classes**
 
-* [`yum_cron`](#yum_cron): == Class: yum_cron: See README.md for documentation
-* [`yum_cron::config`](#yum_cronconfig): Private class
-* [`yum_cron::install`](#yum_croninstall): Private class
-* [`yum_cron::params`](#yum_cronparams): Private class
-* [`yum_cron::service`](#yum_cronservice): Private class
+_Public Classes_
+
+* [`yum_cron`](#yum_cron): Manage yum-cron
+
+_Private Classes_
+
+* `yum_cron::config`: Manage yum-cron configs
+* `yum_cron::install`: Install yum-cron
+* `yum_cron::params`: Define module defaults
+* `yum_cron::service`: Manage yum-cron service
 
 **Resource types**
 
 * [`yum_cron_config`](#yum_cron_config): Section/setting name to manage from yum-cron.conf
+* [`yum_cron_hourly_config`](#yum_cron_hourly_config): Section/setting name to manage from yum-cron-hourly.conf
+
+**Data types**
+
+* [`Yum_cron::Update_cmd`](#yum_cronupdate_cmd): yum-cron update cmd
 
 ## Classes
 
 ### yum_cron
 
-== Class: yum_cron: See README.md for documentation
+Manage yum-cron
 
 #### Parameters
 
@@ -29,7 +39,8 @@ The following parameters are available in the `yum_cron` class.
 
 Data type: `Enum['present', 'absent']`
 
-
+Defines the presence of `yum-cron`.
+Valid values are 'present' and 'absent'.  Default is `'present'`.
 
 Default value: 'present'
 
@@ -37,7 +48,7 @@ Default value: 'present'
 
 Data type: `Boolean`
 
-
+Boolean that defines the state of `yum-cron`.  Default is `true`
 
 Default value: `true`
 
@@ -45,7 +56,7 @@ Default value: `true`
 
 Data type: `Boolean`
 
-
+Boolean that determines if updates should be automatically downloaded.  Default is `true`
 
 Default value: `true`
 
@@ -53,7 +64,8 @@ Default value: `true`
 
 Data type: `Boolean`
 
-
+Boolean that determines if updates should be automatically installed.  Default is `false`.
+If set to `true` then `download_updates` ignored.
 
 Default value: `false`
 
@@ -61,7 +73,8 @@ Default value: `false`
 
 Data type: `Pattern[/^(?:-)?[0-9]$/]`
 
-
+Sets debug level.  Default varies based on OS version
+Applies only to EL7 and EL6.
 
 Default value: $yum_cron::params::debug_level
 
@@ -69,7 +82,8 @@ Default value: $yum_cron::params::debug_level
 
 Data type: `Pattern[/^[0-9]+$/]`
 
-
+Sets random wait time.  Default varies based on OS version
+Applies only to EL7 and EL6.
 
 Default value: $yum_cron::params::randomwait
 
@@ -77,7 +91,8 @@ Default value: $yum_cron::params::randomwait
 
 Data type: `String`
 
-
+Address notified about updates.  Default is 'root'
+Applies only to EL7 and EL6.
 
 Default value: 'root'
 
@@ -85,7 +100,8 @@ Default value: 'root'
 
 Data type: `String`
 
-
+Name of system used in notifications.  Default is `$::fqdn`
+Applies only to EL7 and EL6.
 
 Default value: $::fqdn
 
@@ -93,7 +109,8 @@ Default value: $::fqdn
 
 Data type: `Pattern[/^[0-6]+$/]`
 
-
+Days of the week that yum-cron will run.  Default is `'0123456'`
+Applies only to EL6.
 
 Default value: '0123456'
 
@@ -101,7 +118,8 @@ Default value: '0123456'
 
 Data type: `Pattern[/^[0-6]$/]`
 
-
+Day of the week yum-cron will cleanup.  Default is '0'
+Applies only to EL6.
 
 Default value: '0'
 
@@ -109,7 +127,15 @@ Default value: '0'
 
 Data type: `Yum_cron::Update_cmd`
 
-
+The kind of updates to use.  Default is 'default'
+Applies only to EL7.
+Valid values:
+* default                            = yum upgrade
+* security                           = yum --security upgrade
+* security-severity:Critical         = yum --sec-severity=Critical upgrade
+* minimal                            = yum --bugfix upgrade-minimal
+* minimal-security                   = yum --security upgrade-minimal
+* minimal-security-severity:Critical =  --sec-severity=Critical upgrade-minimal
 
 Default value: 'default'
 
@@ -117,7 +143,8 @@ Default value: 'default'
 
 Data type: `Enum['yes','no']`
 
-
+Determines whether a message should be emitted when updates are available, downloaded, and applied.  Default is 'yes'
+Applies only to EL7.
 
 Default value: 'yes'
 
@@ -125,7 +152,8 @@ Default value: 'yes'
 
 Data type: `String`
 
-
+Host used to send email messages.  Default is 'localhost'
+Applies only to EL7.
 
 Default value: 'localhost'
 
@@ -133,7 +161,24 @@ Default value: 'localhost'
 
 Data type: `Hash`
 
+Hash that can be used to define additional configurations.  Default is {}
+Applies only to EL7 and EL6.
 
+The Hash is passed to `create_resources`.
+For EL7 the hash defines additional `yum_cron_config` resources.
+For EL6 the hash defines additional `shellvar` resources.
+
+Default value: {}
+
+##### `extra_hourly_configs`
+
+Data type: `Hash`
+
+Hash that can be used to define additional hourly configurations.  Default is {}
+Applies only to EL7.
+
+The Hash is passed to `create_resources`.
+For EL7 the hash defines additional `yum_cron_hourly_config` resources.
 
 Default value: {}
 
@@ -141,7 +186,12 @@ Default value: {}
 
 Data type: `Enum['undef', 'UNSET', 'absent', 'disabled']`
 
-
+Defines how to handle yum-autoupdate on Scientific Linux systems.  Default is 'disabled'
+Applies only to Scientific Linux.
+Valid values:
+* 'disabled' (default) - Sets ENABLED='false' in /etc/sysconfig/yum-autoupdate.
+* 'absent' - Uninstall the yum-autoupdate package.
+* 'undef' or 'UNSET' - Leave yum-autoupdate unmanaged.
 
 Default value: 'disabled'
 
@@ -149,7 +199,8 @@ Default value: 'disabled'
 
 Data type: `Optional[String]`
 
-
+The ensure value passed to yum-cron package resource.  Default is `undef`
+When `undef`, the value passed to the package resources is based on this class' `ensure` parameter value.
 
 Default value: `undef`
 
@@ -157,7 +208,7 @@ Default value: `undef`
 
 Data type: `String`
 
-
+yum-cron package name.  Default is `'yum-cron'`
 
 Default value: $yum_cron::params::package_name
 
@@ -165,7 +216,7 @@ Default value: $yum_cron::params::package_name
 
 Data type: `String`
 
-
+yum-cron service name.  Default is `'yum-cron'`
 
 Default value: $yum_cron::params::service_name
 
@@ -173,7 +224,8 @@ Default value: $yum_cron::params::service_name
 
 Data type: `Optional[String]`
 
-
+The ensure value passed to yum-cron service resource.  Default is `undef`
+When `undef`, the value passed to the service resources is based on this class' `ensure` and `enable` parameter values.
 
 Default value: `undef`
 
@@ -181,7 +233,8 @@ Default value: `undef`
 
 Data type: `Optional[Boolean]`
 
-
+The ensure value passed to yum-cron package resource.  Default is `undef`
+When `undef`, the value passed to the service resources is based on this class' `ensure` and `enable` parameter values.
 
 Default value: `undef`
 
@@ -189,7 +242,7 @@ Default value: `undef`
 
 Data type: `Boolean`
 
-
+Service hasstatus property.  Default is `true`
 
 Default value: $yum_cron::params::service_hasstatus
 
@@ -197,7 +250,7 @@ Default value: $yum_cron::params::service_hasstatus
 
 Data type: `Boolean`
 
-
+Service hasrestart property.  Default is `true`
 
 Default value: $yum_cron::params::service_hasrestart
 
@@ -205,25 +258,9 @@ Default value: $yum_cron::params::service_hasrestart
 
 Data type: `Stdlib::Absolutepath`
 
-
+Path to yum-cron configuration.  Default is based on OS version.
 
 Default value: $yum_cron::params::config_path
-
-### yum_cron::config
-
-Private class
-
-### yum_cron::install
-
-Private class
-
-### yum_cron::params
-
-Private class
-
-### yum_cron::service
-
-Private class
 
 ## Resource types
 
@@ -256,4 +293,42 @@ The following parameters are available in the `yum_cron_config` type.
 namevar
 
 Section/setting name to manage from yum-cron.conf
+
+### yum_cron_hourly_config
+
+Section/setting name to manage from yum-cron-hourly.conf
+
+#### Properties
+
+The following properties are available in the `yum_cron_hourly_config` type.
+
+##### `ensure`
+
+Valid values: present, absent
+
+The basic property that the resource should be in.
+
+Default value: present
+
+##### `value`
+
+The value of the setting to be defined.
+
+#### Parameters
+
+The following parameters are available in the `yum_cron_hourly_config` type.
+
+##### `name`
+
+namevar
+
+Section/setting name to manage from yum-cron-hourly.conf
+
+## Data types
+
+### Yum_cron::Update_cmd
+
+yum-cron update cmd
+
+Alias of `Enum['default', 'security', 'security-severity:Critical', 'minimal', 'minimal-security', 'minimal-security-severity:Critical']`
 

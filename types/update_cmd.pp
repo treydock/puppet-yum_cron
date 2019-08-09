@@ -1,4 +1,4 @@
-#
+# yum-cron update cmd
 type Yum_cron::Update_cmd = Enum[
   'default',
   'security',
