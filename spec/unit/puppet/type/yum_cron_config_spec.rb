@@ -1,4 +1,16 @@
-require 'puppet'
+$LOAD_PATH.push(
+  File.join(
+    File.dirname(__FILE__),
+    '..',
+    '..',
+    '..',
+    'fixtures',
+    'modules',
+    'inifile',
+    'lib',
+  ),
+)
+require 'spec_helper'
 require 'puppet/type/yum_cron_config'
 
 describe 'Puppet::Type.type(:yum_cron_config)' do

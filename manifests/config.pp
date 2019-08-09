@@ -22,6 +22,7 @@ class yum_cron::config {
       yum_cron_config { 'base/debuglevel': value => $yum_cron::debug_level }
 
       create_resources(yum_cron_config, $yum_cron::extra_configs)
+      create_resources(yum_cron_hourly_config, $yum_cron::extra_hourly_configs)
     }
 
     if $::operatingsystemmajrelease < '7' {

@@ -51,6 +51,12 @@
 #   The Hash is passed to `create_resources`.
 #   For EL7 the hash defines additional `yum_cron_config` resources.
 #   For EL6 the hash defines additional `shellvar` resources.
+# @param extra_hourly_configs
+#   Hash that can be used to define additional hourly configurations.  Default is {}
+#   Applies only to EL7.
+#
+#   The Hash is passed to `create_resources`.
+#   For EL7 the hash defines additional `yum_cron_hourly_config` resources.
 # @param yum_autoupdate_ensure
 #   Defines how to handle yum-autoupdate on Scientific Linux systems.  Default is 'disabled'
 #   Applies only to Scientific Linux.
@@ -97,6 +103,7 @@ class yum_cron (
   String $email_host = 'localhost',
   # Misc configs
   Hash $extra_configs = {},
+  Hash $extra_hourly_configs = {},
   # Scientific Linux configs
   Enum['undef', 'UNSET', 'absent', 'disabled'] $yum_autoupdate_ensure  = 'disabled',
   # Package, Service and Config params
