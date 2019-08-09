@@ -1,4 +1,5 @@
-# Private class
+# @summary Define module defaults
+# @api private
 class yum_cron::params {
 
   case $::osfamily {

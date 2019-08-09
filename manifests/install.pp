@@ -1,4 +1,5 @@
-# Private class
+# @summary Install yum-cron
+# @api private
 class yum_cron::install {
   if $caller_module_name != $module_name {
     fail("Use of private class ${name} by ${caller_module_name}")

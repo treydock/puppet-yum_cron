@@ -1,13 +1,12 @@
 Puppet::Type.newtype(:yum_cron_config) do
-
   ensurable
 
-  newparam(:name, :namevar => true) do
+  newparam(:name, namevar: true) do
     desc 'Section/setting name to manage from yum-cron.conf'
     # namevar should be of the form section/setting
     validate do |value|
-      unless value =~ /\S+\/\S+/
-        fail("Invalid yum_cron_config #{value}, entries should be in the form of section/setting.")
+      unless value =~ %r{\S+/\S+}
+        raise("Invalid yum_cron_config #{value}, entries should be in the form of section/setting.")
       end
     end
   end

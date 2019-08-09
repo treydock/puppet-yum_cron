@@ -13,14 +13,15 @@ $LOAD_PATH.push(
     'fixtures',
     'modules',
     'inifile',
-    'lib')
+    'lib',
+  ),
 )
 require 'spec_helper'
 provider_class = Puppet::Type.type(:yum_cron_config).provider(:ini_setting)
 describe provider_class do
-  it 'should set section and setting' do
+  it 'sets section and setting' do
     resource = Puppet::Type::Yum_cron_config.new(
-      {:name => 'vars/foo', :value => 'bar'}
+      name: 'vars/foo', value: 'bar',
     )
     provider = provider_class.new(resource)
     expect(provider.section).to eq('vars')
