@@ -1,4 +1,5 @@
-# Private class
+# @summary Manage yum-cron configs
+# @api private
 class yum_cron::config {
   if $caller_module_name != $module_name {
     fail("Use of private class ${name} by ${caller_module_name}")
