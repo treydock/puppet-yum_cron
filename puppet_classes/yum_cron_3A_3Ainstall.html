@@ -6,7 +6,7 @@
 <title>
   Puppet Class: yum_cron::install
   
-    &mdash; Documentation by YARD 0.9.18
+    &mdash; Documentation by YARD 0.9.20
   
 </title>
 
@@ -71,12 +71,13 @@
   </dl>
 </div>
 
+  <h2>Summary</h2>
+  Install yum-cron
+
 <h2>Overview</h2>
 <div class="docstring">
   <div class="discussion">
     
-<p>Private class</p>
-
   </div>
 </div>
 
@@ -91,7 +92,6 @@
         <pre class="lines">
 
 
-2
 3
 4
 5
@@ -106,10 +106,11 @@
 14
 15
 16
-17</pre>
+17
+18</pre>
       </td>
       <td>
-        <pre class="code"><span class="info file"># File 'manifests/install.pp', line 2</span>
+        <pre class="code"><span class="info file"># File 'manifests/install.pp', line 3</span>
 
 class yum_cron::install {
   if $caller_module_name != $module_name {

@@ -6,7 +6,7 @@
 <title>
   File: README
   
-    &mdash; Documentation by YARD 0.9.18
+    &mdash; Documentation by YARD 0.9.20
   
 </title>
 
@@ -76,9 +76,6 @@ between versions</a></p>
 </li><li>
 <p><a href="#label-Reference">Reference - Parameter and detailed reference to all
 options</a></p>
-<ul><li>
-<p><a href="#label-Public+classes">Public Classes</a></p>
-</li></ul>
 </li><li>
 <p><a href="#label-Compatibility">Compatibility - Operating system and Puppet
 compatibility</a></p>
@@ -122,7 +119,8 @@ updates and notify root if any are available.</p>
 <p><strong>On Scientific Linux the default behavior is also to disable
 <em>yum-autoupdate</em>.</strong></p>
 
-<pre class="code ruby"><code class="ruby">class { &#39;yum_cron&#39;: }</code></pre>
+<pre class="code ruby"><code class="ruby">class { &#39;yum_cron&#39;: }
+</code></pre>
 
 <p>These are the actions taken by the module with default parameter values:</p>
 <ul><li>
@@ -140,7 +138,8 @@ updates and notify root if any are available.</p>
 
 <pre class="code ruby"><code class="ruby">class { &#39;yum_cron&#39;:
   apply_updates =&gt; true,
-}</code></pre>
+}
+</code></pre>
 
 <p>Refer to the yum-cron manpage for all available configuration options.</p>
 
@@ -153,7 +152,8 @@ configurations via the <code>extra_configs</code> parameter.</p>
   extra_configs =&gt; {
     &#39;yum_cron ERROR_LEVEL&#39; =&gt; { &#39;variable&#39; =&gt; &#39;ERROR_LEVEL&#39;, &#39;value&#39; =&gt; &#39;1&#39; }
   }
-}</code></pre>
+}
+</code></pre>
 
 <p>To define additional configuration options for EL7:</p>
 
@@ -161,196 +161,13 @@ configurations via the <code>extra_configs</code> parameter.</p>
   extra_configs =&gt; {
     &#39;email/email_from&#39; =&gt; { &#39;value&#39; =&gt; &#39;foo@bar.com&#39; }
   }
-}</code></pre>
+}
+</code></pre>
 
 <h2 id="label-Reference">Reference</h2>
-<ul><li>
-<p><a href="#label-Public+classes">Public Classes</a></p>
-</li><li>
-<p><a href="#label-Class+yum_cron">Class: yum_cron</a></p>
-</li></ul>
 
-<h3 id="label-Public+Classes">Public Classes</h3>
-
-<h4 id="label-Class-3A+yum_cron-3A">Class: <code>yum_cron</code>:</h4>
-
-<p>Installs and configures yum-cron. Default values in Hiera format are below.</p>
-
-<p>$::osfamily == &#39;RedHat&#39;</p>
-
-<pre class="code ruby"><code class="ruby">yum_cron::ensure: &#39;present&#39;
-yum_cron::enable: true
-yum_cron::download_updates: true
-yum_cron::apply_updates: false
-yum_cron::mailto: &#39;root&#39;
-yum_cron::systemname: &quot;%{::fqdn}&quot;
-yum_cron::days_of_week: &#39;0123456&#39;
-yum_cron::cleanday: &#39;0&#39;
-yum_cron::update_cmd: &#39;default&#39;
-yum_cron::update_messages: &#39;yes&#39;
-yum_cron::email_host: &#39;localhost&#39;
-yum_cron::extra_configs: {}
-yum_cron::yum_autoupdate_ensure: &#39;disabled&#39;
-yum_cron::package_ensure: undef
-yum_cron::package_name: &#39;yum-cron&#39;
-yum_cron::service_name: &#39;yum-cron&#39;
-yum_cron::service_ensure: undef
-yum_cron::service_enable: undef
-yum_cron::service_hasstatus: true
-yum_cron::service_hasrestart: true</code></pre>
-
-<p>$::operatingsystemmajrelease == &#39;7&#39;</p>
-
-<pre class="code ruby"><code class="ruby">yum_cron::debug_level: &#39;-2&#39;
-yum_cron::randomwait: &#39;360&#39;
-yum_cron::config_path: &#39;/etc/yum/yum-cron.conf&#39;</code></pre>
-
-<p>$::operatingsystemmajrelease == &#39;6&#39;</p>
-
-<pre class="code ruby"><code class="ruby">yum_cron::debug_level: &#39;0&#39;
-yum_cron::randomwait: &#39;60&#39;
-yum_cron::config_path: &#39;/etc/sysconfig/yum-cron&#39;</code></pre>
-
-<h5 id="label-ensure"><code>ensure</code></h5>
-
-<p>Defines the presence of <code>yum-cron</code>. Valid values are
-&#39;present&#39; and &#39;absent&#39;. Default is
-<code>&#39;present&#39;</code>.</p>
-
-<h5 id="label-enable"><code>enable</code></h5>
-
-<p>Boolean that defines the state of <code>yum-cron</code>. Default is
-<code>true</code></p>
-
-<h5 id="label-download_updates"><code>download_updates</code></h5>
-
-<p>Boolean that determines if updates should be automatically downloaded.
-Default is <code>true</code></p>
-
-<h5 id="label-apply_updates"><code>apply_updates</code></h5>
-
-<p>Boolean that determines if updates should be automatically installed.
-Default is <code>false</code>. If set to <code>true</code> then
-<code>download_updates</code> ignored.</p>
-
-<h5 id="label-debug_level"><code>debug_level</code></h5>
-
-<p>Sets debug level. Default varies based on OS version Applies only to EL7
-and EL6.</p>
-
-<h5 id="label-randomwait"><code>randomwait</code></h5>
-
-<p>Sets random wait time. Default varies based on OS version Applies only to
-EL7 and EL6.</p>
-
-<h5 id="label-mailto"><code>mailto</code></h5>
-
-<p>Address notified about updates. Default is &#39;root&#39; Applies only to
-EL7 and EL6.</p>
-
-<h5 id="label-systemname"><code>systemname</code></h5>
-
-<p>Name of system used in notifications. Default is <code>$::fqdn</code>
-Applies only to EL7 and EL6.</p>
-
-<h5 id="label-days_of_week"><code>days_of_week</code></h5>
-
-<p>Days of the week that yum-cron will run. Default is
-<code>&#39;0123456&#39;</code> Applies only to EL6.</p>
-
-<h5 id="label-cleanday"><code>cleanday</code></h5>
-
-<p>Day of the week yum-cron will cleanup. Default is &#39;0&#39; Applies only
-to EL6.</p>
-
-<h5 id="label-update_cmd"><code>update_cmd</code></h5>
-
-<p>The kind of updates to use. Default is &#39;default&#39; Applies only to
-EL7.</p>
-
-<p>Valid values:</p>
-
-<pre class="code ruby"><code class="ruby"><span class='comment'># default                            = yum upgrade
-</span><span class='comment'># security                           = yum --security upgrade
-</span><span class='comment'># security-severity:Critical         = yum --sec-severity=Critical upgrade
-</span><span class='comment'># minimal                            = yum --bugfix upgrade-minimal
-</span><span class='comment'># minimal-security                   = yum --security upgrade-minimal
-</span><span class='comment'># minimal-security-severity:Critical =  --sec-severity=Critical upgrade-minimal
-</span></code></pre>
-
-<h5 id="label-update_messages"><code>update_messages</code></h5>
-
-<p>Determines whether a message should be emitted when updates are available,
-downloaded, and applied. Default is &#39;yes&#39; Applies only to EL7.</p>
-
-<h5 id="label-email_host"><code>email_host</code></h5>
-
-<p>Host used to send email messages. Default is &#39;localhost&#39; Applies
-only to EL7.</p>
-
-<h5 id="label-extra_configs"><code>extra_configs</code></h5>
-
-<p>Hash that can be used to define additional configurations. Default is {}
-Applies only to EL7 and EL6.</p>
-
-<p>The Hash is passed to <code>create_resources</code>. For EL7 the hash
-defines additional <code>yum_cron_config</code> resources. For EL6 the hash
-defines additional <code>shellvar</code> resources.</p>
-
-<h5 id="label-yum_autoupdate_ensure"><code>yum_autoupdate_ensure</code></h5>
-
-<p>Defines how to handle yum-autoupdate on Scientific Linux systems. Default
-is &#39;disabled&#39; Applies only to Scientific Linux.</p>
-
-<p>Valid values:</p>
-<ul><li>
-<p>&#39;disabled&#39; (default) - Sets ENABLED=&#39;false&#39; in
-/etc/sysconfig/yum-autoupdate.</p>
-</li><li>
-<p>&#39;absent&#39; - Uninstall the yum-autoupdate package.</p>
-</li><li>
-<p>&#39;undef&#39; or &#39;UNSET&#39; - Leave yum-autoupdate unmanaged.</p>
-</li></ul>
-
-<h5 id="label-package_ensure"><code>package_ensure</code></h5>
-
-<p>The ensure value passed to yum-cron package resource. Default is
-<code>undef</code> When <code>undef</code>, the value passed to the package
-resources is based on this class&#39; <code>ensure</code> parameter value.</p>
-
-<h5 id="label-package_name"><code>package_name</code></h5>
-
-<p>yum-cron package name. Default is <code>&#39;yum-cron&#39;</code></p>
-
-<h5 id="label-service_name"><code>service_name</code></h5>
-
-<p>yum-cron service name. Default is <code>&#39;yum-cron&#39;</code></p>
-
-<h5 id="label-service_ensure"><code>service_ensure</code></h5>
-
-<p>The ensure value passed to yum-cron service resource. Default is
-<code>undef</code> When <code>undef</code>, the value passed to the service
-resources is based on this class&#39; <code>ensure</code> and
-<code>enable</code> parameter values.</p>
-
-<h5 id="label-service_enable"><code>service_enable</code></h5>
-
-<p>The ensure value passed to yum-cron package resource. Default is
-<code>undef</code> When <code>undef</code>, the value passed to the service
-resources is based on this class&#39; <code>ensure</code> and
-<code>enable</code> parameter values.</p>
-
-<h5 id="label-service_hasstatus"><code>service_hasstatus</code></h5>
-
-<p>Service hasstatus property. Default is <code>true</code></p>
-
-<h5 id="label-service_hasrestart"><code>service_hasrestart</code></h5>
-
-<p>Service hasrestart property. Default is <code>true</code></p>
-
-<h5 id="label-config_path"><code>config_path</code></h5>
-
-<p>Path to yum-cron configuration. Default is based on OS version.</p>
+<p><a
+href="http://treydock.github.io/puppet-yum_cron/">treydock.github.io/puppet-yum_cron/</a></p>
 
 <h2 id="label-Compatibility">Compatibility</h2>
 

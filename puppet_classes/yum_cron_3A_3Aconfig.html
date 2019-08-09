@@ -6,7 +6,7 @@
 <title>
   Puppet Class: yum_cron::config
   
-    &mdash; Documentation by YARD 0.9.18
+    &mdash; Documentation by YARD 0.9.20
   
 </title>
 
@@ -71,12 +71,13 @@
   </dl>
 </div>
 
+  <h2>Summary</h2>
+  Manage yum-cron configs
+
 <h2>Overview</h2>
 <div class="docstring">
   <div class="discussion">
     
-<p>Private class</p>
-
   </div>
 </div>
 
@@ -91,7 +92,6 @@
         <pre class="lines">
 
 
-2
 3
 4
 5
@@ -175,10 +175,12 @@
 83
 84
 85
-86</pre>
+86
+87
+88</pre>
       </td>
       <td>
-        <pre class="code"><span class="info file"># File 'manifests/config.pp', line 2</span>
+        <pre class="code"><span class="info file"># File 'manifests/config.pp', line 3</span>
 
 class yum_cron::config {
   if $caller_module_name != $module_name {
@@ -202,6 +204,7 @@ class yum_cron::config {
       yum_cron_config { &#39;base/debuglevel&#39;: value =&gt; $yum_cron::debug_level }
 
       create_resources(yum_cron_config, $yum_cron::extra_configs)
+      create_resources(yum_cron_hourly_config, $yum_cron::extra_hourly_configs)
     }
 
     if $::operatingsystemmajrelease &lt; &#39;7&#39; {

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>
-  Puppet Class: yum_cron::params
+  Data Type: Yum_cron::Update_cmd
   
     &mdash; Documentation by YARD 0.9.20
   
@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="../css/common.css" type="text/css" charset="utf-8" />
 
 <script type="text/javascript" charset="utf-8">
-  pathId = "puppet_classes::yum_cron::params";
+  pathId = "puppet_data_type_aliases::Yum_cron::Update_cmd";
   relpath = '../';
 </script>
 
@@ -28,7 +28,7 @@
   </head>
   <body>
     <div class="nav_wrap">
-      <iframe id="nav" src="../puppet_class_list.html?1"></iframe>
+      <iframe id="nav" src="../puppet_data_type_list.html?1"></iframe>
       <div id="resizer"></div>
     </div>
 
@@ -36,10 +36,10 @@
       <div id="header">
         <div id="menu">
   
-    <a href="../_index.html">Index (y)</a> &raquo;
-    <span class='title'><span class='object_link'>Puppet Classes</span></span>
+    <a href="../_index.html">Index (Y)</a> &raquo;
+    <span class='title'><span class='object_link'>Puppet Data Type Aliases</span></span>
      &raquo; 
-    <span class="title">yum_cron::params</span>
+    <span class="title">Yum_cron::Update_cmd</span>
   
 </div>
 
@@ -59,36 +59,34 @@
         <div class="clear"></div>
       </div>
 
-      <div id="content"><h1>Puppet Class: yum_cron::params</h1>
+      <div id="content"><h1>Puppet Data Type Alias: Yum_cron::Update_cmd</h1>
 <div class="box_info">
-  
-  
-  <dl>
-    <dt>Inherited by:</dt>
-    <dd>
-      
-      <span class='object_link'><a href="yum_cron.html" title="puppet_classes::yum_cron (puppet_class)">yum_cron</a></span><br/>
-      
-    </dd>
-  </dl>
-  
   <dl>
     <dt>Defined in:</dt>
     <dd>
-      manifests/params.pp
+      types/update_cmd.pp
     </dd>
   </dl>
 </div>
-
-  <h2>Summary</h2>
-  Define module defaults
 
 <h2>Overview</h2>
 <div class="docstring">
   <div class="discussion">
     
+<p>yum-cron update cmd</p>
+
   </div>
 </div>
+
+<div class="tags">
+  <p class="tag_title">Alias of</p>
+  <div class="docstring">
+    <div class="discussion">
+      <pre class="code"><span class="info">Enum['default', 'security', 'security-severity:Critical', 'minimal', 'minimal-security', 'minimal-security-severity:Critical']</span></pre>
+    </div>
+  </div>
+</div>
+
 
 
 <div class="tags">
@@ -101,74 +99,12 @@
         <pre class="lines">
 
 
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34</pre>
+</pre>
       </td>
       <td>
-        <pre class="code"><span class="info file"># File 'manifests/params.pp', line 3</span>
+        <pre class="code"><span class="info file"># File 'types/update_cmd.pp', line 2</span>
 
-class yum_cron::params {
-
-  case $::osfamily {
-    &#39;RedHat&#39;: {
-      $package_name       = &#39;yum-cron&#39;
-      $service_name       = &#39;yum-cron&#39;
-      $service_hasstatus  = true
-      $service_hasrestart = true
-
-      case $::operatingsystemmajrelease {
-        &#39;7&#39;: {
-          $config_path      = &#39;/etc/yum/yum-cron.conf&#39;
-          $debug_level      = &#39;-2&#39;
-          $randomwait       = &#39;360&#39;
-        }
-        &#39;6&#39;: {
-          $config_path      = &#39;/etc/sysconfig/yum-cron&#39;
-          $debug_level      = &#39;0&#39;
-          $randomwait       = &#39;60&#39;
-        }
-        default: {
-          fail(&quot;Unsupported operatingsystemmajrelease: ${::operatingsystemmajrelease}, module ${module_name} only support 6 and 7&quot;)
-        }
-      }
-    }
-
-    default: {
-      fail(&quot;Unsupported osfamily: ${::osfamily}, module ${module_name} only support osfamily RedHat&quot;)
-    }
-  }
-
-}</pre>
+</pre>
       </td>
     </tr>
   </table>

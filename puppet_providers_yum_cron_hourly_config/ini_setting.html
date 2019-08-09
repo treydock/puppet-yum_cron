@@ -4,7 +4,7 @@
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>
-  Puppet Class: yum_cron::service
+  Provider: ini_setting
   
     &mdash; Documentation by YARD 0.9.20
   
@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="../css/common.css" type="text/css" charset="utf-8" />
 
 <script type="text/javascript" charset="utf-8">
-  pathId = "puppet_classes::yum_cron::service";
+  pathId = "puppet_providers_yum_cron_hourly_config::ini_setting";
   relpath = '../';
 </script>
 
@@ -28,7 +28,7 @@
   </head>
   <body>
     <div class="nav_wrap">
-      <iframe id="nav" src="../puppet_class_list.html?1"></iframe>
+      <iframe id="nav" src="../puppet_provider_list.html?1"></iframe>
       <div id="resizer"></div>
     </div>
 
@@ -36,10 +36,10 @@
       <div id="header">
         <div id="menu">
   
-    <a href="../_index.html">Index (y)</a> &raquo;
-    <span class='title'><span class='object_link'>Puppet Classes</span></span>
+    <a href="../_index.html">Index (i)</a> &raquo;
+    <span class='title'><span class='object_link'>Providers</span></span>
      &raquo; 
-    <span class="title">yum_cron::service</span>
+    <span class="title">ini_setting</span>
   
 </div>
 
@@ -59,73 +59,35 @@
         <div class="clear"></div>
       </div>
 
-      <div id="content"><h1>Puppet Class: yum_cron::service</h1>
+      <div id="content"><h1>Provider: ini_setting</h1>
 <div class="box_info">
-  
-  
   <dl>
     <dt>Defined in:</dt>
     <dd>
-      manifests/service.pp
+      lib/puppet/provider/yum_cron_hourly_config/ini_setting.rb
     </dd>
   </dl>
+  <dl>
+    <dt>Resource type:</dt>
+    <dd><span class='object_link'><a href="../puppet_types/yum_cron_hourly_config.html" title="puppet_types::yum_cron_hourly_config (puppet_type)">yum_cron_hourly_config</a></span></dd>
+  </dl>
 </div>
-
-  <h2>Summary</h2>
-  Manage yum-cron service
 
 <h2>Overview</h2>
 <div class="docstring">
   <div class="discussion">
     
+<p>yum_cron_hourly_config provider</p>
+
   </div>
 </div>
-
-
 <div class="tags">
   
 
-</div><div class="method_details_list">
-  <table class="source_code">
-    <tr>
-      <td>
-        <pre class="lines">
-
-
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15</pre>
-      </td>
-      <td>
-        <pre class="code"><span class="info file"># File 'manifests/service.pp', line 3</span>
-
-class yum_cron::service {
-  if $caller_module_name != $module_name {
-    fail(&quot;Use of private class ${name} by ${caller_module_name}&quot;)
-  }
-
-  service { &#39;yum-cron&#39;:
-    ensure     =&gt; $yum_cron::service_ensure_real,
-    enable     =&gt; $yum_cron::service_enable_real,
-    name       =&gt; $yum_cron::service_name,
-    hasstatus  =&gt; $yum_cron::service_hasstatus,
-    hasrestart =&gt; $yum_cron::service_hasrestart,
-  }
-}</pre>
-      </td>
-    </tr>
-  </table>
 </div>
+
+
+
 </div>
 
       <div id="footer">
