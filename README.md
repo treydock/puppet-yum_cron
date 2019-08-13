@@ -15,7 +15,8 @@
 
 ## Overview
 
-The yum_cron module manages the *yum-cron* package to allow for automatic updates and available updates notifications.
+The yum_cron module manages either the *yum-cron* or *dnf-automatic* (RHEL/CentOS 8+) package to allow for automatic updates
+and available updates notifications.
 
 ## Backwards Compatibility
 
@@ -32,6 +33,8 @@ Version 1.x of this module replaced the **disable_yum_autoupdate** and **remove_
 ### Class: yum_cron
 
 The default parameters will install and enable yum-cron to only check for updates and notify root if any are available.
+Generally, dnf-automatic uses different paths, but functions very similarly and has a similar config file.  For the rest
+of the documentation, you can generally assuming that references to yum-cron also apply to dnf-automatic.
 
 **On Scientific Linux the default behavior is also to disable *yum-autoupdate*.**
 
@@ -39,9 +42,9 @@ The default parameters will install and enable yum-cron to only check for update
 
 These are the actions taken by the module with default parameter values:
 
-* Install yum-cron
+* Install yum-cron/dnf-automatic
 * Set configuration values to enable checking for updates and notify root
-* Start and enable the yum-cron service
+* Start and enable the yum-cron/dnf-automatic service
 * Disable yum-autoupdate by setting ENABLED="false" in /etc/sysconfig/yum-autoupdate **(Scientific Linux only)**
 
 This is an example of enabling automatic updates
@@ -80,7 +83,8 @@ This module should be compatible with all RedHat based operating systems and Pup
 
 It has only been tested on:
 
-* CentOS 7
+* RHEL/CentOS 8
+* RHEL/CentOS 7
 * CentOS 6
 * Scientific Linux 6
 
