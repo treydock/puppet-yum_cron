@@ -6,7 +6,25 @@ class yum_cron::config {
   }
 
   if $yum_cron::ensure == 'present' {
-    if $::operatingsystemmajrelease >= '7' {
+    if $::operatingsystemmajrelease == '8' {
+      Dnf_automatic_config {
+        notify => $yum_cron::config_notify,
+      }
+
+      dnf_automatic_config { 'commands/update_cmd': value => $yum_cron::update_cmd }
+      dnf_automatic_config { 'commands/update_messages': value => $yum_cron::update_messages }
+      dnf_automatic_config { 'commands/download_updates': value => $yum_cron::download_updates_str }
+      dnf_automatic_config { 'commands/apply_updates': value => $yum_cron::apply_updates_str }
+      dnf_automatic_config { 'commands/random_sleep': value => $yum_cron::randomwait }
+      dnf_automatic_config { 'emitters/system_name': value => $yum_cron::systemname }
+      dnf_automatic_config { 'email/email_to': value => $yum_cron::mailto }
+      dnf_automatic_config { 'email/email_host': value => $yum_cron::email_host }
+      dnf_automatic_config { 'base/debuglevel': value => $yum_cron::debug_level }
+
+      create_resources(dnf_automatic_config, $yum_cron::extra_configs)
+    }
+
+    if $::operatingsystemmajrelease == '7' {
       Yum_cron_config {
         notify => $yum_cron::config_notify,
       }

@@ -4,18 +4,27 @@ class yum_cron::params {
 
   case $::osfamily {
     'RedHat': {
-      $package_name       = 'yum-cron'
-      $service_name       = 'yum-cron'
       $service_hasstatus  = true
       $service_hasrestart = true
 
       case $::operatingsystemmajrelease {
+        '8': {
+          $package_name     = 'dnf-automatic'
+          $service_name     = 'dnf-automatic.timer'
+          $config_path      = '/etc/dnf/automatic.conf'
+          $debug_level      = '-2'
+          $randomwait       = '360'
+        }
         '7': {
+          $package_name     = 'yum-cron'
+          $service_name     = 'yum-cron'
           $config_path      = '/etc/yum/yum-cron.conf'
           $debug_level      = '-2'
           $randomwait       = '360'
         }
         '6': {
+          $package_name     = 'yum-cron'
+          $service_name     = 'yum-cron'
           $config_path      = '/etc/sysconfig/yum-cron'
           $debug_level      = '0'
           $randomwait       = '60'
