@@ -1,7 +1,16 @@
 shared_examples 'yum_cron::install' do |facts|
+  let(:package_name) do
+    case facts[:os]['release']['major'].to_i
+    when 8
+      'dnf-automatic'
+    else
+      'yum-cron'
+    end
+  end
+
   it do
     is_expected.to contain_package('yum-cron').with(ensure: 'present',
-                                                    name: 'yum-cron')
+                                                    name: package_name)
   end
 
   context 'ensure => absent' do
