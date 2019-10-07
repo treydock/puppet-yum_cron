@@ -89,8 +89,9 @@ module</a></p>
 
 <h2 id="label-Overview">Overview</h2>
 
-<p>The yum_cron module manages the <em>yum-cron</em> package to allow for
-automatic updates and available updates notifications.</p>
+<p>The yum_cron module manages either the <em>yum-cron</em> or
+<em>dnf-automatic</em> (RHEL/CentOS 8+) package to allow for automatic
+updates and available updates notifications.</p>
 
 <h2 id="label-Backwards+Compatibility">Backwards Compatibility</h2>
 
@@ -114,7 +115,10 @@ disable yum-autoupdate.</p>
 <h3 id="label-Class-3A+yum_cron">Class: yum_cron</h3>
 
 <p>The default parameters will install and enable yum-cron to only check for
-updates and notify root if any are available.</p>
+updates and notify root if any are available. Generally, dnf-automatic uses
+different paths, but functions very similarly and has a similar config
+file. For the rest of the documentation, you can generally assuming that
+references to yum-cron also apply to dnf-automatic.</p>
 
 <p><strong>On Scientific Linux the default behavior is also to disable
 <em>yum-autoupdate</em>.</strong></p>
@@ -124,11 +128,11 @@ updates and notify root if any are available.</p>
 
 <p>These are the actions taken by the module with default parameter values:</p>
 <ul><li>
-<p>Install yum-cron</p>
+<p>Install yum-cron/dnf-automatic</p>
 </li><li>
 <p>Set configuration values to enable checking for updates and notify root</p>
 </li><li>
-<p>Start and enable the yum-cron service</p>
+<p>Start and enable the yum-cron/dnf-automatic service</p>
 </li><li>
 <p>Disable yum-autoupdate by setting ENABLED=“false” in
 /etc/sysconfig/yum-autoupdate <strong>(Scientific Linux only)</strong></p>
@@ -176,7 +180,9 @@ and Puppet 4.7.x and later.</p>
 
 <p>It has only been tested on:</p>
 <ul><li>
-<p>CentOS 7</p>
+<p>RHEL/CentOS 8</p>
+</li><li>
+<p>RHEL/CentOS 7</p>
 </li><li>
 <p>CentOS 6</p>
 </li><li>

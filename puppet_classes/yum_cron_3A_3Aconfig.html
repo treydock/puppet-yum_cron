@@ -177,7 +177,25 @@
 85
 86
 87
-88</pre>
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106</pre>
       </td>
       <td>
         <pre class="code"><span class="info file"># File 'manifests/config.pp', line 3</span>
@@ -188,7 +206,25 @@ class yum_cron::config {
   }
 
   if $yum_cron::ensure == &#39;present&#39; {
-    if $::operatingsystemmajrelease &gt;= &#39;7&#39; {
+    if $::operatingsystemmajrelease == &#39;8&#39; {
+      Dnf_automatic_config {
+        notify =&gt; $yum_cron::config_notify,
+      }
+
+      dnf_automatic_config { &#39;commands/update_cmd&#39;: value =&gt; $yum_cron::update_cmd }
+      dnf_automatic_config { &#39;commands/update_messages&#39;: value =&gt; $yum_cron::update_messages }
+      dnf_automatic_config { &#39;commands/download_updates&#39;: value =&gt; $yum_cron::download_updates_str }
+      dnf_automatic_config { &#39;commands/apply_updates&#39;: value =&gt; $yum_cron::apply_updates_str }
+      dnf_automatic_config { &#39;commands/random_sleep&#39;: value =&gt; $yum_cron::randomwait }
+      dnf_automatic_config { &#39;emitters/system_name&#39;: value =&gt; $yum_cron::systemname }
+      dnf_automatic_config { &#39;email/email_to&#39;: value =&gt; $yum_cron::mailto }
+      dnf_automatic_config { &#39;email/email_host&#39;: value =&gt; $yum_cron::email_host }
+      dnf_automatic_config { &#39;base/debuglevel&#39;: value =&gt; $yum_cron::debug_level }
+
+      create_resources(dnf_automatic_config, $yum_cron::extra_configs)
+    }
+
+    if $::operatingsystemmajrelease == &#39;7&#39; {
       Yum_cron_config {
         notify =&gt; $yum_cron::config_notify,
       }

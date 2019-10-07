@@ -132,7 +132,16 @@
 31
 32
 33
-34</pre>
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43</pre>
       </td>
       <td>
         <pre class="code"><span class="info file"># File 'manifests/params.pp', line 3</span>
@@ -141,18 +150,27 @@ class yum_cron::params {
 
   case $::osfamily {
     &#39;RedHat&#39;: {
-      $package_name       = &#39;yum-cron&#39;
-      $service_name       = &#39;yum-cron&#39;
       $service_hasstatus  = true
       $service_hasrestart = true
 
       case $::operatingsystemmajrelease {
+        &#39;8&#39;: {
+          $package_name     = &#39;dnf-automatic&#39;
+          $service_name     = &#39;dnf-automatic.timer&#39;
+          $config_path      = &#39;/etc/dnf/automatic.conf&#39;
+          $debug_level      = &#39;-2&#39;
+          $randomwait       = &#39;360&#39;
+        }
         &#39;7&#39;: {
+          $package_name     = &#39;yum-cron&#39;
+          $service_name     = &#39;yum-cron&#39;
           $config_path      = &#39;/etc/yum/yum-cron.conf&#39;
           $debug_level      = &#39;-2&#39;
           $randomwait       = &#39;360&#39;
         }
         &#39;6&#39;: {
+          $package_name     = &#39;yum-cron&#39;
+          $service_name     = &#39;yum-cron&#39;
           $config_path      = &#39;/etc/sysconfig/yum-cron&#39;
           $debug_level      = &#39;0&#39;
           $randomwait       = &#39;60&#39;
