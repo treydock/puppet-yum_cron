@@ -12,6 +12,10 @@
       collection: puppet5
     - set: centos-7
       collection: puppet6
+    - set: centos-8
+      collection: puppet5
+    - set: centos-8
+      collection: puppet6
   user: treydock
   secure: "HRF085op/lSCEE1BGsw87u+ZEqvnlK+POdU+4o1BuQzOthKbPSoRof4176ppZ7zV0eRazJe6mD+974SqjpByyiBdEv5u+ifD6AqLDSeqnul9mmx5/gT0n23zFZP9baNeCOIitMslnoSvF+Cxb80aCSzA8Wz7ml5Y+ttMilwfyW4="
 .gitlab-ci.yml:

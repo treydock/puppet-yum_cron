@@ -9,11 +9,11 @@ describe 'yum_cron class:' do
       apply_manifest(pp, catch_changes: true)
     end
 
-    describe package('yum-cron') do
+    describe package(defaults(fact('os.release.major').to_i, 'package')) do
       it { is_expected.to be_installed }
     end
 
-    describe service('yum-cron') do
+    describe service(defaults(fact('os.release.major').to_i, 'service')) do
       it { is_expected.to be_enabled }
       it { is_expected.to be_running }
     end
@@ -42,7 +42,7 @@ describe 'yum_cron class:' do
       describe file('/etc/sysconfig/yum-cron') do
         it { is_expected.not_to be_file }
       end
-      describe file('/etc/yum/yum-cron.conf') do
+      describe file(defaults(fact('os.release.major').to_i, 'config')) do
         it { is_expected.to be_file }
         it { is_expected.to be_owned_by 'root' }
         it { is_expected.to be_grouped_into 'root' }
@@ -84,7 +84,7 @@ describe 'yum_cron class:' do
         its(:content) { is_expected.to match %r{^DOWNLOAD_ONLY=no$} }
       end
     else
-      describe file('/etc/yum/yum-cron.conf') do
+      describe file(defaults(fact('os.release.major').to_i, 'config')) do
         its(:content) { is_expected.to match %r{^download_updates = yes$} }
         its(:content) { is_expected.to match %r{^apply_updates = yes$} }
       end
@@ -99,11 +99,11 @@ describe 'yum_cron class:' do
       apply_manifest(pp, catch_changes: true)
     end
 
-    describe package('yum-cron') do
+    describe package(defaults(fact('os.release.major').to_i, 'package')) do
       it { is_expected.to be_installed }
     end
 
-    describe service('yum-cron') do
+    describe service(defaults(fact('os.release.major').to_i, 'service')) do
       it { is_expected.not_to be_enabled }
       it { is_expected.not_to be_running }
     end
@@ -117,11 +117,11 @@ describe 'yum_cron class:' do
       apply_manifest(pp, catch_changes: true)
     end
 
-    describe package('yum-cron') do
+    describe package(defaults(fact('os.release.major').to_i, 'package')) do
       it { is_expected.not_to be_installed }
     end
 
-    describe service('yum-cron') do
+    describe service(defaults(fact('os.release.major').to_i, 'service')) do
       it { is_expected.not_to be_enabled }
       it { is_expected.not_to be_running }
     end
