@@ -18,6 +18,7 @@ _Private Classes_
 
 **Resource types**
 
+* [`dnf_automatic_config`](#dnf_automatic_config): Section/setting name to manage from dnf-automatic.conf
 * [`yum_cron_config`](#yum_cron_config): Section/setting name to manage from yum-cron.conf
 * [`yum_cron_hourly_config`](#yum_cron_hourly_config): Section/setting name to manage from yum-cron-hourly.conf
 
@@ -263,6 +264,36 @@ Path to yum-cron configuration.  Default is based on OS version.
 Default value: $yum_cron::params::config_path
 
 ## Resource types
+
+### dnf_automatic_config
+
+Section/setting name to manage from dnf-automatic.conf
+
+#### Properties
+
+The following properties are available in the `dnf_automatic_config` type.
+
+##### `ensure`
+
+Valid values: present, absent
+
+The basic property that the resource should be in.
+
+Default value: present
+
+##### `value`
+
+The value of the setting to be defined.
+
+#### Parameters
+
+The following parameters are available in the `dnf_automatic_config` type.
+
+##### `name`
+
+namevar
+
+Section/setting name to manage from dnf-automatic.conf
 
 ### yum_cron_config
 

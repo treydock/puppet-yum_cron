@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org).
 
+## [v5.1.0](https://github.com/treydock/puppet-yum_cron/tree/v5.1.0) (2019-10-07)
+
+[Full Changelog](https://github.com/treydock/puppet-yum_cron/compare/v5.0.0...v5.1.0)
+
+### Added
+
+- Increase upper bound for supported stdlib [\#29](https://github.com/treydock/puppet-yum_cron/pull/29) ([treydock](https://github.com/treydock))
+- EL8 support [\#28](https://github.com/treydock/puppet-yum_cron/pull/28) ([treydock](https://github.com/treydock))
+- RHEL8 Support \(for dnf-automatic\) [\#26](https://github.com/treydock/puppet-yum_cron/pull/26) ([jadestorm](https://github.com/jadestorm))
+
+### Fixed
+
+- Fix spec tests from \#26 [\#27](https://github.com/treydock/puppet-yum_cron/pull/27) ([treydock](https://github.com/treydock))
+
 ## [v5.0.0](https://github.com/treydock/puppet-yum_cron/tree/v5.0.0) (2019-08-09)
 
 [Full Changelog](https://github.com/treydock/puppet-yum_cron/compare/4.1.1...v5.0.0)

@@ -1,6 +1,6 @@
 {
   "name": "treydock-yum_cron",
-  "version": "5.0.0",
+  "version": "5.1.0",
   "author": "treydock",
   "summary": "yum-cron module",
   "license": "Apache-2.0",
@@ -60,5 +60,5 @@
   ],
   "pdk-version": "1.13.0",
   "template-url": "https://github.com/treydock/pdk-templates.git#master",
-  "template-ref": "heads/master-0-g854a33f"
+  "template-ref": "heads/master-0-gdf6e1ae"
 }
