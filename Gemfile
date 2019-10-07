@@ -25,7 +25,33 @@ group :development do
   gem "json", '= 2.1.0',                                         require: false if Gem::Requirement.create(['>= 2.5.0', '< 2.7.0']).satisfied_by?(Gem::Version.new(RUBY_VERSION.dup))
   gem "rb-readline", '= 0.5.5',                                  require: false, platforms: [:mswin, :mingw, :x64_mingw]
   gem "puppet-module-posix-default-r#{minor_version}", '~> 0.3', require: false, platforms: [:ruby]
-  gem "puppet-module-posix-dev-r#{minor_version}", '~> 0.3',     require: false, platforms: [:ruby]
+  gem "activesupport", '~> 5.0',                                 require: false
+  gem "codecov", '~> 0.1.10',                                    require: false
+  gem "dependency_checker", '~> 0.2',                            require: false
+  gem "facterdb", '~> 0.8.1',                                    require: false
+  gem "gettext-setup", '~> 0.26',                                require: false
+  gem "metadata-json-lint", '~> 2.0',                            require: false
+  gem "mocha", '~> 1.0',                                         require: false
+  gem "parallel_tests", '~> 2.14.1',                             require: false
+  gem "parser", '~> 2.5.1.2',                                    require: false
+  gem "pry", '~> 0.10.4',                                        require: false
+  gem "puppet-debugger", '~> 0.14',                              require: false
+  gem "puppet-lint", '~> 2.3',                                   require: false
+  gem "puppet_pot_generator", '~> 1.0',                          require: false
+  gem "puppet-strings", '~> 2.0',                                require: false
+  gem "puppet-resource_api", '~> 1.6',                           require: false
+  gem "puppet-syntax", '~> 2.4',                                 require: false
+  gem "puppetlabs_spec_helper", '~> 2.9',                        require: false
+  gem "rainbow", '~> 2.0',                                       require: false
+  gem "rspec-puppet", '~> 2.3',                                  require: false
+  gem "rspec-puppet-facts", '~> 1.9.5',                          require: false
+  gem "rubocop", '~> 0.49.0',                                    require: false
+  gem "rubocop-i18n", '~> 1.2.0',                                require: false
+  gem "rubocop-rspec", '~> 1.16.0',                              require: false
+  gem "rspec_junit_formatter", '~> 0.2',                         require: false
+  gem "serverspec", '~> 2.41',                                   require: false
+  gem "simplecov-console", '~> 0.4.2',                           require: false
+  gem "specinfra", '2.82.2',                                     require: false
   gem "puppet-module-win-default-r#{minor_version}", '~> 0.3',   require: false, platforms: [:mswin, :mingw, :x64_mingw]
   gem "puppet-module-win-dev-r#{minor_version}", '~> 0.3',       require: false, platforms: [:mswin, :mingw, :x64_mingw]
   gem "puppet-lint-param-docs",                                  require: false
