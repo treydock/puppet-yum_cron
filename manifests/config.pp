@@ -5,8 +5,8 @@ class yum_cron::config {
     fail("Use of private class ${name} by ${caller_module_name}")
   }
 
-  if $yum_cron::ensure == 'present' {
-    if $::operatingsystemmajrelease == '8' {
+  case $facts['os']['release']['major'] {
+    '8': {
       Dnf_automatic_config {
         notify => $yum_cron::config_notify,
       }
@@ -26,10 +26,11 @@ class yum_cron::config {
         value  => join($yum_cron::exclude_packages, ' '),
       }
 
-      create_resources(dnf_automatic_config, $yum_cron::extra_configs)
+      $yum_cron::extra_configs.each |$name, $res| {
+        dnf_automatic_config { $name: * => $res }
+      }
     }
-
-    if $::operatingsystemmajrelease == '7' {
+    '7': {
       Yum_cron_config {
         notify => $yum_cron::config_notify,
       }
@@ -48,16 +49,23 @@ class yum_cron::config {
         value  => join($yum_cron::exclude_packages, ' '),
       }
 
-      create_resources(yum_cron_config, $yum_cron::extra_configs)
-      create_resources(yum_cron_hourly_config, $yum_cron::extra_hourly_configs)
-    }
-
-    if $::operatingsystem =~ /Scientific/ and $yum_cron::yum_autoupdate_ensure == 'disabled' {
-      file_line { 'disable yum-autoupdate':
-        path  => '/etc/sysconfig/yum-autoupdate',
-        line  => 'ENABLED=false',
-        match => '^ENABLED=.*',
+      $yum_cron::extra_configs.each |$name, $res| {
+        yum_cron_config { $name: * => $res }
       }
+      $yum_cron::extra_hourly_configs.each |$name, $res| {
+        yum_cron_hourly_config { $name: * => $res }
+      }
+    }
+    default: {
+      # Do nothing
+    }
+  }
+
+  if $facts['os']['name'] =~ /Scientific/ and $yum_cron::yum_autoupdate_ensure == 'disabled' {
+    file_line { 'disable yum-autoupdate':
+      path  => '/etc/sysconfig/yum-autoupdate',
+      line  => 'ENABLED=false',
+      match => '^ENABLED=.*',
     }
   }
 }

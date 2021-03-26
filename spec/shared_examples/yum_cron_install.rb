@@ -21,7 +21,7 @@ shared_examples 'yum_cron::install' do |facts|
 
   it { is_expected.not_to contain_package('yum-autoupdate') }
 
-  if facts[:operatingsystem] =~ %r{Scientific}
+  if facts[:os]['name'] =~ %r{Scientific}
     context "yum_autoupdate_ensure => 'absent'" do
       let(:params) { { yum_autoupdate_ensure: 'absent' } }
 

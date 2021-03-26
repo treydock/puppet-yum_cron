@@ -2,37 +2,36 @@
 #
 # @param ensure
 #   Defines the presence of `yum-cron`.
-#   Valid values are 'present' and 'absent'.  Default is `'present'`.
 # @param enable
-#   Boolean that defines the state of `yum-cron`.  Default is `true`
+#   Boolean that defines the state of `yum-cron`.
 # @param download_updates
-#   Boolean that determines if updates should be automatically downloaded.  Default is `true`
+#   Boolean that determines if updates should be automatically downloaded.
 # @param apply_updates
-#   Boolean that determines if updates should be automatically installed.  Default is `false`.
+#   Boolean that determines if updates should be automatically installed.
 #   If set to `true` then `download_updates` ignored.
 # @param upgrade_type
 #   The kind of updates to perform.
 #   Applies only to EL8.
 # @param debug_level
-#   Sets debug level.  Default varies based on OS version
+#   Sets debug level.
 #   Applies only to EL7 and EL8.
 # @param exclude_packages
 #   Packages to exclude from updates.
 #   Applies only to EL7 and EL8.
 # @param randomwait
-#   Sets random wait time.  Default varies based on OS version
+#   Sets random wait time.
 #   Applies only to EL7 and EL8.
 # @param mailto
-#   Address notified about updates.  Default is 'root'
+#   Address notified about updates.
 #   Applies only to EL7 and EL8.
 # @param systemname
-#   Name of system used in notifications.  Default is `$::fqdn`
+#   Name of system used in notifications.
 #   Applies only to EL7 and EL8.
 # @param email_host
-#   Host used to send email messages.  Default is 'localhost'
+#   Host used to send email messages.
 #   Applies only to EL7 and EL8.
 # @param update_cmd
-#   The kind of updates to use.  Default is 'default'
+#   The kind of updates to use.
 #   Applies only to EL7.
 #   Valid values:
 #   * default                            = yum upgrade
@@ -42,49 +41,50 @@
 #   * minimal-security                   = yum --security upgrade-minimal
 #   * minimal-security-severity:Critical =  --sec-severity=Critical upgrade-minimal
 # @param update_messages
-#   Determines whether a message should be emitted when updates are available, downloaded, and applied.  Default is 'yes'
+#   Determines whether a message should be emitted when updates are available, downloaded, and applied.
 #   Applies only to EL7.
 # @param extra_configs
-#   Hash that can be used to define additional configurations.  Default is {}
+#   Hash that can be used to define additional configurations.
 #   Applies only to EL7 and EL8.
 #
-#   The Hash is passed to `create_resources`.
 #   For EL8 the hash defines additonal `dnf_automatic_config` resources.
 #   For EL7 the hash defines additional `yum_cron_config` resources.
 # @param extra_hourly_configs
-#   Hash that can be used to define additional hourly configurations.  Default is {}
+#   Hash that can be used to define additional hourly configurations.
 #   Applies only to EL7.
 #
-#   The Hash is passed to `create_resources`.
 #   For EL7 the hash defines additional `yum_cron_hourly_config` resources.
 # @param yum_autoupdate_ensure
-#   Defines how to handle yum-autoupdate on Scientific Linux systems.  Default is 'disabled'
+#   Defines how to handle yum-autoupdate on Scientific Linux systems.
 #   Applies only to Scientific Linux.
 #   Valid values:
 #   * 'disabled' (default) - Sets ENABLED='false' in /etc/sysconfig/yum-autoupdate.
 #   * 'absent' - Uninstall the yum-autoupdate package.
 #   * 'undef' or 'UNSET' - Leave yum-autoupdate unmanaged.
 # @param package_ensure
-#   The ensure value passed to yum-cron package resource.  Default is `undef`
+#   The ensure value passed to yum-cron package resource.
 #   When `undef`, the value passed to the package resources is based on this class' `ensure` parameter value.
 # @param package_name
-#   yum-cron package name.  Default is `'yum-cron'`
+#   yum-cron package name.  Default is based on OS version.
 # @param service_name
-#   yum-cron service name.  Default is `'yum-cron'`
+#   yum-cron service name.  Default is based on OS version.
 # @param service_ensure
-#   The ensure value passed to yum-cron service resource.  Default is `undef`
+#   The ensure value passed to yum-cron service resource.
 #   When `undef`, the value passed to the service resources is based on this class' `ensure` and `enable` parameter values.
 # @param service_enable
-#   The ensure value passed to yum-cron package resource.  Default is `undef`
+#   The ensure value passed to yum-cron package resource.
 #   When `undef`, the value passed to the service resources is based on this class' `ensure` and `enable` parameter values.
 # @param service_hasstatus
-#   Service hasstatus property.  Default is `true`
+#   Service hasstatus property.
 # @param service_hasrestart
-#   Service hasrestart property.  Default is `true`
+#   Service hasrestart property.
 # @param config_path
 #   Path to yum-cron configuration.  Default is based on OS version.
 #
 class yum_cron (
+  String $package_name,
+  String $service_name,
+  Stdlib::Absolutepath $config_path,
   Enum['present', 'absent'] $ensure = 'present',
   Boolean $enable = true,
   Boolean $download_updates = true,
@@ -92,9 +92,9 @@ class yum_cron (
   # EL8 only options
   Enum['default','security'] $upgrade_type = 'default',
   # EL8 and EL7 options
-  Pattern[/^(?:-)?[0-9]$/] $debug_level = $yum_cron::params::debug_level,
+  Pattern[/^(?:-)?[0-9]$/] $debug_level = '-2',
+  Pattern[/^[0-9]+$/] $randomwait = '360',
   Array $exclude_packages = [],
-  Pattern[/^[0-9]+$/] $randomwait = $yum_cron::params::randomwait,
   String $mailto = 'root',
   String $systemname = $::fqdn,
   String $email_host = 'localhost',
@@ -108,14 +108,11 @@ class yum_cron (
   Enum['undef', 'UNSET', 'absent', 'disabled'] $yum_autoupdate_ensure  = 'disabled',
   # Package, Service and Config params
   Optional[String] $package_ensure = undef,
-  String $package_name = $yum_cron::params::package_name,
-  String $service_name = $yum_cron::params::service_name,
   Optional[String] $service_ensure = undef,
   Optional[Boolean] $service_enable = undef,
-  Boolean $service_hasstatus = $yum_cron::params::service_hasstatus,
-  Boolean $service_hasrestart = $yum_cron::params::service_hasrestart,
-  Stdlib::Absolutepath $config_path = $yum_cron::params::config_path,
-) inherits yum_cron::params {
+  Boolean $service_hasstatus = true,
+  Boolean $service_hasrestart = true,
+) {
 
   case $ensure {
     'present': {
@@ -170,10 +167,15 @@ class yum_cron (
   }
 
   contain yum_cron::install
-  contain yum_cron::config
   contain yum_cron::service
 
   Class['yum_cron::install']
-  -> Class['yum_cron::config']
   -> Class['yum_cron::service']
+
+  if $ensure == 'present' {
+    contain yum_cron::config
+    Class['yum_cron::install']
+    -> Class['yum_cron::config']
+    -> Class['yum_cron::service']
+  }
 }
