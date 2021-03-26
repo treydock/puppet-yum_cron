@@ -22,15 +22,8 @@ class yum_cron::params {
           $debug_level      = '-2'
           $randomwait       = '360'
         }
-        '6': {
-          $package_name     = 'yum-cron'
-          $service_name     = 'yum-cron'
-          $config_path      = '/etc/sysconfig/yum-cron'
-          $debug_level      = '0'
-          $randomwait       = '60'
-        }
         default: {
-          fail("Unsupported operatingsystemmajrelease: ${::operatingsystemmajrelease}, module ${module_name} only support 6 and 7")
+          fail("Unsupported operatingsystemmajrelease: ${::operatingsystemmajrelease}, module ${module_name} only support 7 and 8")
         }
       }
     }

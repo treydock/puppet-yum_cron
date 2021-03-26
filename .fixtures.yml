@@ -4,9 +4,5 @@ fixtures:
       repo: https://github.com/puppetlabs/puppetlabs-stdlib.git
     inifile:
       repo: https://github.com/puppetlabs/puppetlabs-inifile.git
-    augeasproviders_core:
-      repo: https://github.com/hercules-team/augeasproviders_core.git
-    augeasproviders_shellvar:
-      repo: https://github.com/hercules-team/augeasproviders_shellvar.git
   symlinks:
     yum_cron: "#{source_dir}"

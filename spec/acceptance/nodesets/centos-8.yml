@@ -10,8 +10,12 @@ HOSTS:
       - '/usr/sbin/init'
     docker_image_commands:
       - 'yum install -y dnf-utils'
-      - 'dnf config-manager --set-enabled PowerTools'
-      - 'yum install -y wget which cronie iproute initscripts'
+      - 'dnf config-manager --set-enabled powertools'
+      - 'yum install -y wget which cronie iproute initscripts langpacks-en glibc-all-langpacks'
+    docker_env:
+      - LANG=en_US.UTF-8
+      - LANGUAGE=en_US.UTF-8
+      - LC_ALL=en_US.UTF-8
     docker_container_name: 'yum_cron-el8'
 CONFIG:
   log_level: debug

@@ -1,7 +1,7 @@
 # puppet-yum_cron
 
 [![Puppet Forge](http://img.shields.io/puppetforge/v/treydock/yum_cron.svg)](https://forge.puppetlabs.com/treydock/yum_cron)
-[![Build Status](https://travis-ci.org/treydock/puppet-yum_cron.svg?branch=master)](https://travis-ci.org/treydock/puppet-yum_cron)
+[![CI Status](https://github.com/treydock/puppet-yum_cron/workflows/CI/badge.svg?branch=master)](https://github.com/treydock/puppet-yum_cron/actions?query=workflow%3ACI)
 
 #### Table of Contents
 
@@ -10,8 +10,6 @@
 2. [Usage - Configuration and customization options](#usage)
 3. [Reference - Parameter and detailed reference to all options](#reference)
 4. [Compatibility - Operating system and Puppet compatibility](#compatibility)
-5. [Development - Guide for contributing to the module](#development)
-    * [Testing - Testing your configuration](#testing)
 
 ## Overview
 
@@ -79,36 +77,9 @@ To define additional configuration options for EL7:
 
 ## Compatibility
 
-This module should be compatible with all RedHat based operating systems and Puppet 4.7.x and later.
+This module should be compatible with all RedHat based operating systems and Puppet 6.1.x and newer.
 
 It has only been tested on:
 
 * RHEL/CentOS 8
 * RHEL/CentOS 7
-* CentOS 6
-* Scientific Linux 6
-
-## Development
-
-### Testing
-
-Testing requires the following dependencies:
-
-* rake
-* bundler
-
-Install gem dependencies
-
-    bundle install
-
-Run unit tests
-
-    bundle exec rake test
-
-If you have Vagrant >= 1.2.0 installed you can run system tests
-
-    bundle exec rake beaker
-
-## TODO
-
-*
