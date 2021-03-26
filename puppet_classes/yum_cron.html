@@ -6,15 +6,15 @@
 <title>
   Puppet Class: yum_cron
   
-    &mdash; Documentation by YARD 0.9.20
+    &mdash; Documentation by YARD 0.9.26
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" charset="utf-8" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" charset="utf-8" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
 
-<script type="text/javascript" charset="utf-8">
+<script type="text/javascript">
   pathId = "puppet_classes::yum_cron";
   relpath = '../';
 </script>
@@ -62,11 +62,6 @@
       <div id="content"><h1>Puppet Class: yum_cron</h1>
 <div class="box_info">
   
-  <dl>
-    <dt>Inherits:</dt>
-    <dd><span class='object_link'><a href="yum_cron_3A_3Aparams.html" title="puppet_classes::yum_cron::params (puppet_class)">yum_cron::params</a></span></dd>
-  </dl>
-  
   
   <dl>
     <dt>Defined in:</dt>
@@ -104,9 +99,7 @@
       
         &mdash;
         <div class='inline'>
-<p>Defines the presence of <code>yum-cron</code>. Valid values are
-&#39;present&#39; and &#39;absent&#39;. Default is
-<code>&#39;present&#39;</code>.</p>
+<p>Defines the presence of <code>yum-cron</code>.</p>
 </div>
       
     </li>
@@ -124,8 +117,7 @@
       
         &mdash;
         <div class='inline'>
-<p>Boolean that defines the state of <code>yum-cron</code>. Default is
-<code>true</code></p>
+<p>Boolean that defines the state of <code>yum-cron</code>.</p>
 </div>
       
     </li>
@@ -143,8 +135,7 @@
       
         &mdash;
         <div class='inline'>
-<p>Boolean that determines if updates should be automatically downloaded.
-Default is <code>true</code></p>
+<p>Boolean that determines if updates should be automatically downloaded.</p>
 </div>
       
     </li>
@@ -162,9 +153,26 @@ Default is <code>true</code></p>
       
         &mdash;
         <div class='inline'>
-<p>Boolean that determines if updates should be automatically installed.
-Default is <code>false</code>. If set to <code>true</code> then
-<code>download_updates</code> ignored.</p>
+<p>Boolean that determines if updates should be automatically installed. If
+set to <code>true</code> then <code>download_updates</code> ignored.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>upgrade_type</span>
+      
+      
+        <span class='type'>(<tt>Enum['default','security']</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&#39;default&#39;</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The kind of updates to perform. Applies only to EL8.</p>
 </div>
       
     </li>
@@ -177,13 +185,30 @@ Default is <code>false</code>. If set to <code>true</code> then
         <span class='type'>(<tt>Pattern[/^(?:-)?[0-9]$/]</tt>)</span>
       
       
-        <em class="default">(defaults to: <tt>$yum_cron::params::debug_level</tt>)</em>
+        <em class="default">(defaults to: <tt>&#39;-2&#39;</tt>)</em>
       
       
         &mdash;
         <div class='inline'>
-<p>Sets debug level. Default varies based on OS version Applies only to EL7
-and EL6.</p>
+<p>Sets debug level. Applies only to EL7 and EL8.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>exclude_packages</span>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>[]</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Packages to exclude from updates. Applies only to EL7 and EL8.</p>
 </div>
       
     </li>
@@ -196,13 +221,12 @@ and EL6.</p>
         <span class='type'>(<tt>Pattern[/^[0-9]+$/]</tt>)</span>
       
       
-        <em class="default">(defaults to: <tt>$yum_cron::params::randomwait</tt>)</em>
+        <em class="default">(defaults to: <tt>&#39;360&#39;</tt>)</em>
       
       
         &mdash;
         <div class='inline'>
-<p>Sets random wait time. Default varies based on OS version Applies only to
-EL7 and EL6.</p>
+<p>Sets random wait time. Applies only to EL7 and EL8.</p>
 </div>
       
     </li>
@@ -220,8 +244,7 @@ EL7 and EL6.</p>
       
         &mdash;
         <div class='inline'>
-<p>Address notified about updates. Default is &#39;root&#39; Applies only to
-EL7 and EL6.</p>
+<p>Address notified about updates. Applies only to EL7 and EL8.</p>
 </div>
       
     </li>
@@ -239,46 +262,25 @@ EL7 and EL6.</p>
       
         &mdash;
         <div class='inline'>
-<p>Name of system used in notifications. Default is <code>$::fqdn</code>
-Applies only to EL7 and EL6.</p>
+<p>Name of system used in notifications. Applies only to EL7 and EL8.</p>
 </div>
       
     </li>
   
     <li>
       
-        <span class='name'>days_of_week</span>
+        <span class='name'>email_host</span>
       
       
-        <span class='type'>(<tt>Pattern[/^[0-6]+$/]</tt>)</span>
+        <span class='type'>(<tt>String</tt>)</span>
       
       
-        <em class="default">(defaults to: <tt>&#39;0123456&#39;</tt>)</em>
-      
-      
-        &mdash;
-        <div class='inline'>
-<p>Days of the week that yum-cron will run. Default is
-<code>&#39;0123456&#39;</code> Applies only to EL6.</p>
-</div>
-      
-    </li>
-  
-    <li>
-      
-        <span class='name'>cleanday</span>
-      
-      
-        <span class='type'>(<tt>Pattern[/^[0-6]$/]</tt>)</span>
-      
-      
-        <em class="default">(defaults to: <tt>&#39;0&#39;</tt>)</em>
+        <em class="default">(defaults to: <tt>&#39;localhost&#39;</tt>)</em>
       
       
         &mdash;
         <div class='inline'>
-<p>Day of the week yum-cron will cleanup. Default is &#39;0&#39; Applies only
-to EL6.</p>
+<p>Host used to send email messages. Applies only to EL7 and EL8.</p>
 </div>
       
     </li>
@@ -296,12 +298,11 @@ to EL6.</p>
       
         &mdash;
         <div class='inline'>
-<p>The kind of updates to use. Default is &#39;default&#39; Applies only to
-EL7. Valid values: * default = yum upgrade * security = yum –security
-upgrade * security-severity:Critical = yum –sec-severity=Critical upgrade *
-minimal = yum –bugfix upgrade-minimal * minimal-security = yum –security
-upgrade-minimal * minimal-security-severity:Critical =
-–sec-severity=Critical upgrade-minimal</p>
+<p>The kind of updates to use. Applies only to EL7. Valid values: * default =
+yum upgrade * security = yum –security upgrade * security-severity:Critical
+= yum –sec-severity=Critical upgrade * minimal = yum –bugfix
+upgrade-minimal * minimal-security = yum –security upgrade-minimal *
+minimal-security-severity:Critical = –sec-severity=Critical upgrade-minimal</p>
 </div>
       
     </li>
@@ -320,26 +321,7 @@ upgrade-minimal * minimal-security-severity:Critical =
         &mdash;
         <div class='inline'>
 <p>Determines whether a message should be emitted when updates are available,
-downloaded, and applied. Default is &#39;yes&#39; Applies only to EL7.</p>
-</div>
-      
-    </li>
-  
-    <li>
-      
-        <span class='name'>email_host</span>
-      
-      
-        <span class='type'>(<tt>String</tt>)</span>
-      
-      
-        <em class="default">(defaults to: <tt>&#39;localhost&#39;</tt>)</em>
-      
-      
-        &mdash;
-        <div class='inline'>
-<p>Host used to send email messages. Default is &#39;localhost&#39; Applies
-only to EL7.</p>
+downloaded, and applied. Applies only to EL7.</p>
 </div>
       
     </li>
@@ -357,12 +339,12 @@ only to EL7.</p>
       
         &mdash;
         <div class='inline'>
-<p>Hash that can be used to define additional configurations. Default is {}
-Applies only to EL7 and EL6.</p>
+<p>Hash that can be used to define additional configurations. Applies only to
+EL7 and EL8.</p>
 
-<p>The Hash is passed to <code>create_resources</code>. For EL7 the hash
-defines additional <code>yum_cron_config</code> resources. For EL6 the hash
-defines additional <code>shellvar</code> resources.</p>
+<p>For EL8 the hash defines additonal <code>dnf_automatic_config</code>
+resources. For EL7 the hash defines additional <code>yum_cron_config</code>
+resources.</p>
 </div>
       
     </li>
@@ -380,11 +362,11 @@ defines additional <code>shellvar</code> resources.</p>
       
         &mdash;
         <div class='inline'>
-<p>Hash that can be used to define additional hourly configurations. Default
-is {} Applies only to EL7.</p>
+<p>Hash that can be used to define additional hourly configurations. Applies
+only to EL7.</p>
 
-<p>The Hash is passed to <code>create_resources</code>. For EL7 the hash
-defines additional <code>yum_cron_hourly_config</code> resources.</p>
+<p>For EL7 the hash defines additional <code>yum_cron_hourly_config</code>
+resources.</p>
 </div>
       
     </li>
@@ -402,12 +384,11 @@ defines additional <code>yum_cron_hourly_config</code> resources.</p>
       
         &mdash;
         <div class='inline'>
-<p>Defines how to handle yum-autoupdate on Scientific Linux systems. Default
-is &#39;disabled&#39; Applies only to Scientific Linux. Valid values: *
-&#39;disabled&#39; (default) - Sets ENABLED=&#39;false&#39; in
-/etc/sysconfig/yum-autoupdate. * &#39;absent&#39; - Uninstall the
-yum-autoupdate package. * &#39;undef&#39; or &#39;UNSET&#39; - Leave
-yum-autoupdate unmanaged.</p>
+<p>Defines how to handle yum-autoupdate on Scientific Linux systems. Applies
+only to Scientific Linux. Valid values: * &#39;disabled&#39; (default) -
+Sets ENABLED=&#39;false&#39; in /etc/sysconfig/yum-autoupdate. *
+&#39;absent&#39; - Uninstall the yum-autoupdate package. * &#39;undef&#39;
+or &#39;UNSET&#39; - Leave yum-autoupdate unmanaged.</p>
 </div>
       
     </li>
@@ -425,9 +406,9 @@ yum-autoupdate unmanaged.</p>
       
         &mdash;
         <div class='inline'>
-<p>The ensure value passed to yum-cron package resource. Default is
-<code>undef</code> When <code>undef</code>, the value passed to the package
-resources is based on this class&#39; <code>ensure</code> parameter value.</p>
+<p>The ensure value passed to yum-cron package resource. When
+<code>undef</code>, the value passed to the package resources is based on
+this class&#39; <code>ensure</code> parameter value.</p>
 </div>
       
     </li>
@@ -440,12 +421,10 @@ resources is based on this class&#39; <code>ensure</code> parameter value.</p>
         <span class='type'>(<tt>String</tt>)</span>
       
       
-        <em class="default">(defaults to: <tt>$yum_cron::params::package_name</tt>)</em>
-      
       
         &mdash;
         <div class='inline'>
-<p>yum-cron package name. Default is <code>&#39;yum-cron&#39;</code></p>
+<p>yum-cron package name. Default is based on OS version.</p>
 </div>
       
     </li>
@@ -458,12 +437,10 @@ resources is based on this class&#39; <code>ensure</code> parameter value.</p>
         <span class='type'>(<tt>String</tt>)</span>
       
       
-        <em class="default">(defaults to: <tt>$yum_cron::params::service_name</tt>)</em>
-      
       
         &mdash;
         <div class='inline'>
-<p>yum-cron service name. Default is <code>&#39;yum-cron&#39;</code></p>
+<p>yum-cron service name. Default is based on OS version.</p>
 </div>
       
     </li>
@@ -481,10 +458,10 @@ resources is based on this class&#39; <code>ensure</code> parameter value.</p>
       
         &mdash;
         <div class='inline'>
-<p>The ensure value passed to yum-cron service resource. Default is
-<code>undef</code> When <code>undef</code>, the value passed to the service
-resources is based on this class&#39; <code>ensure</code> and
-<code>enable</code> parameter values.</p>
+<p>The ensure value passed to yum-cron service resource. When
+<code>undef</code>, the value passed to the service resources is based on
+this class&#39; <code>ensure</code> and <code>enable</code> parameter
+values.</p>
 </div>
       
     </li>
@@ -502,10 +479,10 @@ resources is based on this class&#39; <code>ensure</code> and
       
         &mdash;
         <div class='inline'>
-<p>The ensure value passed to yum-cron package resource. Default is
-<code>undef</code> When <code>undef</code>, the value passed to the service
-resources is based on this class&#39; <code>ensure</code> and
-<code>enable</code> parameter values.</p>
+<p>The ensure value passed to yum-cron package resource. When
+<code>undef</code>, the value passed to the service resources is based on
+this class&#39; <code>ensure</code> and <code>enable</code> parameter
+values.</p>
 </div>
       
     </li>
@@ -518,12 +495,12 @@ resources is based on this class&#39; <code>ensure</code> and
         <span class='type'>(<tt>Boolean</tt>)</span>
       
       
-        <em class="default">(defaults to: <tt>$yum_cron::params::service_hasstatus</tt>)</em>
+        <em class="default">(defaults to: <tt>true</tt>)</em>
       
       
         &mdash;
         <div class='inline'>
-<p>Service hasstatus property. Default is <code>true</code></p>
+<p>Service hasstatus property.</p>
 </div>
       
     </li>
@@ -536,12 +513,12 @@ resources is based on this class&#39; <code>ensure</code> and
         <span class='type'>(<tt>Boolean</tt>)</span>
       
       
-        <em class="default">(defaults to: <tt>$yum_cron::params::service_hasrestart</tt>)</em>
+        <em class="default">(defaults to: <tt>true</tt>)</em>
       
       
         &mdash;
         <div class='inline'>
-<p>Service hasrestart property. Default is <code>true</code></p>
+<p>Service hasrestart property.</p>
 </div>
       
     </li>
@@ -554,8 +531,6 @@ resources is based on this class&#39; <code>ensure</code> and
         <span class='type'>(<tt>Stdlib::Absolutepath</tt>)</span>
       
       
-        <em class="default">(defaults to: <tt>$yum_cron::params::config_path</tt>)</em>
-      
       
         &mdash;
         <div class='inline'>
@@ -567,6 +542,7 @@ resources is based on this class&#39; <code>ensure</code> and
 </ul>
 
 
+
 </div><div class="method_details_list">
   <table class="source_code">
     <tr>
@@ -574,6 +550,9 @@ resources is based on this class&#39; <code>ensure</code> and
         <pre class="lines">
 
 
+84
+85
+86
 87
 88
 89
@@ -660,28 +639,39 @@ resources is based on this class&#39; <code>ensure</code> and
 170
 171
 172
-173</pre>
+173
+174
+175
+176
+177
+178
+179
+180
+181</pre>
       </td>
       <td>
-        <pre class="code"><span class="info file"># File 'manifests/init.pp', line 87</span>
+        <pre class="code"><span class="info file"># File 'manifests/init.pp', line 84</span>
 
 class yum_cron (
+  String $package_name,
+  String $service_name,
+  Stdlib::Absolutepath $config_path,
   Enum[&#39;present&#39;, &#39;absent&#39;] $ensure = &#39;present&#39;,
   Boolean $enable = true,
   Boolean $download_updates = true,
   Boolean $apply_updates = false,
-  # EL7/EL6 only options
-  Pattern[/^(?:-)?[0-9]$/] $debug_level = $yum_cron::params::debug_level,
-  Pattern[/^[0-9]+$/] $randomwait = $yum_cron::params::randomwait,
+  # EL8 only options
+  Enum[&#39;default&#39;,&#39;security&#39;] $upgrade_type = &#39;default&#39;,
+  # EL8 and EL7 options
+  Pattern[/^(?:-)?[0-9]$/] $debug_level = &#39;-2&#39;,
+  Pattern[/^[0-9]+$/] $randomwait = &#39;360&#39;,
+  Array $exclude_packages = [],
   String $mailto = &#39;root&#39;,
   String $systemname = $::fqdn,
-  # EL6 only options
-  Pattern[/^[0-6]+$/] $days_of_week = &#39;0123456&#39;,
-  Pattern[/^[0-6]$/] $cleanday = &#39;0&#39;,
+  String $email_host = &#39;localhost&#39;,
   # EL7 only options
   Yum_cron::Update_cmd $update_cmd = &#39;default&#39;,
   Enum[&#39;yes&#39;,&#39;no&#39;] $update_messages = &#39;yes&#39;,
-  String $email_host = &#39;localhost&#39;,
   # Misc configs
   Hash $extra_configs = {},
   Hash $extra_hourly_configs = {},
@@ -689,14 +679,11 @@ class yum_cron (
   Enum[&#39;undef&#39;, &#39;UNSET&#39;, &#39;absent&#39;, &#39;disabled&#39;] $yum_autoupdate_ensure  = &#39;disabled&#39;,
   # Package, Service and Config params
   Optional[String] $package_ensure = undef,
-  String $package_name = $yum_cron::params::package_name,
-  String $service_name = $yum_cron::params::service_name,
   Optional[String] $service_ensure = undef,
   Optional[Boolean] $service_enable = undef,
-  Boolean $service_hasstatus = $yum_cron::params::service_hasstatus,
-  Boolean $service_hasrestart = $yum_cron::params::service_hasrestart,
-  Stdlib::Absolutepath $config_path = $yum_cron::params::config_path,
-) inherits yum_cron::params {
+  Boolean $service_hasstatus = true,
+  Boolean $service_hasrestart = true,
+) {
 
   case $ensure {
     &#39;present&#39;: {
@@ -744,13 +731,24 @@ class yum_cron (
     }
   }
 
+  if empty($exclude_packages) {
+    $exclude_packages_ensure = &#39;absent&#39;
+  } else {
+    $exclude_packages_ensure = &#39;present&#39;
+  }
+
   contain yum_cron::install
-  contain yum_cron::config
   contain yum_cron::service
 
   Class[&#39;yum_cron::install&#39;]
-  -&gt; Class[&#39;yum_cron::config&#39;]
   -&gt; Class[&#39;yum_cron::service&#39;]
+
+  if $ensure == &#39;present&#39; {
+    contain yum_cron::config
+    Class[&#39;yum_cron::install&#39;]
+    -&gt; Class[&#39;yum_cron::config&#39;]
+    -&gt; Class[&#39;yum_cron::service&#39;]
+  }
 }</pre>
       </td>
     </tr>

@@ -6,15 +6,15 @@
 <title>
   Puppet Class: yum_cron::install
   
-    &mdash; Documentation by YARD 0.9.20
+    &mdash; Documentation by YARD 0.9.26
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" charset="utf-8" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" charset="utf-8" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
 
-<script type="text/javascript" charset="utf-8">
+<script type="text/javascript">
   pathId = "puppet_classes::yum_cron::install";
   relpath = '../';
 </script>
@@ -85,6 +85,7 @@
 <div class="tags">
   
 
+
 </div><div class="method_details_list">
   <table class="source_code">
     <tr>
@@ -122,7 +123,7 @@ class yum_cron::install {
     name   =&gt; $yum_cron::package_name,
   }
 
-  if $::operatingsystem =~ /Scientific/ and $yum_cron::yum_autoupdate_ensure == &#39;absent&#39; {
+  if $facts[&#39;os&#39;][&#39;name&#39;] =~ /Scientific/ and $yum_cron::yum_autoupdate_ensure == &#39;absent&#39; {
     package { &#39;yum-autoupdate&#39;:
       ensure  =&gt; absent,
     }

@@ -6,15 +6,15 @@
 <title>
   Puppet Class: yum_cron::config
   
-    &mdash; Documentation by YARD 0.9.20
+    &mdash; Documentation by YARD 0.9.26
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" charset="utf-8" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" charset="utf-8" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
 
-<script type="text/javascript" charset="utf-8">
+<script type="text/javascript">
   pathId = "puppet_classes::yum_cron::config";
   relpath = '../';
 </script>
@@ -84,6 +84,7 @@
 
 <div class="tags">
   
+
 
 </div><div class="method_details_list">
   <table class="source_code">
@@ -160,42 +161,7 @@
 68
 69
 70
-71
-72
-73
-74
-75
-76
-77
-78
-79
-80
-81
-82
-83
-84
-85
-86
-87
-88
-89
-90
-91
-92
-93
-94
-95
-96
-97
-98
-99
-100
-101
-102
-103
-104
-105
-106</pre>
+71</pre>
       </td>
       <td>
         <pre class="code"><span class="info file"># File 'manifests/config.pp', line 3</span>
@@ -205,14 +171,15 @@ class yum_cron::config {
     fail(&quot;Use of private class ${name} by ${caller_module_name}&quot;)
   }
 
-  if $yum_cron::ensure == &#39;present&#39; {
-    if $::operatingsystemmajrelease == &#39;8&#39; {
+  case $facts[&#39;os&#39;][&#39;release&#39;][&#39;major&#39;] {
+    &#39;8&#39;: {
       Dnf_automatic_config {
         notify =&gt; $yum_cron::config_notify,
       }
 
-      dnf_automatic_config { &#39;commands/update_cmd&#39;: value =&gt; $yum_cron::update_cmd }
-      dnf_automatic_config { &#39;commands/update_messages&#39;: value =&gt; $yum_cron::update_messages }
+      dnf_automatic_config { &#39;commands/upgrade_type&#39;: value =&gt; $yum_cron::upgrade_type }
+      dnf_automatic_config { &#39;commands/upgrade_cmd&#39;: ensure =&gt; &#39;absent&#39; }
+      dnf_automatic_config { &#39;commands/update_messages&#39;: ensure =&gt; &#39;absent&#39; }
       dnf_automatic_config { &#39;commands/download_updates&#39;: value =&gt; $yum_cron::download_updates_str }
       dnf_automatic_config { &#39;commands/apply_updates&#39;: value =&gt; $yum_cron::apply_updates_str }
       dnf_automatic_config { &#39;commands/random_sleep&#39;: value =&gt; $yum_cron::randomwait }
@@ -220,11 +187,16 @@ class yum_cron::config {
       dnf_automatic_config { &#39;email/email_to&#39;: value =&gt; $yum_cron::mailto }
       dnf_automatic_config { &#39;email/email_host&#39;: value =&gt; $yum_cron::email_host }
       dnf_automatic_config { &#39;base/debuglevel&#39;: value =&gt; $yum_cron::debug_level }
+      dnf_automatic_config { &#39;base/exclude&#39;:
+        ensure =&gt; $yum_cron::exclude_packages_ensure,
+        value  =&gt; join($yum_cron::exclude_packages, &#39; &#39;),
+      }
 
-      create_resources(dnf_automatic_config, $yum_cron::extra_configs)
+      $yum_cron::extra_configs.each |$name, $res| {
+        dnf_automatic_config { $name: * =&gt; $res }
+      }
     }
-
-    if $::operatingsystemmajrelease == &#39;7&#39; {
+    &#39;7&#39;: {
       Yum_cron_config {
         notify =&gt; $yum_cron::config_notify,
       }
@@ -238,69 +210,28 @@ class yum_cron::config {
       yum_cron_config { &#39;email/email_to&#39;: value =&gt; $yum_cron::mailto }
       yum_cron_config { &#39;email/email_host&#39;: value =&gt; $yum_cron::email_host }
       yum_cron_config { &#39;base/debuglevel&#39;: value =&gt; $yum_cron::debug_level }
-
-      create_resources(yum_cron_config, $yum_cron::extra_configs)
-      create_resources(yum_cron_hourly_config, $yum_cron::extra_hourly_configs)
-    }
-
-    if $::operatingsystemmajrelease &lt; &#39;7&#39; {
-      Shellvar {
-        ensure =&gt; present,
-        target =&gt; $yum_cron::config_path,
-        notify =&gt; $yum_cron::config_notify,
+      yum_cron_config { &#39;base/exclude&#39;:
+        ensure =&gt; $yum_cron::exclude_packages_ensure,
+        value  =&gt; join($yum_cron::exclude_packages, &#39; &#39;),
       }
 
-      shellvar { &#39;yum_cron CHECK_ONLY&#39;:
-        variable =&gt; &#39;CHECK_ONLY&#39;,
-        value    =&gt; $yum_cron::check_only,
+      $yum_cron::extra_configs.each |$name, $res| {
+        yum_cron_config { $name: * =&gt; $res }
       }
-
-      shellvar { &#39;yum_cron DOWNLOAD_ONLY&#39;:
-        variable =&gt; &#39;DOWNLOAD_ONLY&#39;,
-        value    =&gt; $yum_cron::download_only,
-      }
-
-      if $::operatingsystemmajrelease == &#39;6&#39; {
-        shellvar { &#39;yum_cron DEBUG_LEVEL&#39;:
-          variable =&gt; &#39;DEBUG_LEVEL&#39;,
-          value    =&gt; $yum_cron::debug_level,
-        }
-
-        shellvar { &#39;yum_cron RANDOMWAIT&#39;:
-          variable =&gt; &#39;RANDOMWAIT&#39;,
-          value    =&gt; $yum_cron::randomwait,
-        }
-
-        shellvar { &#39;yum_cron MAILTO&#39;:
-          variable =&gt; &#39;MAILTO&#39;,
-          value    =&gt; $yum_cron::mailto,
-        }
-
-        shellvar { &#39;yum_cron SYSTEMNAME&#39;:
-          variable =&gt; &#39;SYSTEMNAME&#39;,
-          value    =&gt; $yum_cron::systemname,
-        }
-
-        shellvar { &#39;yum_cron DAYS_OF_WEEK&#39;:
-          variable =&gt; &#39;DAYS_OF_WEEK&#39;,
-          value    =&gt; $yum_cron::days_of_week,
-        }
-
-        shellvar { &#39;yum_cron CLEANDAY&#39;:
-          variable =&gt; &#39;CLEANDAY&#39;,
-          value    =&gt; $yum_cron::cleanday,
-        }
-
-        create_resources(shellvar, $yum_cron::extra_configs)
+      $yum_cron::extra_hourly_configs.each |$name, $res| {
+        yum_cron_hourly_config { $name: * =&gt; $res }
       }
     }
+    default: {
+      # Do nothing
+    }
+  }
 
-    if $::operatingsystem =~ /Scientific/ and $yum_cron::yum_autoupdate_ensure == &#39;disabled&#39; {
-      file_line { &#39;disable yum-autoupdate&#39;:
-        path  =&gt; &#39;/etc/sysconfig/yum-autoupdate&#39;,
-        line  =&gt; &#39;ENABLED=false&#39;,
-        match =&gt; &#39;^ENABLED=.*&#39;,
-      }
+  if $facts[&#39;os&#39;][&#39;name&#39;] =~ /Scientific/ and $yum_cron::yum_autoupdate_ensure == &#39;disabled&#39; {
+    file_line { &#39;disable yum-autoupdate&#39;:
+      path  =&gt; &#39;/etc/sysconfig/yum-autoupdate&#39;,
+      line  =&gt; &#39;ENABLED=false&#39;,
+      match =&gt; &#39;^ENABLED=.*&#39;,
     }
   }
 }</pre>

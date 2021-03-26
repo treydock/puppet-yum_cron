@@ -6,15 +6,15 @@
 <title>
   File: README
   
-    &mdash; Documentation by YARD 0.9.20
+    &mdash; Documentation by YARD 0.9.26
   
 </title>
 
-  <link rel="stylesheet" href="css/style.css" type="text/css" charset="utf-8" />
+  <link rel="stylesheet" href="css/style.css" type="text/css" />
 
-  <link rel="stylesheet" href="css/common.css" type="text/css" charset="utf-8" />
+  <link rel="stylesheet" href="css/common.css" type="text/css" />
 
-<script type="text/javascript" charset="utf-8">
+<script type="text/javascript">
   pathId = "";
   relpath = '';
 </script>
@@ -62,29 +62,23 @@
 
 <p><a href="https://forge.puppetlabs.com/treydock/yum_cron"><img
 src="http://img.shields.io/puppetforge/v/treydock/yum_cron.svg"></a> <a
-href="https://travis-ci.org/treydock/puppet-yum_cron"><img
-src="https://travis-ci.org/treydock/puppet-yum_cron.svg?branch=master"></a></p>
+href="https://github.com/treydock/puppet-yum_cron/actions?query=workflow%3ACI"><img
+src="https://github.com/treydock/puppet-yum_cron/workflows/CI/badge.svg?branch=master"></a></p>
 
 <h4 id="label-Table+of+Contents">Table of Contents</h4>
 <ol><li>
-<p><a href="#label-Overview">Overview - What is the yum_cron module?</a></p>
+<p><a href="#overview">Overview - What is the yum_cron module?</a></p>
 </li><li>
-<p><a href="#label-Backwards+compatibility">Backwards Compatibility - Key changes
+<p><a href="#backwards-compatibility">Backwards Compatibility - Key changes
 between versions</a></p>
 </li><li>
-<p><a href="#label-Usage">Usage - Configuration and customization options</a></p>
+<p><a href="#usage">Usage - Configuration and customization options</a></p>
 </li><li>
-<p><a href="#label-Reference">Reference - Parameter and detailed reference to all
+<p><a href="#reference">Reference - Parameter and detailed reference to all
 options</a></p>
 </li><li>
-<p><a href="#label-Compatibility">Compatibility - Operating system and Puppet
+<p><a href="#compatibility">Compatibility - Operating system and Puppet
 compatibility</a></p>
-</li><li>
-<p><a href="#label-Development">Development - Guide for contributing to the
-module</a></p>
-<ul><li>
-<p><a href="#label-Testing">Testing - Testing your configuration</a></p>
-</li></ul>
 </li></ol>
 
 <h2 id="label-Overview">Overview</h2>
@@ -176,48 +170,14 @@ href="http://treydock.github.io/puppet-yum_cron/">treydock.github.io/puppet-yum_
 <h2 id="label-Compatibility">Compatibility</h2>
 
 <p>This module should be compatible with all RedHat based operating systems
-and Puppet 4.7.x and later.</p>
+and Puppet 6.1.x and newer.</p>
 
 <p>It has only been tested on:</p>
 <ul><li>
 <p>RHEL/CentOS 8</p>
 </li><li>
 <p>RHEL/CentOS 7</p>
-</li><li>
-<p>CentOS 6</p>
-</li><li>
-<p>Scientific Linux 6</p>
 </li></ul>
-
-<h2 id="label-Development">Development</h2>
-
-<h3 id="label-Testing">Testing</h3>
-
-<p>Testing requires the following dependencies:</p>
-<ul><li>
-<p>rake</p>
-</li><li>
-<p>bundler</p>
-</li></ul>
-
-<p>Install gem dependencies</p>
-
-<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_bundle'>bundle</span> <span class='id identifier rubyid_install'>install</span>
-</code></pre>
-
-<p>Run unit tests</p>
-
-<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_bundle'>bundle</span> <span class='id identifier rubyid_exec'>exec</span> <span class='id identifier rubyid_rake'>rake</span> <span class='id identifier rubyid_test'>test</span>
-</code></pre>
-
-<p>If you have Vagrant &gt;= 1.2.0 installed you can run system tests</p>
-
-<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_bundle'>bundle</span> <span class='id identifier rubyid_exec'>exec</span> <span class='id identifier rubyid_rake'>rake</span> <span class='id identifier rubyid_beaker'>beaker</span>
-</code></pre>
-
-<h2 id="label-TODO">TODO</h2>
-
-<p>*</p>
 </div></div>
 
       <div id="footer">
