@@ -11,8 +11,9 @@ class yum_cron::config {
         notify => $yum_cron::config_notify,
       }
 
-      dnf_automatic_config { 'commands/update_cmd': value => $yum_cron::update_cmd }
-      dnf_automatic_config { 'commands/update_messages': value => $yum_cron::update_messages }
+      dnf_automatic_config { 'commands/upgrade_type': value => $yum_cron::upgrade_type }
+      dnf_automatic_config { 'commands/upgrade_cmd': ensure => 'absent' }
+      dnf_automatic_config { 'commands/update_messages': ensure => 'absent' }
       dnf_automatic_config { 'commands/download_updates': value => $yum_cron::download_updates_str }
       dnf_automatic_config { 'commands/apply_updates': value => $yum_cron::apply_updates_str }
       dnf_automatic_config { 'commands/random_sleep': value => $yum_cron::randomwait }
