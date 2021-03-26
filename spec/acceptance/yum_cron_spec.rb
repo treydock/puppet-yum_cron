@@ -39,6 +39,7 @@ describe 'yum_cron class:' do
       its(:content) { is_expected.to match %r{^email_to = root$} }
       its(:content) { is_expected.to match %r{^email_host = localhost$} }
       its(:content) { is_expected.to match %r{^debuglevel = -2$} }
+      its(:content) { is_expected.not_to match %r{^exclude} }
     end
   end
 

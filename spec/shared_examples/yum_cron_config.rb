@@ -10,6 +10,7 @@ shared_examples 'yum_cron::config' do |facts|
       { name: 'email/email_to', value: 'root' },
       { name: 'email/email_host', value: 'localhost' },
       { name: 'base/debuglevel', value: '-2' },
+      { name: 'base/exclude', value: '' },
     ].freeze
   end
 
