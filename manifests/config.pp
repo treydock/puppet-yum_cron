@@ -21,6 +21,10 @@ class yum_cron::config {
       dnf_automatic_config { 'email/email_to': value => $yum_cron::mailto }
       dnf_automatic_config { 'email/email_host': value => $yum_cron::email_host }
       dnf_automatic_config { 'base/debuglevel': value => $yum_cron::debug_level }
+      dnf_automatic_config { 'base/exclude':
+        ensure => $yum_cron::exclude_packages_ensure,
+        value  => join($yum_cron::exclude_packages, ' '),
+      }
 
       create_resources(dnf_automatic_config, $yum_cron::extra_configs)
     }
@@ -39,6 +43,10 @@ class yum_cron::config {
       yum_cron_config { 'email/email_to': value => $yum_cron::mailto }
       yum_cron_config { 'email/email_host': value => $yum_cron::email_host }
       yum_cron_config { 'base/debuglevel': value => $yum_cron::debug_level }
+      yum_cron_config { 'base/exclude':
+        ensure => $yum_cron::exclude_packages_ensure,
+        value  => join($yum_cron::exclude_packages, ' '),
+      }
 
       create_resources(yum_cron_config, $yum_cron::extra_configs)
       create_resources(yum_cron_hourly_config, $yum_cron::extra_hourly_configs)

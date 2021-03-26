@@ -16,6 +16,9 @@
 # @param debug_level
 #   Sets debug level.  Default varies based on OS version
 #   Applies only to EL7 and EL8.
+# @param exclude_packages
+#   Packages to exclude from updates.
+#   Applies only to EL7 and EL8.
 # @param randomwait
 #   Sets random wait time.  Default varies based on OS version
 #   Applies only to EL7 and EL8.
@@ -90,6 +93,7 @@ class yum_cron (
   Enum['default','security'] $upgrade_type = 'default',
   # EL8 and EL7 options
   Pattern[/^(?:-)?[0-9]$/] $debug_level = $yum_cron::params::debug_level,
+  Array $exclude_packages = [],
   Pattern[/^[0-9]+$/] $randomwait = $yum_cron::params::randomwait,
   String $mailto = 'root',
   String $systemname = $::fqdn,
@@ -157,6 +161,12 @@ class yum_cron (
       $download_updates_str = 'no'
       $download_only        = 'no'
     }
+  }
+
+  if empty($exclude_packages) {
+    $exclude_packages_ensure = 'absent'
+  } else {
+    $exclude_packages_ensure = 'present'
   }
 
   contain yum_cron::install
