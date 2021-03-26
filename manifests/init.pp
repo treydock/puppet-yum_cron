@@ -12,22 +12,16 @@
 #   If set to `true` then `download_updates` ignored.
 # @param debug_level
 #   Sets debug level.  Default varies based on OS version
-#   Applies only to EL7 and EL6.
+#   Applies only to EL7.
 # @param randomwait
 #   Sets random wait time.  Default varies based on OS version
-#   Applies only to EL7 and EL6.
+#   Applies only to EL7.
 # @param mailto
 #   Address notified about updates.  Default is 'root'
-#   Applies only to EL7 and EL6.
+#   Applies only to EL7.
 # @param systemname
 #   Name of system used in notifications.  Default is `$::fqdn`
-#   Applies only to EL7 and EL6.
-# @param days_of_week
-#   Days of the week that yum-cron will run.  Default is `'0123456'`
-#   Applies only to EL6.
-# @param cleanday
-#   Day of the week yum-cron will cleanup.  Default is '0'
-#   Applies only to EL6.
+#   Applies only to EL7.
 # @param update_cmd
 #   The kind of updates to use.  Default is 'default'
 #   Applies only to EL7.
@@ -89,15 +83,11 @@ class yum_cron (
   Boolean $enable = true,
   Boolean $download_updates = true,
   Boolean $apply_updates = false,
-  # EL7/EL6 only options
+  # EL7 only options
   Pattern[/^(?:-)?[0-9]$/] $debug_level = $yum_cron::params::debug_level,
   Pattern[/^[0-9]+$/] $randomwait = $yum_cron::params::randomwait,
   String $mailto = 'root',
   String $systemname = $::fqdn,
-  # EL6 only options
-  Pattern[/^[0-6]+$/] $days_of_week = '0123456',
-  Pattern[/^[0-6]$/] $cleanday = '0',
-  # EL7 only options
   Yum_cron::Update_cmd $update_cmd = 'default',
   Enum['yes','no'] $update_messages = 'yes',
   String $email_host = 'localhost',

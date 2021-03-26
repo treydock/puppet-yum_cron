@@ -13,26 +13,6 @@ shared_examples 'yum_cron::config' do |facts|
     ].freeze
   end
 
-  unless defined?(EL6_CONFIGS)
-    EL6_CONFIGS = [
-      { name: 'CHECK_ONLY', value: 'yes' },
-      { name: 'DOWNLOAD_ONLY', value: 'yes' },
-      { name: 'DEBUG_LEVEL', value: '0' },
-      { name: 'RANDOMWAIT', value: '60' },
-      { name: 'MAILTO', value: 'root' },
-      { name: 'SYSTEMNAME', value: facts[:fqdn] },
-      { name: 'DAYS_OF_WEEK', value: '0123456' },
-      { name: 'CLEANDAY', value: '0' },
-    ].freeze
-  end
-
-  unless defined?(EL5_CONFIGS)
-    EL5_CONFIGS = [
-      { name: 'CHECK_ONLY', value: 'yes' },
-      { name: 'DOWNLOAD_ONLY', value: 'yes' },
-    ].freeze
-  end
-
   case facts[:operatingsystemmajrelease]
   when '7'
     EL7_CONFIGS.each do |config|
@@ -67,70 +47,6 @@ shared_examples 'yum_cron::config' do |facts|
       it do
         is_expected.to contain_yum_cron_config('email/email_from').with(value: 'foo@bar.com',
                                                                         notify: 'Service[yum-cron]')
-      end
-    end
-  when '6'
-    EL6_CONFIGS.each do |config|
-      it "should set #{config[:name]} to #{config[:value]}" do
-        is_expected.to contain_shellvar("yum_cron #{config[:name]}").with(ensure: 'present',
-                                                                          target: '/etc/sysconfig/yum-cron',
-                                                                          notify: 'Service[yum-cron]',
-                                                                          variable: config[:name],
-                                                                          value: config[:value])
-      end
-    end
-
-    it { is_expected.to have_yum_cron_config_resource_count(0) }
-    it { is_expected.to have_shellvar_resource_count(EL6_CONFIGS.size) }
-
-    context 'when enable => false' do
-      let(:params) { { enable: false } }
-
-      EL6_CONFIGS.each do |config|
-        it 'does not notify Service[yum-cron]' do
-          is_expected.to contain_shellvar("yum_cron #{config[:name]}").without_notify
-        end
-      end
-    end
-
-    context 'extra_configs defined' do
-      let(:params) do
-        {
-          extra_configs: {
-            'yum_cron ERROR_LEVEL' => { 'variable' => 'ERROR_LEVEL', 'value' => '1' },
-          },
-        }
-      end
-
-      it do
-        is_expected.to contain_shellvar('yum_cron ERROR_LEVEL').with(ensure: 'present',
-                                                                     target: '/etc/sysconfig/yum-cron',
-                                                                     notify: 'Service[yum-cron]',
-                                                                     variable: 'ERROR_LEVEL',
-                                                                     value: '1')
-      end
-    end
-  when '5'
-    EL5_CONFIGS.each do |config|
-      it "should set #{config[:name]} to #{config[:value]}" do
-        is_expected.to contain_shellvar("yum_cron #{config[:name]}").with(ensure: 'present',
-                                                                          target: '/etc/sysconfig/yum-cron',
-                                                                          notify: 'Service[yum-cron]',
-                                                                          variable: config[:name],
-                                                                          value: config[:value])
-      end
-    end
-
-    it { is_expected.to have_yum_cron_config_resource_count(0) }
-    it { is_expected.to have_shellvar_resource_count(EL5_CONFIGS.size) }
-
-    context 'when enable => false' do
-      let(:params) { { enable: false } }
-
-      EL5_CONFIGS.each do |config|
-        it 'does not notify Service[yum-cron]' do
-          is_expected.to contain_shellvar("yum_cron #{config[:name]}").without_notify
-        end
       end
     end
   end

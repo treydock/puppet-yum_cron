@@ -69,20 +69,6 @@ describe 'yum_cron' do
           end
         end
 
-        # Test pattern validation
-        [
-          :days_of_week,
-          :cleanday,
-        ].each do |param|
-          context "#{param} => false" do
-            let(:params) { { param => false } }
-
-            it 'raises an error' do
-              expect { is_expected.to compile }.to raise_error(%r{expects a match for Pattern})
-            end
-          end
-        end
-
         # Test hash validation
         [
           :extra_configs,
