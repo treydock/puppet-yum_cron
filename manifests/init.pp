@@ -10,18 +10,24 @@
 # @param apply_updates
 #   Boolean that determines if updates should be automatically installed.  Default is `false`.
 #   If set to `true` then `download_updates` ignored.
+# @param upgrade_type
+#   The kind of updates to perform.
+#   Applies only to EL8.
 # @param debug_level
 #   Sets debug level.  Default varies based on OS version
-#   Applies only to EL7.
+#   Applies only to EL7 and EL8.
 # @param randomwait
 #   Sets random wait time.  Default varies based on OS version
-#   Applies only to EL7.
+#   Applies only to EL7 and EL8.
 # @param mailto
 #   Address notified about updates.  Default is 'root'
-#   Applies only to EL7.
+#   Applies only to EL7 and EL8.
 # @param systemname
 #   Name of system used in notifications.  Default is `$::fqdn`
-#   Applies only to EL7.
+#   Applies only to EL7 and EL8.
+# @param email_host
+#   Host used to send email messages.  Default is 'localhost'
+#   Applies only to EL7 and EL8.
 # @param update_cmd
 #   The kind of updates to use.  Default is 'default'
 #   Applies only to EL7.
@@ -35,16 +41,13 @@
 # @param update_messages
 #   Determines whether a message should be emitted when updates are available, downloaded, and applied.  Default is 'yes'
 #   Applies only to EL7.
-# @param email_host
-#   Host used to send email messages.  Default is 'localhost'
-#   Applies only to EL7.
 # @param extra_configs
 #   Hash that can be used to define additional configurations.  Default is {}
-#   Applies only to EL7 and EL6.
+#   Applies only to EL7 and EL8.
 #
 #   The Hash is passed to `create_resources`.
+#   For EL8 the hash defines additonal `dnf_automatic_config` resources.
 #   For EL7 the hash defines additional `yum_cron_config` resources.
-#   For EL6 the hash defines additional `shellvar` resources.
 # @param extra_hourly_configs
 #   Hash that can be used to define additional hourly configurations.  Default is {}
 #   Applies only to EL7.
@@ -83,14 +86,17 @@ class yum_cron (
   Boolean $enable = true,
   Boolean $download_updates = true,
   Boolean $apply_updates = false,
-  # EL7 only options
+  # EL8 only options
+  Enum['default','security'] $upgrade_type = 'default',
+  # EL8 and EL7 options
   Pattern[/^(?:-)?[0-9]$/] $debug_level = $yum_cron::params::debug_level,
   Pattern[/^[0-9]+$/] $randomwait = $yum_cron::params::randomwait,
   String $mailto = 'root',
   String $systemname = $::fqdn,
+  String $email_host = 'localhost',
+  # EL7 only options
   Yum_cron::Update_cmd $update_cmd = 'default',
   Enum['yes','no'] $update_messages = 'yes',
-  String $email_host = 'localhost',
   # Misc configs
   Hash $extra_configs = {},
   Hash $extra_hourly_configs = {},
