@@ -14,7 +14,7 @@ shared_examples 'yum_cron::config' do |facts|
     ].freeze
   end
 
-  case facts[:operatingsystemmajrelease]
+  case facts[:os]['release']['major'].to_s
   when '7'
     EL7_CONFIGS.each do |config|
       it "should set #{config[:name]} to #{config[:value]}" do
@@ -56,10 +56,9 @@ shared_examples 'yum_cron::config' do |facts|
     let(:params) { { ensure: 'absent' } }
 
     it { is_expected.to have_yum_cron_config_resource_count(0) }
-    it { is_expected.to have_shellvar_resource_count(0) }
   end
 
-  if facts[:operatingsystem] =~ %r{Scientific}
+  if facts[:os]['name'] =~ %r{Scientific}
     it do
       is_expected.to contain_file_line('disable yum-autoupdate').with(path: '/etc/sysconfig/yum-autoupdate',
                                                                       line: 'ENABLED=false',
