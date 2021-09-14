@@ -38,6 +38,12 @@
         "7",
         "8"
       ]
+    },
+    {
+      "operatingsystem": "Amazon",
+      "operatingsystemrelease": [
+        "2"
+      ]
     }
   ],
   "requirements": [
