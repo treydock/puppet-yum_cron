@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org).
 
+## [v6.1.0](https://github.com/treydock/puppet-yum_cron/tree/v6.1.0) (2021-09-14)
+
+[Full Changelog](https://github.com/treydock/puppet-yum_cron/compare/v6.0.0...v6.1.0)
+
+### Added
+
+- Support Amazon Linux 2 [\#38](https://github.com/treydock/puppet-yum_cron/pull/38) ([treydock](https://github.com/treydock))
+
 ## [v6.0.0](https://github.com/treydock/puppet-yum_cron/tree/v6.0.0) (2021-03-26)
 
 [Full Changelog](https://github.com/treydock/puppet-yum_cron/compare/v5.1.0...v6.0.0)
