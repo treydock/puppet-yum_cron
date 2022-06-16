@@ -1,10 +1,10 @@
 shared_examples 'yum_cron::install' do |facts|
   let(:package_name) do
     case facts[:os]['release']['major'].to_i
-    when 8
-      'dnf-automatic'
-    else
+    when 2, 7
       'yum-cron'
+    else
+      'dnf-automatic'
     end
   end
 

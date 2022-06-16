@@ -11,25 +11,19 @@
 #   If set to `true` then `download_updates` ignored.
 # @param upgrade_type
 #   The kind of updates to perform.
-#   Applies only to EL8.
+#   Applies only to EL8, EL9.
 # @param debug_level
 #   Sets debug level.
-#   Applies only to EL7 and EL8.
 # @param exclude_packages
 #   Packages to exclude from updates.
-#   Applies only to EL7 and EL8.
 # @param randomwait
 #   Sets random wait time.
-#   Applies only to EL7 and EL8.
 # @param mailto
 #   Address notified about updates.
-#   Applies only to EL7 and EL8.
 # @param systemname
 #   Name of system used in notifications.
-#   Applies only to EL7 and EL8.
 # @param email_host
 #   Host used to send email messages.
-#   Applies only to EL7 and EL8.
 # @param update_cmd
 #   The kind of updates to use.
 #   Applies only to EL7.
@@ -45,9 +39,9 @@
 #   Applies only to EL7.
 # @param extra_configs
 #   Hash that can be used to define additional configurations.
-#   Applies only to EL7 and EL8.
+#   Applies only to EL7, EL8, and EL9.
 #
-#   For EL8 the hash defines additonal `dnf_automatic_config` resources.
+#   For EL8 and EL9 the hash defines additonal `dnf_automatic_config` resources.
 #   For EL7 the hash defines additional `yum_cron_config` resources.
 # @param extra_hourly_configs
 #   Hash that can be used to define additional hourly configurations.

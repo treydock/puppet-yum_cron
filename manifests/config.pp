@@ -6,31 +6,7 @@ class yum_cron::config {
   }
 
   case $facts['os']['release']['major'] {
-    '8': {
-      Dnf_automatic_config {
-        notify => $yum_cron::config_notify,
-      }
-
-      dnf_automatic_config { 'commands/upgrade_type': value => $yum_cron::upgrade_type }
-      dnf_automatic_config { 'commands/upgrade_cmd': ensure => 'absent' }
-      dnf_automatic_config { 'commands/update_messages': ensure => 'absent' }
-      dnf_automatic_config { 'commands/download_updates': value => $yum_cron::download_updates_str }
-      dnf_automatic_config { 'commands/apply_updates': value => $yum_cron::apply_updates_str }
-      dnf_automatic_config { 'commands/random_sleep': value => $yum_cron::randomwait }
-      dnf_automatic_config { 'emitters/system_name': value => $yum_cron::systemname }
-      dnf_automatic_config { 'email/email_to': value => $yum_cron::mailto }
-      dnf_automatic_config { 'email/email_host': value => $yum_cron::email_host }
-      dnf_automatic_config { 'base/debuglevel': value => $yum_cron::debug_level }
-      dnf_automatic_config { 'base/exclude':
-        ensure => $yum_cron::exclude_packages_ensure,
-        value  => join($yum_cron::exclude_packages, ' '),
-      }
-
-      $yum_cron::extra_configs.each |$name, $res| {
-        dnf_automatic_config { $name: * => $res }
-      }
-    }
-    '7': {
+    /2|7/: {
       Yum_cron_config {
         notify => $yum_cron::config_notify,
       }
@@ -57,7 +33,28 @@ class yum_cron::config {
       }
     }
     default: {
-      # Do nothing
+      Dnf_automatic_config {
+        notify => $yum_cron::config_notify,
+      }
+
+      dnf_automatic_config { 'commands/upgrade_type': value => $yum_cron::upgrade_type }
+      dnf_automatic_config { 'commands/upgrade_cmd': ensure => 'absent' }
+      dnf_automatic_config { 'commands/update_messages': ensure => 'absent' }
+      dnf_automatic_config { 'commands/download_updates': value => $yum_cron::download_updates_str }
+      dnf_automatic_config { 'commands/apply_updates': value => $yum_cron::apply_updates_str }
+      dnf_automatic_config { 'commands/random_sleep': value => $yum_cron::randomwait }
+      dnf_automatic_config { 'emitters/system_name': value => $yum_cron::systemname }
+      dnf_automatic_config { 'email/email_to': value => $yum_cron::mailto }
+      dnf_automatic_config { 'email/email_host': value => $yum_cron::email_host }
+      dnf_automatic_config { 'base/debuglevel': value => $yum_cron::debug_level }
+      dnf_automatic_config { 'base/exclude':
+        ensure => $yum_cron::exclude_packages_ensure,
+        value  => join($yum_cron::exclude_packages, ' '),
+      }
+
+      $yum_cron::extra_configs.each |$name, $res| {
+        dnf_automatic_config { $name: * => $res }
+      }
     }
   }
 
