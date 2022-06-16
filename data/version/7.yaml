@@ -1,3 +1,4 @@
 yum_cron::package_name: yum-cron
 yum_cron::service_name: yum-cron
 yum_cron::config_path: /etc/yum/yum-cron.conf
+yum_cron::debug_level: '-2'

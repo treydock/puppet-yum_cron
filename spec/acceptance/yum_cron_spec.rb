@@ -27,10 +27,12 @@ describe 'yum_cron class:' do
         its(:content) { is_expected.to match %r{^upgrade_type = default$} }
         its(:content) { is_expected.not_to match %r{^update_cmd} }
         its(:content) { is_expected.not_to match %r{^update_messages} }
+        its(:content) { is_expected.to match %r{^debuglevel = 1$} }
       else
         its(:content) { is_expected.not_to match %r{^upgrade_type} }
         its(:content) { is_expected.to match %r{^update_cmd = default$} }
         its(:content) { is_expected.to match %r{^update_messages = yes$} }
+        its(:content) { is_expected.to match %r{^debuglevel = -2$} }
       end
       its(:content) { is_expected.to match %r{^download_updates = yes$} }
       its(:content) { is_expected.to match %r{^apply_updates = no$} }
@@ -38,7 +40,6 @@ describe 'yum_cron class:' do
       its(:content) { is_expected.to match %r{^system_name = #{fact('fqdn')}$} }
       its(:content) { is_expected.to match %r{^email_to = root$} }
       its(:content) { is_expected.to match %r{^email_host = localhost$} }
-      its(:content) { is_expected.to match %r{^debuglevel = -2$} }
       its(:content) { is_expected.not_to match %r{^exclude} }
     end
   end
