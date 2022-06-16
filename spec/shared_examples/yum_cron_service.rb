@@ -1,10 +1,10 @@
 shared_examples 'yum_cron::service' do |_facts|
   let(:service_name) do
     case facts[:os]['release']['major'].to_i
-    when 8
-      'dnf-automatic.timer'
-    else
+    when 2, 7
       'yum-cron'
+    else
+      'dnf-automatic.timer'
     end
   end
 

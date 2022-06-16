@@ -40,7 +40,7 @@
       ]
     },
     {
-      "operatingsystem": "Rocky Linux",
+      "operatingsystem": "Rocky",
       "operatingsystemrelease": [
         "8",
         "9"
