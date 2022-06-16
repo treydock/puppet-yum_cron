@@ -99,7 +99,7 @@ Default value: ``false``
 Data type: `Enum['default','security']`
 
 The kind of updates to perform.
-Applies only to EL8.
+Applies only to EL8, EL9.
 
 Default value: `'default'`
 
@@ -108,7 +108,6 @@ Default value: `'default'`
 Data type: `Pattern[/^(?:-)?[0-9]$/]`
 
 Sets debug level.
-Applies only to EL7 and EL8.
 
 Default value: `'-2'`
 
@@ -117,7 +116,6 @@ Default value: `'-2'`
 Data type: `Array`
 
 Packages to exclude from updates.
-Applies only to EL7 and EL8.
 
 Default value: `[]`
 
@@ -126,7 +124,6 @@ Default value: `[]`
 Data type: `Pattern[/^[0-9]+$/]`
 
 Sets random wait time.
-Applies only to EL7 and EL8.
 
 Default value: `'360'`
 
@@ -135,7 +132,6 @@ Default value: `'360'`
 Data type: `String`
 
 Address notified about updates.
-Applies only to EL7 and EL8.
 
 Default value: `'root'`
 
@@ -144,7 +140,6 @@ Default value: `'root'`
 Data type: `String`
 
 Name of system used in notifications.
-Applies only to EL7 and EL8.
 
 Default value: `$::fqdn`
 
@@ -153,7 +148,6 @@ Default value: `$::fqdn`
 Data type: `String`
 
 Host used to send email messages.
-Applies only to EL7 and EL8.
 
 Default value: `'localhost'`
 
@@ -187,9 +181,9 @@ Default value: `'yes'`
 Data type: `Hash`
 
 Hash that can be used to define additional configurations.
-Applies only to EL7 and EL8.
+Applies only to EL7, EL8, and EL9.
 
-For EL8 the hash defines additonal `dnf_automatic_config` resources.
+For EL8 and EL9 the hash defines additonal `dnf_automatic_config` resources.
 For EL7 the hash defines additional `yum_cron_config` resources.
 
 Default value: `{}`
