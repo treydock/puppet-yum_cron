@@ -6,7 +6,7 @@
 <title>
   Puppet Class: yum_cron
   
-    &mdash; Documentation by YARD 0.9.26
+    &mdash; Documentation by YARD 0.9.28
   
 </title>
 
@@ -172,7 +172,7 @@ set to <code>true</code> then <code>download_updates</code> ignored.</p>
       
         &mdash;
         <div class='inline'>
-<p>The kind of updates to perform. Applies only to EL8.</p>
+<p>The kind of updates to perform. Applies only to EL8, EL9.</p>
 </div>
       
     </li>
@@ -190,7 +190,7 @@ set to <code>true</code> then <code>download_updates</code> ignored.</p>
       
         &mdash;
         <div class='inline'>
-<p>Sets debug level. Applies only to EL7 and EL8.</p>
+<p>Sets debug level.</p>
 </div>
       
     </li>
@@ -208,7 +208,7 @@ set to <code>true</code> then <code>download_updates</code> ignored.</p>
       
         &mdash;
         <div class='inline'>
-<p>Packages to exclude from updates. Applies only to EL7 and EL8.</p>
+<p>Packages to exclude from updates.</p>
 </div>
       
     </li>
@@ -226,7 +226,7 @@ set to <code>true</code> then <code>download_updates</code> ignored.</p>
       
         &mdash;
         <div class='inline'>
-<p>Sets random wait time. Applies only to EL7 and EL8.</p>
+<p>Sets random wait time.</p>
 </div>
       
     </li>
@@ -244,7 +244,7 @@ set to <code>true</code> then <code>download_updates</code> ignored.</p>
       
         &mdash;
         <div class='inline'>
-<p>Address notified about updates. Applies only to EL7 and EL8.</p>
+<p>Address notified about updates.</p>
 </div>
       
     </li>
@@ -262,7 +262,7 @@ set to <code>true</code> then <code>download_updates</code> ignored.</p>
       
         &mdash;
         <div class='inline'>
-<p>Name of system used in notifications. Applies only to EL7 and EL8.</p>
+<p>Name of system used in notifications.</p>
 </div>
       
     </li>
@@ -280,7 +280,7 @@ set to <code>true</code> then <code>download_updates</code> ignored.</p>
       
         &mdash;
         <div class='inline'>
-<p>Host used to send email messages. Applies only to EL7 and EL8.</p>
+<p>Host used to send email messages.</p>
 </div>
       
     </li>
@@ -340,11 +340,11 @@ downloaded, and applied. Applies only to EL7.</p>
         &mdash;
         <div class='inline'>
 <p>Hash that can be used to define additional configurations. Applies only to
-EL7 and EL8.</p>
+EL7, EL8, and EL9.</p>
 
-<p>For EL8 the hash defines additonal <code>dnf_automatic_config</code>
-resources. For EL7 the hash defines additional <code>yum_cron_config</code>
-resources.</p>
+<p>For EL8 and EL9 the hash defines additonal
+<code>dnf_automatic_config</code> resources. For EL7 the hash defines
+additional <code>yum_cron_config</code> resources.</p>
 </div>
       
     </li>
@@ -550,6 +550,12 @@ values.</p>
         <pre class="lines">
 
 
+78
+79
+80
+81
+82
+83
 84
 85
 86
@@ -641,16 +647,10 @@ values.</p>
 172
 173
 174
-175
-176
-177
-178
-179
-180
-181</pre>
+175</pre>
       </td>
       <td>
-        <pre class="code"><span class="info file"># File 'manifests/init.pp', line 84</span>
+        <pre class="code"><span class="info file"># File 'manifests/init.pp', line 78</span>
 
 class yum_cron (
   String $package_name,
