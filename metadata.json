@@ -10,7 +10,7 @@
   "dependencies": [
     {
       "name": "puppetlabs/stdlib",
-      "version_requirement": ">= 4.13.1 <8.0.0"
+      "version_requirement": ">= 4.13.1 <9.0.0"
     },
     {
       "name": "puppetlabs/inifile",
@@ -22,21 +22,28 @@
       "operatingsystem": "RedHat",
       "operatingsystemrelease": [
         "7",
-        "8"
+        "8",
+        "9"
       ]
     },
     {
       "operatingsystem": "CentOS",
       "operatingsystemrelease": [
-        "7",
-        "8"
+        "7"
       ]
     },
     {
-      "operatingsystem": "Scientific",
+      "operatingsystem": "AlmaLinux",
       "operatingsystemrelease": [
-        "7",
-        "8"
+        "8",
+        "9"
+      ]
+    },
+    {
+      "operatingsystem": "Rocky Linux",
+      "operatingsystemrelease": [
+        "8",
+        "9"
       ]
     },
     {
@@ -59,7 +66,7 @@
     "dnf",
     "dnf-automatic"
   ],
-  "pdk-version": "1.17.0",
+  "pdk-version": "2.1.0",
   "template-url": "https://github.com/treydock/pdk-templates.git#master",
-  "template-ref": "heads/master-0-g1d2967a"
+  "template-ref": "heads/master-0-g83b84e2"
 }
