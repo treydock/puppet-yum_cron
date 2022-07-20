@@ -6,7 +6,7 @@ class yum_cron::config {
   }
 
   case $facts['os']['release']['major'] {
-    /2|7/: {
+    /2|7|2022/: {
       Yum_cron_config {
         notify => $yum_cron::config_notify,
       }
