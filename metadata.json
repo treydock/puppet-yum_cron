@@ -49,7 +49,9 @@
     {
       "operatingsystem": "Amazon",
       "operatingsystemrelease": [
-        "2"
+        "2",
+        "2022",
+        "2023"
       ]
     }
   ],

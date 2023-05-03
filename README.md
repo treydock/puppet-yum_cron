@@ -77,9 +77,9 @@ To define additional configuration options for EL7:
 
 ## Compatibility
 
-This module should be compatible with all RedHat based operating systems and Puppet 6.1.x and newer.
+This module should be compatible with all RedHat based operating systems and Puppet 7 and newer.
 
 It has only been tested on:
 
-* RHEL/CentOS 8
-* RHEL/CentOS 7
+* RHEL and RHEL derivatives 7, 8, 9
+* Amazon Linux 2, 2022, 2023
