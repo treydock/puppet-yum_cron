@@ -90,7 +90,7 @@ class yum_cron (
   Pattern[/^[0-9]+$/] $randomwait = '360',
   Array $exclude_packages = [],
   String $mailto = 'root',
-  String $systemname = $::fqdn,
+  String $systemname = $facts['networking']['fqdn'],
   String $email_host = 'localhost',
   # EL7 only options
   Yum_cron::Update_cmd $update_cmd = 'default',
@@ -107,7 +107,6 @@ class yum_cron (
   Boolean $service_hasstatus = true,
   Boolean $service_hasrestart = true,
 ) {
-
   case $ensure {
     'present': {
       $package_ensure_default   = 'present'

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper_acceptance'
 
 describe 'yum_cron class:' do
@@ -23,6 +25,7 @@ describe 'yum_cron class:' do
       it { is_expected.to be_owned_by 'root' }
       it { is_expected.to be_grouped_into 'root' }
       it { is_expected.to be_mode 644 }
+
       if fact('os.release.major').to_i >= 8
         its(:content) { is_expected.to match %r{^upgrade_type = default$} }
         its(:content) { is_expected.not_to match %r{^update_cmd} }

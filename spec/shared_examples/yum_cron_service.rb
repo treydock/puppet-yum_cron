@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 shared_examples 'yum_cron::service' do |_facts|
   let(:service_name) do
     case facts[:os]['release']['major'].to_i
@@ -16,7 +18,7 @@ shared_examples 'yum_cron::service' do |_facts|
                                                     hasrestart: 'true')
   end
 
-  context 'ensure => absent' do
+  context 'when ensure => absent' do
     let(:params) { { ensure: 'absent' } }
 
     it { is_expected.to contain_service('yum-cron').with_ensure('stopped') }
