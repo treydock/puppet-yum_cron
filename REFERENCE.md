@@ -141,7 +141,7 @@ Data type: `String`
 
 Name of system used in notifications.
 
-Default value: `$::fqdn`
+Default value: `$facts['networking']['fqdn']`
 
 ##### <a name="email_host"></a>`email_host`
 

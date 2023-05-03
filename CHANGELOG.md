@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org).
 
+## [v7.0.0](https://github.com/treydock/puppet-yum_cron/tree/v7.0.0) (2023-05-03)
+
+[Full Changelog](https://github.com/treydock/puppet-yum_cron/compare/v6.2.0...v7.0.0)
+
+### Changed
+
+- Drop Puppet 6 support, Support Puppet 8 [\#47](https://github.com/treydock/puppet-yum_cron/pull/47) ([treydock](https://github.com/treydock))
+
+### Added
+
+- Support Amazon Linux 2022 and 2023 [\#48](https://github.com/treydock/puppet-yum_cron/pull/48) ([treydock](https://github.com/treydock))
+
 ## [v6.2.0](https://github.com/treydock/puppet-yum_cron/tree/v6.2.0) (2022-06-16)
 
 [Full Changelog](https://github.com/treydock/puppet-yum_cron/compare/v6.1.0...v6.2.0)
