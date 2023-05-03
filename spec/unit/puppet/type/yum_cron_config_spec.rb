@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 $LOAD_PATH.push(
   File.join(
     File.dirname(__FILE__),

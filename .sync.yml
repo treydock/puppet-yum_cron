@@ -3,6 +3,14 @@
   delete: true
 appveyor.yml:
   delete: true
+.rubocop.yml:
+  profiles:
+    strict:
+      configs:
+        RSpec/RepeatedDescription:
+          Enabled: false
+        RSpec/LeakyConstantDeclaration:
+          Enabled: false
 spec/acceptance/nodesets/debian-9.yml:
   delete: true
 spec/acceptance/nodesets/debian-10.yml:
@@ -14,4 +22,6 @@ spec/acceptance/nodesets/ubuntu-1604.yml:
 spec/acceptance/nodesets/ubuntu-1804.yml:
   delete: true
 spec/acceptance/nodesets/ubuntu-2004.yml:
+  delete: true
+spec/acceptance/nodesets/ubuntu-2204.yml:
   delete: true

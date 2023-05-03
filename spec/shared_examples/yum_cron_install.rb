@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 shared_examples 'yum_cron::install' do |facts|
   let(:package_name) do
     case facts[:os]['release']['major'].to_i
@@ -13,7 +15,7 @@ shared_examples 'yum_cron::install' do |facts|
                                                     name: package_name)
   end
 
-  context 'ensure => absent' do
+  context 'when ensure => absent' do
     let(:params) { { ensure: 'absent' } }
 
     it { is_expected.to contain_package('yum-cron').with_ensure('absent') }
@@ -22,19 +24,19 @@ shared_examples 'yum_cron::install' do |facts|
   it { is_expected.not_to contain_package('yum-autoupdate') }
 
   if facts[:os]['name'] =~ %r{Scientific}
-    context "yum_autoupdate_ensure => 'absent'" do
+    context "when yum_autoupdate_ensure => 'absent'" do
       let(:params) { { yum_autoupdate_ensure: 'absent' } }
 
       it { is_expected.to contain_package('yum-autoupdate').with_ensure('absent') }
     end
 
-    context "yum_autoupdate_ensure => 'undef'" do
+    context "when yum_autoupdate_ensure => 'undef'" do
       let(:params) { { yum_autoupdate_ensure: 'undef' } }
 
       it { is_expected.not_to contain_package('yum-autoupdate') }
     end
 
-    context "yum_autoupdate_ensure => 'UNSET'" do
+    context "when yum_autoupdate_ensure => 'UNSET'" do
       let(:params) { { yum_autoupdate_ensure: 'UNSET' } }
 
       it { is_expected.not_to contain_package('yum-autoupdate') }

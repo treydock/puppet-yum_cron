@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Puppet::Type.newtype(:yum_cron_config) do
   ensurable
 
@@ -19,10 +21,8 @@ Puppet::Type.newtype(:yum_cron_config) do
   end
 
   validate do
-    if self[:ensure] == :present
-      if self[:value].nil?
-        raise Puppet::Error, "Property value must be set for #{self[:name]} when ensure is present"
-      end
+    if self[:ensure] == :present && self[:value].nil?
+      raise Puppet::Error, "Property value must be set for #{self[:name]} when ensure is present"
     end
   end
 
