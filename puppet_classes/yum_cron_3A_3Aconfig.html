@@ -168,8 +168,8 @@ class yum_cron::config {
     fail(&quot;Use of private class ${name} by ${caller_module_name}&quot;)
   }
 
-  case $facts[&#39;os&#39;][&#39;release&#39;][&#39;major&#39;] {
-    /2|7/: {
+  case String($facts[&#39;os&#39;][&#39;release&#39;][&#39;major&#39;]) {
+    &#39;2&#39;, &#39;7&#39;: {
       Yum_cron_config {
         notify =&gt; $yum_cron::config_notify,
       }

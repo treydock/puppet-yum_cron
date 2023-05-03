@@ -60,62 +60,40 @@
       <div id="content"><div id='filecontents'>
 <h1 id="label-puppet-yum_cron">puppet-yum_cron</h1>
 
-<p><a href="https://forge.puppetlabs.com/treydock/yum_cron"><img
-src="http://img.shields.io/puppetforge/v/treydock/yum_cron.svg"></a> <a
-href="https://github.com/treydock/puppet-yum_cron/actions?query=workflow%3ACI"><img
-src="https://github.com/treydock/puppet-yum_cron/workflows/CI/badge.svg?branch=master"></a></p>
+<p><a href="https://forge.puppetlabs.com/treydock/yum_cron"><img src="http://img.shields.io/puppetforge/v/treydock/yum_cron.svg"></a> <a href="https://github.com/treydock/puppet-yum_cron/actions?query=workflow%3ACI"><img src="https://github.com/treydock/puppet-yum_cron/workflows/CI/badge.svg?branch=master"></a></p>
 
 <h4 id="label-Table+of+Contents">Table of Contents</h4>
 <ol><li>
 <p><a href="#overview">Overview - What is the yum_cron module?</a></p>
 </li><li>
-<p><a href="#backwards-compatibility">Backwards Compatibility - Key changes
-between versions</a></p>
+<p><a href="#backwards-compatibility">Backwards Compatibility - Key changes between versions</a></p>
 </li><li>
 <p><a href="#usage">Usage - Configuration and customization options</a></p>
 </li><li>
-<p><a href="#reference">Reference - Parameter and detailed reference to all
-options</a></p>
+<p><a href="#reference">Reference - Parameter and detailed reference to all options</a></p>
 </li><li>
-<p><a href="#compatibility">Compatibility - Operating system and Puppet
-compatibility</a></p>
+<p><a href="#compatibility">Compatibility - Operating system and Puppet compatibility</a></p>
 </li></ol>
 
 <h2 id="label-Overview">Overview</h2>
 
-<p>The yum_cron module manages either the <em>yum-cron</em> or
-<em>dnf-automatic</em> (RHEL/CentOS 8+) package to allow for automatic
-updates and available updates notifications.</p>
+<p>The yum_cron module manages either the <em>yum-cron</em> or <em>dnf-automatic</em> (RHEL/CentOS 8+) package to allow for automatic updates and available updates notifications.</p>
 
 <h2 id="label-Backwards+Compatibility">Backwards Compatibility</h2>
 
-<p>Version 3.x of this module modified the way <code>apply_updates</code> and
-<code>download_updates</code> parameters are handled.
-<code>apply_updates</code> now takes precedence over
-<code>download_updates</code>. If <code>apply_updates</code> is
-<code>true</code> then <code>download_updates</code> has no effect.</p>
+<p>Version 3.x of this module modified the way <code>apply_updates</code> and <code>download_updates</code> parameters are handled. <code>apply_updates</code> now takes precedence over <code>download_updates</code>. If <code>apply_updates</code> is <code>true</code> then <code>download_updates</code> has no effect.</p>
 
-<p>Version 2.x of this module added and removed many parameters. See <a
-href="CHANGELOG.md">CHANGELOG</a> for detailed list of all the changes.</p>
+<p>Version 2.x of this module added and removed many parameters. See <a href="CHANGELOG.md">CHANGELOG</a> for detailed list of all the changes.</p>
 
-<p>Version 1.x of this module replaced the
-<strong>disable_yum_autoupdate</strong> and
-<strong>remove_yum_autoupdate</strong> parameters with
-<strong>yum_autoupdate_ensure</strong>. The default behavior is still to
-disable yum-autoupdate.</p>
+<p>Version 1.x of this module replaced the <strong>disable_yum_autoupdate</strong> and <strong>remove_yum_autoupdate</strong> parameters with <strong>yum_autoupdate_ensure</strong>. The default behavior is still to disable yum-autoupdate.</p>
 
 <h2 id="label-Usage">Usage</h2>
 
 <h3 id="label-Class-3A+yum_cron">Class: yum_cron</h3>
 
-<p>The default parameters will install and enable yum-cron to only check for
-updates and notify root if any are available. Generally, dnf-automatic uses
-different paths, but functions very similarly and has a similar config
-file. For the rest of the documentation, you can generally assuming that
-references to yum-cron also apply to dnf-automatic.</p>
+<p>The default parameters will install and enable yum-cron to only check for updates and notify root if any are available. Generally, dnf-automatic uses different paths, but functions very similarly and has a similar config file. For the rest of the documentation, you can generally assuming that references to yum-cron also apply to dnf-automatic.</p>
 
-<p><strong>On Scientific Linux the default behavior is also to disable
-<em>yum-autoupdate</em>.</strong></p>
+<p><strong>On Scientific Linux the default behavior is also to disable <em>yum-autoupdate</em>.</strong></p>
 
 <pre class="code ruby"><code class="ruby">class { &#39;yum_cron&#39;: }
 </code></pre>
@@ -128,8 +106,7 @@ references to yum-cron also apply to dnf-automatic.</p>
 </li><li>
 <p>Start and enable the yum-cron/dnf-automatic service</p>
 </li><li>
-<p>Disable yum-autoupdate by setting ENABLED=“false” in
-/etc/sysconfig/yum-autoupdate <strong>(Scientific Linux only)</strong></p>
+<p>Disable yum-autoupdate by setting ENABLED=“false” in /etc/sysconfig/yum-autoupdate <strong>(Scientific Linux only)</strong></p>
 </li></ul>
 
 <p>This is an example of enabling automatic updates</p>
@@ -141,8 +118,7 @@ references to yum-cron also apply to dnf-automatic.</p>
 
 <p>Refer to the yum-cron manpage for all available configuration options.</p>
 
-<p>Additional configuration values can be passed to the <code>yum-cron</code>
-configurations via the <code>extra_configs</code> parameter.</p>
+<p>Additional configuration values can be passed to the <code>yum-cron</code> configurations via the <code>extra_configs</code> parameter.</p>
 
 <p>To define additional configuration options for EL6:</p>
 
@@ -164,19 +140,17 @@ configurations via the <code>extra_configs</code> parameter.</p>
 
 <h2 id="label-Reference">Reference</h2>
 
-<p><a
-href="http://treydock.github.io/puppet-yum_cron/">treydock.github.io/puppet-yum_cron/</a></p>
+<p><a href="http://treydock.github.io/puppet-yum_cron/">treydock.github.io/puppet-yum_cron/</a></p>
 
 <h2 id="label-Compatibility">Compatibility</h2>
 
-<p>This module should be compatible with all RedHat based operating systems
-and Puppet 6.1.x and newer.</p>
+<p>This module should be compatible with all RedHat based operating systems and Puppet 7 and newer.</p>
 
 <p>It has only been tested on:</p>
 <ul><li>
-<p>RHEL/CentOS 8</p>
+<p>RHEL and RHEL derivatives 7, 8, 9</p>
 </li><li>
-<p>RHEL/CentOS 7</p>
+<p>Amazon Linux 2, 2022, 2023</p>
 </li></ul>
 </div></div>
 

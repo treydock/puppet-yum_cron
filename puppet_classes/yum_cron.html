@@ -153,8 +153,7 @@
       
         &mdash;
         <div class='inline'>
-<p>Boolean that determines if updates should be automatically installed. If
-set to <code>true</code> then <code>download_updates</code> ignored.</p>
+<p>Boolean that determines if updates should be automatically installed. If set to <code>true</code> then <code>download_updates</code> ignored.</p>
 </div>
       
     </li>
@@ -257,7 +256,7 @@ set to <code>true</code> then <code>download_updates</code> ignored.</p>
         <span class='type'>(<tt>String</tt>)</span>
       
       
-        <em class="default">(defaults to: <tt>$::fqdn</tt>)</em>
+        <em class="default">(defaults to: <tt>$facts[&#39;networking&#39;][&#39;fqdn&#39;]</tt>)</em>
       
       
         &mdash;
@@ -298,11 +297,7 @@ set to <code>true</code> then <code>download_updates</code> ignored.</p>
       
         &mdash;
         <div class='inline'>
-<p>The kind of updates to use. Applies only to EL7. Valid values: * default =
-yum upgrade * security = yum –security upgrade * security-severity:Critical
-= yum –sec-severity=Critical upgrade * minimal = yum –bugfix
-upgrade-minimal * minimal-security = yum –security upgrade-minimal *
-minimal-security-severity:Critical = –sec-severity=Critical upgrade-minimal</p>
+<p>The kind of updates to use. Applies only to EL7. Valid values: * default = yum upgrade * security = yum –security upgrade * security-severity:Critical = yum –sec-severity=Critical upgrade * minimal = yum –bugfix upgrade-minimal * minimal-security = yum –security upgrade-minimal * minimal-security-severity:Critical = –sec-severity=Critical upgrade-minimal</p>
 </div>
       
     </li>
@@ -320,8 +315,7 @@ minimal-security-severity:Critical = –sec-severity=Critical upgrade-minimal</p
       
         &mdash;
         <div class='inline'>
-<p>Determines whether a message should be emitted when updates are available,
-downloaded, and applied. Applies only to EL7.</p>
+<p>Determines whether a message should be emitted when updates are available, downloaded, and applied. Applies only to EL7.</p>
 </div>
       
     </li>
@@ -339,12 +333,9 @@ downloaded, and applied. Applies only to EL7.</p>
       
         &mdash;
         <div class='inline'>
-<p>Hash that can be used to define additional configurations. Applies only to
-EL7, EL8, and EL9.</p>
+<p>Hash that can be used to define additional configurations. Applies only to EL7, EL8, and EL9.</p>
 
-<p>For EL8 and EL9 the hash defines additonal
-<code>dnf_automatic_config</code> resources. For EL7 the hash defines
-additional <code>yum_cron_config</code> resources.</p>
+<p>For EL8 and EL9 the hash defines additonal <code>dnf_automatic_config</code> resources. For EL7 the hash defines additional <code>yum_cron_config</code> resources.</p>
 </div>
       
     </li>
@@ -362,11 +353,9 @@ additional <code>yum_cron_config</code> resources.</p>
       
         &mdash;
         <div class='inline'>
-<p>Hash that can be used to define additional hourly configurations. Applies
-only to EL7.</p>
+<p>Hash that can be used to define additional hourly configurations. Applies only to EL7.</p>
 
-<p>For EL7 the hash defines additional <code>yum_cron_hourly_config</code>
-resources.</p>
+<p>For EL7 the hash defines additional <code>yum_cron_hourly_config</code> resources.</p>
 </div>
       
     </li>
@@ -384,11 +373,7 @@ resources.</p>
       
         &mdash;
         <div class='inline'>
-<p>Defines how to handle yum-autoupdate on Scientific Linux systems. Applies
-only to Scientific Linux. Valid values: * &#39;disabled&#39; (default) -
-Sets ENABLED=&#39;false&#39; in /etc/sysconfig/yum-autoupdate. *
-&#39;absent&#39; - Uninstall the yum-autoupdate package. * &#39;undef&#39;
-or &#39;UNSET&#39; - Leave yum-autoupdate unmanaged.</p>
+<p>Defines how to handle yum-autoupdate on Scientific Linux systems. Applies only to Scientific Linux. Valid values: * &#39;disabled&#39; (default) - Sets ENABLED=&#39;false&#39; in /etc/sysconfig/yum-autoupdate. * &#39;absent&#39; - Uninstall the yum-autoupdate package. * &#39;undef&#39; or &#39;UNSET&#39; - Leave yum-autoupdate unmanaged.</p>
 </div>
       
     </li>
@@ -406,9 +391,7 @@ or &#39;UNSET&#39; - Leave yum-autoupdate unmanaged.</p>
       
         &mdash;
         <div class='inline'>
-<p>The ensure value passed to yum-cron package resource. When
-<code>undef</code>, the value passed to the package resources is based on
-this class&#39; <code>ensure</code> parameter value.</p>
+<p>The ensure value passed to yum-cron package resource. When <code>undef</code>, the value passed to the package resources is based on this class&#39; <code>ensure</code> parameter value.</p>
 </div>
       
     </li>
@@ -458,10 +441,7 @@ this class&#39; <code>ensure</code> parameter value.</p>
       
         &mdash;
         <div class='inline'>
-<p>The ensure value passed to yum-cron service resource. When
-<code>undef</code>, the value passed to the service resources is based on
-this class&#39; <code>ensure</code> and <code>enable</code> parameter
-values.</p>
+<p>The ensure value passed to yum-cron service resource. When <code>undef</code>, the value passed to the service resources is based on this class&#39; <code>ensure</code> and <code>enable</code> parameter values.</p>
 </div>
       
     </li>
@@ -479,10 +459,7 @@ values.</p>
       
         &mdash;
         <div class='inline'>
-<p>The ensure value passed to yum-cron package resource. When
-<code>undef</code>, the value passed to the service resources is based on
-this class&#39; <code>ensure</code> and <code>enable</code> parameter
-values.</p>
+<p>The ensure value passed to yum-cron package resource. When <code>undef</code>, the value passed to the service resources is based on this class&#39; <code>ensure</code> and <code>enable</code> parameter values.</p>
 </div>
       
     </li>
@@ -646,8 +623,7 @@ values.</p>
 171
 172
 173
-174
-175</pre>
+174</pre>
       </td>
       <td>
         <pre class="code"><span class="info file"># File 'manifests/init.pp', line 78</span>
@@ -667,7 +643,7 @@ class yum_cron (
   Pattern[/^[0-9]+$/] $randomwait = &#39;360&#39;,
   Array $exclude_packages = [],
   String $mailto = &#39;root&#39;,
-  String $systemname = $::fqdn,
+  String $systemname = $facts[&#39;networking&#39;][&#39;fqdn&#39;],
   String $email_host = &#39;localhost&#39;,
   # EL7 only options
   Yum_cron::Update_cmd $update_cmd = &#39;default&#39;,
@@ -684,7 +660,6 @@ class yum_cron (
   Boolean $service_hasstatus = true,
   Boolean $service_hasrestart = true,
 ) {
-
   case $ensure {
     &#39;present&#39;: {
       $package_ensure_default   = &#39;present&#39;
