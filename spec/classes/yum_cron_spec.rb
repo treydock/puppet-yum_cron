@@ -4,7 +4,7 @@ require 'spec_helper'
 
 describe 'yum_cron' do
   on_supported_os.each do |os, facts|
-    context "on #{os}" do
+    context "with #{os}" do
       let(:facts) { facts }
       let(:params) { {} }
 

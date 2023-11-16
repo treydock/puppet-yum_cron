@@ -10,7 +10,7 @@
   "dependencies": [
     {
       "name": "puppetlabs/stdlib",
-      "version_requirement": ">= 4.13.1 <9.0.0"
+      "version_requirement": ">= 4.13.1 <10.0.0"
     },
     {
       "name": "puppetlabs/inifile",
@@ -68,7 +68,7 @@
     "dnf",
     "dnf-automatic"
   ],
-  "pdk-version": "2.1.0",
+  "pdk-version": "3.0.0",
   "template-url": "https://github.com/treydock/pdk-templates.git#master",
-  "template-ref": "heads/master-0-g9e1c5b4"
+  "template-ref": "heads/master-0-g52b1622"
 }

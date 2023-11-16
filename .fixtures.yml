@@ -1,8 +1,8 @@
 fixtures:
-  repositories:
+  forge_modules:
     stdlib:
-      repo: https://github.com/puppetlabs/puppetlabs-stdlib.git
+      repo: puppetlabs/stdlib
     inifile:
-      repo: https://github.com/puppetlabs/puppetlabs-inifile.git
+      repo: puppetlabs/inifile
   symlinks:
     yum_cron: "#{source_dir}"
