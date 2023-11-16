@@ -22,7 +22,7 @@ require 'spec_helper'
 provider_class = Puppet::Type.type(:yum_cron_hourly_config).provider(:ini_setting)
 describe provider_class do
   it 'sets section and setting' do
-    resource = Puppet::Type::Yum_cron_config.new(
+    resource = Puppet::Type::Yum_cron_hourly_config.new(
       name: 'vars/foo', value: 'bar',
     )
     provider = provider_class.new(resource)
