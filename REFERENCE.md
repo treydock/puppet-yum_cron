@@ -24,7 +24,7 @@
 
 ### Data types
 
-* [`Yum_cron::Update_cmd`](#yum_cronupdate_cmd): yum-cron update cmd
+* [`Yum_cron::Update_cmd`](#Yum_cron--Update_cmd): yum-cron update cmd
 
 ## Classes
 
@@ -36,32 +36,32 @@ Manage yum-cron
 
 The following parameters are available in the `yum_cron` class:
 
-* [`ensure`](#ensure)
-* [`enable`](#enable)
-* [`download_updates`](#download_updates)
-* [`apply_updates`](#apply_updates)
-* [`upgrade_type`](#upgrade_type)
-* [`debug_level`](#debug_level)
-* [`exclude_packages`](#exclude_packages)
-* [`randomwait`](#randomwait)
-* [`mailto`](#mailto)
-* [`systemname`](#systemname)
-* [`email_host`](#email_host)
-* [`update_cmd`](#update_cmd)
-* [`update_messages`](#update_messages)
-* [`extra_configs`](#extra_configs)
-* [`extra_hourly_configs`](#extra_hourly_configs)
-* [`yum_autoupdate_ensure`](#yum_autoupdate_ensure)
-* [`package_ensure`](#package_ensure)
-* [`package_name`](#package_name)
-* [`service_name`](#service_name)
-* [`service_ensure`](#service_ensure)
-* [`service_enable`](#service_enable)
-* [`service_hasstatus`](#service_hasstatus)
-* [`service_hasrestart`](#service_hasrestart)
-* [`config_path`](#config_path)
+* [`ensure`](#-yum_cron--ensure)
+* [`enable`](#-yum_cron--enable)
+* [`download_updates`](#-yum_cron--download_updates)
+* [`apply_updates`](#-yum_cron--apply_updates)
+* [`upgrade_type`](#-yum_cron--upgrade_type)
+* [`debug_level`](#-yum_cron--debug_level)
+* [`exclude_packages`](#-yum_cron--exclude_packages)
+* [`randomwait`](#-yum_cron--randomwait)
+* [`mailto`](#-yum_cron--mailto)
+* [`systemname`](#-yum_cron--systemname)
+* [`email_host`](#-yum_cron--email_host)
+* [`update_cmd`](#-yum_cron--update_cmd)
+* [`update_messages`](#-yum_cron--update_messages)
+* [`extra_configs`](#-yum_cron--extra_configs)
+* [`extra_hourly_configs`](#-yum_cron--extra_hourly_configs)
+* [`yum_autoupdate_ensure`](#-yum_cron--yum_autoupdate_ensure)
+* [`package_ensure`](#-yum_cron--package_ensure)
+* [`package_name`](#-yum_cron--package_name)
+* [`service_name`](#-yum_cron--service_name)
+* [`service_ensure`](#-yum_cron--service_ensure)
+* [`service_enable`](#-yum_cron--service_enable)
+* [`service_hasstatus`](#-yum_cron--service_hasstatus)
+* [`service_hasrestart`](#-yum_cron--service_hasrestart)
+* [`config_path`](#-yum_cron--config_path)
 
-##### <a name="ensure"></a>`ensure`
+##### <a name="-yum_cron--ensure"></a>`ensure`
 
 Data type: `Enum['present', 'absent']`
 
@@ -69,32 +69,32 @@ Defines the presence of `yum-cron`.
 
 Default value: `'present'`
 
-##### <a name="enable"></a>`enable`
+##### <a name="-yum_cron--enable"></a>`enable`
 
 Data type: `Boolean`
 
 Boolean that defines the state of `yum-cron`.
 
-Default value: ``true``
+Default value: `true`
 
-##### <a name="download_updates"></a>`download_updates`
+##### <a name="-yum_cron--download_updates"></a>`download_updates`
 
 Data type: `Boolean`
 
 Boolean that determines if updates should be automatically downloaded.
 
-Default value: ``true``
+Default value: `true`
 
-##### <a name="apply_updates"></a>`apply_updates`
+##### <a name="-yum_cron--apply_updates"></a>`apply_updates`
 
 Data type: `Boolean`
 
 Boolean that determines if updates should be automatically installed.
 If set to `true` then `download_updates` ignored.
 
-Default value: ``false``
+Default value: `false`
 
-##### <a name="upgrade_type"></a>`upgrade_type`
+##### <a name="-yum_cron--upgrade_type"></a>`upgrade_type`
 
 Data type: `Enum['default','security']`
 
@@ -103,7 +103,7 @@ Applies only to EL8, EL9.
 
 Default value: `'default'`
 
-##### <a name="debug_level"></a>`debug_level`
+##### <a name="-yum_cron--debug_level"></a>`debug_level`
 
 Data type: `Pattern[/^(?:-)?[0-9]$/]`
 
@@ -111,7 +111,7 @@ Sets debug level.
 
 Default value: `'-2'`
 
-##### <a name="exclude_packages"></a>`exclude_packages`
+##### <a name="-yum_cron--exclude_packages"></a>`exclude_packages`
 
 Data type: `Array`
 
@@ -119,7 +119,7 @@ Packages to exclude from updates.
 
 Default value: `[]`
 
-##### <a name="randomwait"></a>`randomwait`
+##### <a name="-yum_cron--randomwait"></a>`randomwait`
 
 Data type: `Pattern[/^[0-9]+$/]`
 
@@ -127,7 +127,7 @@ Sets random wait time.
 
 Default value: `'360'`
 
-##### <a name="mailto"></a>`mailto`
+##### <a name="-yum_cron--mailto"></a>`mailto`
 
 Data type: `String`
 
@@ -135,7 +135,7 @@ Address notified about updates.
 
 Default value: `'root'`
 
-##### <a name="systemname"></a>`systemname`
+##### <a name="-yum_cron--systemname"></a>`systemname`
 
 Data type: `String`
 
@@ -143,7 +143,7 @@ Name of system used in notifications.
 
 Default value: `$facts['networking']['fqdn']`
 
-##### <a name="email_host"></a>`email_host`
+##### <a name="-yum_cron--email_host"></a>`email_host`
 
 Data type: `String`
 
@@ -151,7 +151,7 @@ Host used to send email messages.
 
 Default value: `'localhost'`
 
-##### <a name="update_cmd"></a>`update_cmd`
+##### <a name="-yum_cron--update_cmd"></a>`update_cmd`
 
 Data type: `Yum_cron::Update_cmd`
 
@@ -167,7 +167,7 @@ Valid values:
 
 Default value: `'default'`
 
-##### <a name="update_messages"></a>`update_messages`
+##### <a name="-yum_cron--update_messages"></a>`update_messages`
 
 Data type: `Enum['yes','no']`
 
@@ -176,7 +176,7 @@ Applies only to EL7.
 
 Default value: `'yes'`
 
-##### <a name="extra_configs"></a>`extra_configs`
+##### <a name="-yum_cron--extra_configs"></a>`extra_configs`
 
 Data type: `Hash`
 
@@ -188,7 +188,7 @@ For EL7 the hash defines additional `yum_cron_config` resources.
 
 Default value: `{}`
 
-##### <a name="extra_hourly_configs"></a>`extra_hourly_configs`
+##### <a name="-yum_cron--extra_hourly_configs"></a>`extra_hourly_configs`
 
 Data type: `Hash`
 
@@ -199,7 +199,7 @@ For EL7 the hash defines additional `yum_cron_hourly_config` resources.
 
 Default value: `{}`
 
-##### <a name="yum_autoupdate_ensure"></a>`yum_autoupdate_ensure`
+##### <a name="-yum_cron--yum_autoupdate_ensure"></a>`yum_autoupdate_ensure`
 
 Data type: `Enum['undef', 'UNSET', 'absent', 'disabled']`
 
@@ -212,62 +212,62 @@ Valid values:
 
 Default value: `'disabled'`
 
-##### <a name="package_ensure"></a>`package_ensure`
+##### <a name="-yum_cron--package_ensure"></a>`package_ensure`
 
 Data type: `Optional[String]`
 
 The ensure value passed to yum-cron package resource.
 When `undef`, the value passed to the package resources is based on this class' `ensure` parameter value.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="package_name"></a>`package_name`
+##### <a name="-yum_cron--package_name"></a>`package_name`
 
 Data type: `String`
 
 yum-cron package name.  Default is based on OS version.
 
-##### <a name="service_name"></a>`service_name`
+##### <a name="-yum_cron--service_name"></a>`service_name`
 
 Data type: `String`
 
 yum-cron service name.  Default is based on OS version.
 
-##### <a name="service_ensure"></a>`service_ensure`
+##### <a name="-yum_cron--service_ensure"></a>`service_ensure`
 
 Data type: `Optional[String]`
 
 The ensure value passed to yum-cron service resource.
 When `undef`, the value passed to the service resources is based on this class' `ensure` and `enable` parameter values.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="service_enable"></a>`service_enable`
+##### <a name="-yum_cron--service_enable"></a>`service_enable`
 
 Data type: `Optional[Boolean]`
 
 The ensure value passed to yum-cron package resource.
 When `undef`, the value passed to the service resources is based on this class' `ensure` and `enable` parameter values.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="service_hasstatus"></a>`service_hasstatus`
+##### <a name="-yum_cron--service_hasstatus"></a>`service_hasstatus`
 
 Data type: `Boolean`
 
 Service hasstatus property.
 
-Default value: ``true``
+Default value: `true`
 
-##### <a name="service_hasrestart"></a>`service_hasrestart`
+##### <a name="-yum_cron--service_hasrestart"></a>`service_hasrestart`
 
 Data type: `Boolean`
 
 Service hasrestart property.
 
-Default value: ``true``
+Default value: `true`
 
-##### <a name="config_path"></a>`config_path`
+##### <a name="-yum_cron--config_path"></a>`config_path`
 
 Data type: `Stdlib::Absolutepath`
 
@@ -299,16 +299,16 @@ The value of the setting to be defined.
 
 The following parameters are available in the `dnf_automatic_config` type.
 
-* [`name`](#name)
-* [`provider`](#provider)
+* [`name`](#-dnf_automatic_config--name)
+* [`provider`](#-dnf_automatic_config--provider)
 
-##### <a name="name"></a>`name`
+##### <a name="-dnf_automatic_config--name"></a>`name`
 
 namevar
 
 Section/setting name to manage from dnf-automatic.conf
 
-##### <a name="provider"></a>`provider`
+##### <a name="-dnf_automatic_config--provider"></a>`provider`
 
 The specific backend to use for this `dnf_automatic_config` resource. You will seldom need to specify this --- Puppet
 will usually discover the appropriate provider for your platform.
@@ -337,16 +337,16 @@ The value of the setting to be defined.
 
 The following parameters are available in the `yum_cron_config` type.
 
-* [`name`](#name)
-* [`provider`](#provider)
+* [`name`](#-yum_cron_config--name)
+* [`provider`](#-yum_cron_config--provider)
 
-##### <a name="name"></a>`name`
+##### <a name="-yum_cron_config--name"></a>`name`
 
 namevar
 
 Section/setting name to manage from yum-cron.conf
 
-##### <a name="provider"></a>`provider`
+##### <a name="-yum_cron_config--provider"></a>`provider`
 
 The specific backend to use for this `yum_cron_config` resource. You will seldom need to specify this --- Puppet will
 usually discover the appropriate provider for your platform.
@@ -375,29 +375,25 @@ The value of the setting to be defined.
 
 The following parameters are available in the `yum_cron_hourly_config` type.
 
-* [`name`](#name)
-* [`provider`](#provider)
+* [`name`](#-yum_cron_hourly_config--name)
+* [`provider`](#-yum_cron_hourly_config--provider)
 
-##### <a name="name"></a>`name`
+##### <a name="-yum_cron_hourly_config--name"></a>`name`
 
 namevar
 
 Section/setting name to manage from yum-cron-hourly.conf
 
-##### <a name="provider"></a>`provider`
+##### <a name="-yum_cron_hourly_config--provider"></a>`provider`
 
 The specific backend to use for this `yum_cron_hourly_config` resource. You will seldom need to specify this --- Puppet
 will usually discover the appropriate provider for your platform.
 
 ## Data types
 
-### <a name="yum_cronupdate_cmd"></a>`Yum_cron::Update_cmd`
+### <a name="Yum_cron--Update_cmd"></a>`Yum_cron::Update_cmd`
 
 yum-cron update cmd
 
-Alias of
-
-```puppet
-Enum['default', 'security', 'security-severity:Critical', 'minimal', 'minimal-security', 'minimal-security-severity:Critical']
-```
+Alias of `Enum['default', 'security', 'security-severity:Critical', 'minimal', 'minimal-security', 'minimal-security-severity:Critical']`
 
