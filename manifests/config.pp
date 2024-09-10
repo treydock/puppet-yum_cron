@@ -17,6 +17,8 @@ class yum_cron::config {
       yum_cron_config { 'commands/apply_updates': value => $yum_cron::apply_updates_str }
       yum_cron_config { 'commands/random_sleep': value => $yum_cron::randomwait }
       yum_cron_config { 'emitters/system_name': value => $yum_cron::systemname }
+      yum_cron_config { 'emitters/emit_via': value => $yum_cron::emit_via }
+      yum_cron_config { 'email/email_from': value => $yum_cron::mailfrom }
       yum_cron_config { 'email/email_to': value => $yum_cron::mailto }
       yum_cron_config { 'email/email_host': value => $yum_cron::email_host }
       yum_cron_config { 'base/debuglevel': value => $yum_cron::debug_level }
@@ -44,6 +46,8 @@ class yum_cron::config {
       dnf_automatic_config { 'commands/apply_updates': value => $yum_cron::apply_updates_str }
       dnf_automatic_config { 'commands/random_sleep': value => $yum_cron::randomwait }
       dnf_automatic_config { 'emitters/system_name': value => $yum_cron::systemname }
+      dnf_automatic_config { 'emitters/emit_via': value => $yum_cron::emit_via }
+      dnf_automatic_config { 'email/email_from': value => $yum_cron::mailfrom }
       dnf_automatic_config { 'email/email_to': value => $yum_cron::mailto }
       dnf_automatic_config { 'email/email_host': value => $yum_cron::email_host }
       dnf_automatic_config { 'base/debuglevel': value => $yum_cron::debug_level }

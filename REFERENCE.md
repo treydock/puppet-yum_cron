@@ -127,6 +127,14 @@ Sets random wait time.
 
 Default value: `'360'`
 
+##### <a name="-yum_cron--mailfrom"></a>`mailto`
+
+Data type: `String`
+
+Sender address to use.
+
+Default value: `'root@example.com'`
+
 ##### <a name="-yum_cron--mailto"></a>`mailto`
 
 Data type: `String`
@@ -142,6 +150,14 @@ Data type: `String`
 Name of system used in notifications.
 
 Default value: `$facts['networking']['fqdn']`
+
+##### <a name="-yum_cron--emit_via"></a>`mailto`
+
+Data type: `String`
+
+How to send messages.
+
+Default value: `'stdio'`
 
 ##### <a name="-yum_cron--email_host"></a>`email_host`
 
