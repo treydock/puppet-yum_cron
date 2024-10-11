@@ -12,6 +12,17 @@
 # @param upgrade_type
 #   The kind of updates to perform.
 #   Applies only to EL8, EL9.
+# @param reboot
+#   Determines when the system should reboot.
+#   Valid values:
+#   * 'never' (default) - does not reboot the system
+#   * 'when-changed'    - triggers a reboot after any upgrade
+#   * 'when-needed'     - triggers a reboot only when rebooting is necessary to apply changes
+#   Applies only to EL8 and EL9.
+# @param reboot_command
+#   Command to execute for rebooting the system after applying updates.
+#   Default is "shutdown -r +5 'Rebooting after applying package updates'".
+#   Applies only to EL8 and EL9.
 # @param debug_level
 #   Sets debug level.
 # @param exclude_packages
@@ -83,8 +94,10 @@ class yum_cron (
   Boolean $enable = true,
   Boolean $download_updates = true,
   Boolean $apply_updates = false,
-  # EL8 only options
+  # EL8 and EL9 only options
   Enum['default','security'] $upgrade_type = 'default',
+  Enum['never','when-changed','when-needed'] $reboot = 'never',
+  String $reboot_command = "\"shutdown -r +5 'Rebooting after applying package updates'\"",
   # EL8 and EL7 options
   Pattern[/^(?:-)?[0-9]$/] $debug_level = '-2',
   Pattern[/^[0-9]+$/] $randomwait = '360',

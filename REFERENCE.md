@@ -41,6 +41,8 @@ The following parameters are available in the `yum_cron` class:
 * [`download_updates`](#-yum_cron--download_updates)
 * [`apply_updates`](#-yum_cron--apply_updates)
 * [`upgrade_type`](#-yum_cron--upgrade_type)
+* [`reboot`](#-yum_cron--reboot)
+* [`reboot_command`](#-yum_cron--reboot_command)
 * [`debug_level`](#-yum_cron--debug_level)
 * [`exclude_packages`](#-yum_cron--exclude_packages)
 * [`randomwait`](#-yum_cron--randomwait)
@@ -102,6 +104,24 @@ The kind of updates to perform.
 Applies only to EL8, EL9.
 
 Default value: `'default'`
+
+##### <a name="-yum_cron--reboot"></a>`reboot`
+
+Data type: `Enum['never','when-changed','when-needed']`
+
+When the system should reboot following upgrades.
+Applies only to EL8, EL9.
+
+Default value: `'never'`
+
+##### <a name="-yum_cron--reboot_command"></a>`reboot_command`
+
+Data type: `String`
+
+Specify the command to run to trigger a reboot of the system.
+Applies only to EL8, EL9.
+
+Default value: `"shutdown -r +5 'Rebooting after applying package updates'"`
 
 ##### <a name="-yum_cron--debug_level"></a>`debug_level`
 
