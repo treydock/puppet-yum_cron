@@ -44,7 +44,7 @@ class yum_cron::config {
       dnf_automatic_config { 'commands/apply_updates': value => $yum_cron::apply_updates_str }
       dnf_automatic_config { 'commands/random_sleep': value => $yum_cron::randomwait }
       dnf_automatic_config { 'commands/reboot': value => $yum_cron::reboot }
-      dnf_automatic_config { 'commands/reboot_command': value => $yum_cron::reboot_command }
+      dnf_automatic_config { 'commands/reboot_command': value => "\"${yum_cron::reboot_command}\"" }
       dnf_automatic_config { 'emitters/system_name': value => $yum_cron::systemname }
       dnf_automatic_config { 'email/email_to': value => $yum_cron::mailto }
       dnf_automatic_config { 'email/email_host': value => $yum_cron::email_host }

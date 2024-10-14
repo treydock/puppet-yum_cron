@@ -97,7 +97,7 @@ class yum_cron (
   # EL8 and EL9 only options
   Enum['default','security'] $upgrade_type = 'default',
   Enum['never','when-changed','when-needed'] $reboot = 'never',
-  String $reboot_command = "\"shutdown -r +5 'Rebooting after applying package updates'\"",
+  String $reboot_command = "shutdown -r +5 'Rebooting after applying package updates'",
   # EL8 and EL7 options
   Pattern[/^(?:-)?[0-9]$/] $debug_level = '-2',
   Pattern[/^[0-9]+$/] $randomwait = '360',
