@@ -12,7 +12,7 @@ shared_examples 'yum_cron::install' do |facts|
 
   it do
     is_expected.to contain_package('yum-cron').with(ensure: 'present',
-                                                    name: package_name)
+                                                    name: package_name,)
   end
 
   context 'when ensure => absent' do
