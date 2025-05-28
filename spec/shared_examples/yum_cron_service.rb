@@ -15,7 +15,7 @@ shared_examples 'yum_cron::service' do |_facts|
                                                     enable: 'true',
                                                     name: service_name,
                                                     hasstatus: 'true',
-                                                    hasrestart: 'true')
+                                                    hasrestart: 'true',)
   end
 
   context 'when ensure => absent' do

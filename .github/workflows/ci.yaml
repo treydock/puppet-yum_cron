@@ -16,11 +16,11 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - ruby: 2.7.7
+          - ruby: 2.7.8
             puppet: 7
             fixtures: .fixtures.yml
             allow_failure: false
-          - ruby: 3.2.2
+          - ruby: 3.2.3
             puppet: 8
             fixtures: .fixtures.yml
             allow_failure: false
@@ -48,7 +48,6 @@ jobs:
       fail-fast: false
       matrix:
         set:
-          - "el7"
           - "el8"
           - "el9"
         puppet:
