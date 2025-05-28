@@ -12,7 +12,7 @@ class yum_cron::install {
 
   if $facts['os']['name'] =~ /Scientific/ and $yum_cron::yum_autoupdate_ensure == 'absent' {
     package { 'yum-autoupdate':
-      ensure  => absent,
+      ensure => absent,
     }
   }
 }
