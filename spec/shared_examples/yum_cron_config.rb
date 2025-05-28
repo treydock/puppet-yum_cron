@@ -12,7 +12,7 @@ shared_examples 'yum_cron::config' do |facts|
       { name: 'email/email_to', value: 'root' },
       { name: 'email/email_host', value: 'localhost' },
       { name: 'base/debuglevel', value: '-2' },
-      { name: 'base/exclude', value: '' }
+      { name: 'base/exclude', value: '' },
     ].freeze
   end
 
@@ -21,7 +21,7 @@ shared_examples 'yum_cron::config' do |facts|
     EL7_CONFIGS.each do |config|
       it "sets #{config[:name]} to #{config[:value]}" do
         is_expected.to contain_yum_cron_config(config[:name]).with(value: config[:value],
-                                                                   notify: 'Service[yum-cron]')
+                                                                   notify: 'Service[yum-cron]',)
       end
     end
 
@@ -42,14 +42,14 @@ shared_examples 'yum_cron::config' do |facts|
       let(:params) do
         {
           extra_configs: {
-            'email/email_from' => { 'value' => 'foo@bar.com' }
-          }
+            'email/email_from' => { 'value' => 'foo@bar.com' },
+          },
         }
       end
 
       it do
         is_expected.to contain_yum_cron_config('email/email_from').with(value: 'foo@bar.com',
-                                                                        notify: 'Service[yum-cron]')
+                                                                        notify: 'Service[yum-cron]',)
       end
     end
   end
@@ -64,7 +64,7 @@ shared_examples 'yum_cron::config' do |facts|
     it do
       is_expected.to contain_file_line('disable yum-autoupdate').with(path: '/etc/sysconfig/yum-autoupdate',
                                                                       line: 'ENABLED=false',
-                                                                      match: '^ENABLED=.*')
+                                                                      match: '^ENABLED=.*',)
     end
 
     context "when yum_autoupdate_ensure => 'absent'" do
