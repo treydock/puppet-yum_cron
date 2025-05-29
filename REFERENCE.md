@@ -109,8 +109,12 @@ Default value: `'default'`
 
 Data type: `Enum['never','when-changed','when-needed']`
 
-When the system should reboot following upgrades.
-Applies only to EL8, EL9.
+Determines when the system should reboot.
+Valid values:
+* 'never' (default) - does not reboot the system
+* 'when-changed'    - triggers a reboot after any upgrade
+* 'when-needed'     - triggers a reboot only when rebooting is necessary to apply changes
+Applies only to EL8 and EL9.
 
 Default value: `'never'`
 
@@ -118,8 +122,9 @@ Default value: `'never'`
 
 Data type: `String`
 
-Specify the command to run to trigger a reboot of the system.
-Applies only to EL8, EL9.
+Command to execute for rebooting the system after applying updates.
+Default is "shutdown -r +5 'Rebooting after applying package updates'".
+Applies only to EL8 and EL9.
 
 Default value: `"shutdown -r +5 'Rebooting after applying package updates'"`
 
