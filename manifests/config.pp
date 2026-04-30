@@ -49,7 +49,8 @@ class yum_cron::config {
       dnf_automatic_config { 'email/email_to': value => $yum_cron::mailto }
       dnf_automatic_config { 'email/email_host': value => $yum_cron::email_host }
       dnf_automatic_config { 'base/debuglevel': value => $yum_cron::debug_level }
-      dnf_automatic_config { 'base/exclude':
+      dnf_automatic_config { 'base/exclude': ensure => 'absent' }
+      dnf_automatic_config { 'base/excludepkgs':
         ensure => $yum_cron::exclude_packages_ensure,
         value  => join($yum_cron::exclude_packages, ' '),
       }
