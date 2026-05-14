@@ -1,0 +1,4 @@
+yum_cron::package_name: dnf-automatic
+yum_cron::service_name: dnf-automatic.timer
+yum_cron::config_path: /etc/dnf/automatic.conf
+yum_cron::debug_level: '1'
