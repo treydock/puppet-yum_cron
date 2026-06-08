@@ -13,10 +13,15 @@ Puppet::Type.newtype(:dnf_automatic_config) do
     end
   end
 
-  newproperty(:value) do
+  newproperty(:value, array_matching: :all) do
     desc 'The value of the setting to be defined.'
     munge do |v|
       v.to_s.strip
+    end
+
+    def should_to_s(newvalue)
+      newvalue = newvalue.first if newvalue.is_a?(Array) && newvalue.length == 1
+      newvalue
     end
   end
 
