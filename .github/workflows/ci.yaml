@@ -16,10 +16,6 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - ruby: 2.7.8
-            puppet: 7
-            fixtures: .fixtures.yml
-            allow_failure: false
           - ruby: 3.2.3
             puppet: 8
             fixtures: .fixtures.yml
@@ -43,15 +39,16 @@ jobs:
       - name: Run tests
         run: bundle exec rake parallel_spec
   acceptance:
-    runs-on: ubuntu-latest
+    # Run on 22.04 until newer doesn't cause ioctl errors for el10 tests
+    runs-on: ubuntu-22.04
     strategy:
       fail-fast: false
       matrix:
         set:
           - "el8"
           - "el9"
+          - "el10"
         puppet:
-          - "puppet7"
           - "puppet8"
     env:
       BUNDLE_WITHOUT: development:release
@@ -74,10 +71,10 @@ jobs:
       - name: Setup ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '2.7'
+          ruby-version: '3.2'
           bundler-cache: true
-          cache-version: 2
-          bundler: '2.1.0'
+          cache-version: 3
+          bundler: '2.4.13'
       - name: Run tests
         run: bundle exec rake beaker
         env:
