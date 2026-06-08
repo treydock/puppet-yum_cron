@@ -1,4 +1,10 @@
 ---
+.github/workflows/ci.yaml:
+  acceptance_matrix:
+    set:
+      - el8
+      - el9
+      - el10
 .gitlab-ci.yml:
   delete: true
 appveyor.yml:
