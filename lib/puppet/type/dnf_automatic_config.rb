@@ -13,15 +13,16 @@ Puppet::Type.newtype(:dnf_automatic_config) do
     end
   end
 
-  newproperty(:value, array_matching: :all) do
+  newproperty(:value) do
     desc 'The value of the setting to be defined.'
     munge do |v|
       v.to_s.strip
     end
 
-    def should_to_s(newvalue)
-      newvalue = newvalue.first if newvalue.is_a?(Array) && newvalue.length == 1
-      newvalue
+    def insync?(is)
+      # inifile >= 6.4.1 may return the current value wrapped in an array
+      is = is.first if is.is_a?(Array)
+      is == should
     end
   end
 
