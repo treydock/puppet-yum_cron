@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org).
 
+## [v9.0.2](https://github.com/treydock/puppet-yum_cron/tree/v9.0.2) (2026-07-04)
+
+[Full Changelog](https://github.com/treydock/puppet-yum_cron/compare/v9.0.1...v9.0.2)
+
+### Fixed
+
+- Fix dnf\_automatic\_config writing values as arrays [\#65](https://github.com/treydock/puppet-yum_cron/pull/65) ([dsundq](https://github.com/dsundq))
+
 ## [v9.0.1](https://github.com/treydock/puppet-yum_cron/tree/v9.0.1) (2026-06-11)
 
 [Full Changelog](https://github.com/treydock/puppet-yum_cron/compare/v9.0.0...v9.0.1)
