@@ -102,8 +102,10 @@ class yum_cron (
   Pattern[/^(?:-)?[0-9]$/] $debug_level = '-2',
   Pattern[/^[0-9]+$/] $randomwait = '360',
   Array $exclude_packages = [],
+  String $mailfrom = 'root@example.com',
   String $mailto = 'root',
   String $systemname = $facts['networking']['fqdn'],
+  String $emit_via = 'stdio',
   String $email_host = 'localhost',
   # EL7 only options
   Yum_cron::Update_cmd $update_cmd = 'default',
