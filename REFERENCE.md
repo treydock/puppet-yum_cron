@@ -421,4 +421,3 @@ will usually discover the appropriate provider for your platform.
 yum-cron update cmd
 
 Alias of `Enum['default', 'security', 'security-severity:Critical', 'minimal', 'minimal-security', 'minimal-security-severity:Critical']`
-
