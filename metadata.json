@@ -53,8 +53,8 @@
   ],
   "requirements": [
     {
-      "name": "puppet",
-      "version_requirement": ">= 8.0.0 < 9.0.0"
+      "name": "openvox",
+      "version_requirement": ">= 8.0.0 < 10.0.0"
     }
   ],
   "description": "yum-cron module",
@@ -66,5 +66,5 @@
   ],
   "pdk-version": "3.4.0",
   "template-url": "https://github.com/treydock/pdk-templates.git#master",
-  "template-ref": "heads/master-0-g875588c"
+  "template-ref": "heads/master-0-g807f623"
 }
