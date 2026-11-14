@@ -5,10 +5,6 @@
       - el8
       - el9
       - el10
-.gitlab-ci.yml:
-  delete: true
-appveyor.yml:
-  delete: true
 .rubocop.yml:
   profiles:
     strict:
@@ -21,9 +17,13 @@ spec/acceptance/nodesets/debian-11.yml:
   delete: true
 spec/acceptance/nodesets/debian-12.yml:
   delete: true
+spec/acceptance/nodesets/debian-13.yml:
+  delete: true
 spec/acceptance/nodesets/ubuntu-2004.yml:
   delete: true
 spec/acceptance/nodesets/ubuntu-2204.yml:
   delete: true
 spec/acceptance/nodesets/ubuntu-2404.yml:
+  delete: true
+spec/acceptance/nodesets/ubuntu-2604.yml:
   delete: true

@@ -4,5 +4,3 @@ fixtures:
       repo: puppetlabs/stdlib
     inifile:
       repo: puppetlabs/inifile
-  symlinks:
-    yum_cron: "#{source_dir}"
